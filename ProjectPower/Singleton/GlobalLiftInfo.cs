@@ -4,7 +4,7 @@ namespace ProjectPower.Singleton
     // This Singleton implementation is called "double check lock". It is safe
     // in multithreaded environment and provides lazy initialization for the
     // Singleton object.
-    class GlobalLiftInfo
+    public class GlobalLiftInfo
     {
         private GlobalLiftInfo() { }
 
@@ -44,10 +44,14 @@ namespace ProjectPower.Singleton
         }
 
         // We'll use this property to prove that our Singleton really works.
-        public decimal SquatTrainingMax { get; set; }
-        public decimal BenchTrainingMax { get; set; }
-        public decimal OhpTrainingMax { get; set; }
-        public decimal DeadliftTrainingMax { get; set; }
+        public static decimal SquatTrainingMax = 125;
+        public static decimal BenchTrainingMax { get; set; }
+        public static decimal OhpTrainingMax { get; set; }
+        public static decimal DeadliftTrainingMax { get; set; }
+      
+        public static int WeekOneTierOneRepsPerSet = 6;
+
+        public static readonly decimal w1T1 = 0.7M;
 
     }
 }
