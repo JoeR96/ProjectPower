@@ -1,7 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release;TEST</Configurations>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Factories\WorkoutFactory\ConcreteFactory\**" />
+    <EmbeddedResource Remove="Factories\WorkoutFactory\ConcreteFactory\**" />
+    <None Remove="Factories\WorkoutFactory\ConcreteFactory\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectPowerData\ProjectPowerData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
+  </ItemGroup>
 
 </Project>

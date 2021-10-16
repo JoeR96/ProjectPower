@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProjectPowerData\ProjectPowerData.csproj" />
     <ProjectReference Include="..\ProjectPower\ProjectPower.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using ProjectPower.Formula;
-using ProjectPower.Utility;
-using ProjectPower.Singleton;
+using ProjectPowerData;
+using ProjectPowerData.Folder.Models;
 
 namespace ProjectPowerConsole
 {
@@ -10,8 +10,22 @@ namespace ProjectPowerConsole
 
         static void Main(string[] args)
         {
-            Console.WriteLine(Formula.WaveOneTierOne());
-            Console.ReadLine();
-        }
+            using (var ctx = new DataContext())
+            {
+                UserAccounts userAccount = new UserAccounts()
+                {
+                    UserId = 0,
+                    UserName = "Bzzt",
+                    Password = "Zelfdwnq9512!",
+                    Email = "Joeyrichardson96@gmail.com"
+                };
+
+
+                ctx.UserAccounts.Add(userAccount);
+                ctx.SaveChanges();
+
+
+            }
+        }    
     }
 }
