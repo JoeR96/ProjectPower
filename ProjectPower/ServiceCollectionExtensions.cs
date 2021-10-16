@@ -23,6 +23,11 @@ namespace ProjectPower
         {
             collection.AddScoped<IA2SWorkoutService, A2SWorkoutService>();
         }
+
+        public static void RegisterCachingService(this IServiceCollection collection)
+        {
+            collection.AddScoped<ICachingService, CachingService>();
+        }
         public static void AddDataContext(this IServiceCollection collection)
         {
             collection.AddDbContext<DataContext>();
