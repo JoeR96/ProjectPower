@@ -62,12 +62,12 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             }
         }
 
-        [HttpPut("{id:long}")]
-        public ActionResult Update(long id, UpdateA2SAmrapResultModel model)
+        [HttpPut]
+        public ActionResult Update(UpdateA2SAmrapResultModel model)
         {
             try
             {
-                _service.SaveUpdateModel(id, model);
+                _service.SaveUpdateModel( model);
                 return Ok();
             }
             catch (KeyNotFoundException)

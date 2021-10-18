@@ -80,9 +80,9 @@ namespace ProjectPower.Areas.A2S_Program.Service
                 return new UpdateA2SAmrapResultModel(dbEntity);
             }
         }
-        public void SaveUpdateModel(long id, UpdateA2SAmrapResultModel model)
+        public void SaveUpdateModel(UpdateA2SAmrapResultModel model)
         {
-            var dbEntity = _dc.A2SWorkoutExercises.Find(id);
+            var dbEntity = _dc.A2SWorkoutExercises.Find(model.Id);
             dbEntity.AmrapRepResult = model.AmrapRepResult;
 
             _dc.SaveChanges();

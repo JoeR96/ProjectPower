@@ -18,7 +18,7 @@ namespace ProjectPower.Areas.A2S_Program.Service.Interfaces
 
         UpdateA2SAmrapResultModel GetUpdateModel(long id);
 
-        void SaveUpdateModel(long id, UpdateA2SAmrapResultModel model);
+        void SaveUpdateModel(UpdateA2SAmrapResultModel model);
 
         CreateA2SWorkoutModel GetCreateModel();
 
