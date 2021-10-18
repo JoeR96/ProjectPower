@@ -103,5 +103,28 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
                 return Problem(ex.Message);
             }
         }
+
+        [HttpPost("Login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<UserAccountLoginModel> Login(UserAccountLoginModel model)
+        {
+            try
+            {
+                var response = _service.Login(model); 
+                if (response)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
     }
 }

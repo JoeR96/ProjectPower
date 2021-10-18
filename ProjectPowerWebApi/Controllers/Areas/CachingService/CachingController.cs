@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectPower.Areas.UserAccounts.Models.Cache;
+using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
+using ProjectPower.Areas.UserAccounts.Services.Models;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace ProjectPowerWebApi.Controllers.Areas.CachingService
@@ -22,9 +26,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.CachingService
 
             }
     }
-        private ICachingService _cachingService;
-
-        
+        private ICachingService _cachingService; 
         public CachingController(ICachingService cachingService)
         {
             _cachingService = cachingService;
@@ -42,10 +44,13 @@ namespace ProjectPowerWebApi.Controllers.Areas.CachingService
 
         [Route("store")]
         [HttpGet]
-        public IActionResult CacheObject(string key)
+        public IActionResult CacheObject(string key, UserCacheInformationModel model)
         {
-            CacheDummyObject objectToStore = new CacheDummyObject(2, 2, "bdtv");
-            CacheResultModel result = _cachingService.SaveToCache(key, 0, 5, 30, objectToStore, true);
+            var x = Request.Body;
+            var y = Url;
+            var yz = User;
+            CacheDummyObject objectToStore = new CacheDummyObject(model.CurrentWeek, model.CurrentDay, model.UserName);
+            CacheResultModel result = _cachingService.SaveToCache(model.UserName, 0, 5, 30, objectToStore, true);
 
             return Ok(result);
         }

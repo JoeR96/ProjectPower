@@ -32,7 +32,7 @@ namespace ProjectPowerWebApi
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SAM IS A GAY BITCH", Version = "v1" });
             });
         }
 

@@ -86,7 +86,7 @@ namespace ProjectPowerData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BaseWorkoutExerciseInformation");
+                    b.ToTable("BasicWorkoutInformation");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.UserAccounts", b =>

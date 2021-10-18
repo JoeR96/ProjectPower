@@ -15,7 +15,7 @@ namespace ProjectPower.Areas.UserAccounts.Services.Interfaces
 
         ShowUserAccountModel GetShowModel(long id);
 
-        ShowUserAccountModel GetShowModelByEmail(string email);
+        ShowUserAccountModel GetShowModelByUsername(string email);
 
         UpdateUserAccountModel GetUpdateModel(long id);
 
@@ -26,5 +26,7 @@ namespace ProjectPower.Areas.UserAccounts.Services.Interfaces
         ShowUserAccountModel SaveCreateModel(CreateUserAccountModel model);
 
         void Delete(long id);
+        bool Login(UserAccountLoginModel model);
+
     }
 }

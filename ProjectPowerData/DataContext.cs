@@ -9,7 +9,7 @@ namespace ProjectPowerData
         public DbSet<BasicWorkoutInformation> BasicWorkoutInformation { get; set; }
         public DbSet<UserAccounts> UserAccounts { get; set; }
         public DbSet<A2SHyperTrophyModel> A2SWorkoutExercises { get; set; }
-
+        public DbSet<A2SWorkoutValuesModel> A2SWorkoutTemplate { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

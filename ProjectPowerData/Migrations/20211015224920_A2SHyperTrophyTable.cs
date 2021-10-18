@@ -15,11 +15,11 @@ namespace ProjectPowerData.Migrations
 
             migrationBuilder.RenameTable(
                 name: "WorkoutExerciseInformation",
-                newName: "BaseWorkoutExerciseInformation");
+                newName: "BasicWorkoutInformation");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_BaseWorkoutExerciseInformation",
-                table: "BaseWorkoutExerciseInformation",
+                name: "PK_BasicWorkoutInformation",
+                table: "BasicWorkoutInformation",
                 column: "Id");
 
             migrationBuilder.CreateTable(
@@ -69,11 +69,11 @@ namespace ProjectPowerData.Migrations
                 name: "UserAccounts");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_BaseWorkoutExerciseInformation",
-                table: "BaseWorkoutExerciseInformation");
+                name: "PK_BasicWorkoutInformation",
+                table: "BasicWorkoutInformation");
 
             migrationBuilder.RenameTable(
-                name: "BaseWorkoutExerciseInformation",
+                name: "BasicWorkoutInformation",
                 newName: "WorkoutExerciseInformation");
 
             migrationBuilder.AddPrimaryKey(

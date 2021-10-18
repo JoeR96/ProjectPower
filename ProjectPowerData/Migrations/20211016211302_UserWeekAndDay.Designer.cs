@@ -10,8 +10,8 @@ using ProjectPowerData;
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211015230643_renamedb")]
-    partial class renamedb
+    [Migration("20211016211302_UserWeekAndDay")]
+    partial class UserWeekAndDay
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,6 +66,68 @@ namespace ProjectPowerData.Migrations
                     b.ToTable("A2SWorkoutExercises");
                 });
 
+            modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SWorkoutValuesModel", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AmrapRepTarget")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("AuxillaryLift")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("BeatByFive")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("BeatByFour")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("BeatByOne")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("BeatByThree")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("BeatByTwo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Block")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Intensity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MatchedTarget")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RepsPerSet")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sets")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("UnderByOne")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("UnderByTwo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Week")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("A2SWorkoutTemplate");
+                });
+
             modelBuilder.Entity("ProjectPowerData.Folder.Models.BasicWorkoutInformation", b =>
                 {
                     b.Property<long>("Id")
@@ -96,6 +158,12 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CurrentDay")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurrentWeek")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -103,7 +171,7 @@ namespace ProjectPowerData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

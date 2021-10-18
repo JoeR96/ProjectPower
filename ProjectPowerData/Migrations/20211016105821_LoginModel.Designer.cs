@@ -10,8 +10,8 @@ using ProjectPowerData;
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211015230643_renamedb")]
-    partial class renamedb
+    [Migration("20211016105821_LoginModel")]
+    partial class LoginModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

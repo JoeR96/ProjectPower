@@ -1,26 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ProjectPowerData.Folder.Models
 {
-    public class A2SHyperTrophyModel
+    public class A2SWorkoutValuesModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
-        public decimal TrainingMax { get; set; }
-        [Required]
         public bool AuxillaryLift { get; set; }
         [Required]
         public string Block { get; set; }
-
         [Required]
         public int AmrapRepTarget { get; set; }
-        [Required]
-        public int? AmrapRepResult { get; set; }
         [Required]
         public int Week { get; set; }
         [Required]
@@ -30,9 +29,20 @@ namespace ProjectPowerData.Folder.Models
         [Required]
         public int RepsPerSet { get; set; }
         [Required]
-        public string Username { get; set; }
+        public decimal BeatByOne { get; set; }
         [Required]
-        public string UniqueId { get; set; }
+        public decimal BeatByTwo {get; set; }
+        [Required]
+        public decimal BeatByThree { get; set; }
+        [Required]
+        public decimal BeatByFour { get; set; }
+        [Required]
+        public decimal BeatByFive { get; set; }
+        public decimal MatchedTarget { get; set; }
+        [Required]
+        public decimal UnderByOne { get; set; }
+        [Required]
+        public decimal UnderByTwo { get; set; }
 
     }
 }

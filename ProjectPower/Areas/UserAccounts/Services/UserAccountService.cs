@@ -1,6 +1,8 @@
-﻿using ProjectPower.Areas.UserAccounts.Helpers;
+﻿using ProjectPower.Areas.A2S_Program.Helpers;
+using ProjectPower.Areas.UserAccounts.Helpers;
 using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
+using ProjectPower.Areas.UserAccounts.Services.Models;
 using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
 using System.Collections.Generic;
@@ -11,9 +13,11 @@ namespace ProjectPower.Areas.UserAccounts.Services
     public class UserAccountService : IUserAccountService
     {
         private readonly DataContext _dc;
+        private ICachingService _cachingService;
 
-        public UserAccountService(DataContext context)
+        public UserAccountService(DataContext context,ICachingService cachingService)
         {
+            _cachingService = cachingService;
             _dc = context;
         }
         
@@ -32,6 +36,8 @@ namespace ProjectPower.Areas.UserAccounts.Services
 
         public int GetCount(UserAccountSearchModel search)
         {
+            
+
             var dbEntities = _dc.UserAccounts;
 
             return dbEntities.Count();
@@ -39,6 +45,7 @@ namespace ProjectPower.Areas.UserAccounts.Services
 
         public ShowUserAccountModel GetShowModel(long id)
         {
+           
             var dbEntity = _dc.UserAccounts.Find(id);
 
             if(dbEntity == null)
@@ -51,9 +58,9 @@ namespace ProjectPower.Areas.UserAccounts.Services
             }
         }
 
-        public ShowUserAccountModel GetShowModelByEmail(string email)
+        public ShowUserAccountModel GetShowModelByUsername(string username)
         {
-            var dbEntity = _dc.UserAccounts.FirstOrDefault(x => x.Email == email);
+            var dbEntity = _dc.UserAccounts.FirstOrDefault(x => x.UserName == username);
 
             if(dbEntity == null)
             {
@@ -93,11 +100,14 @@ namespace ProjectPower.Areas.UserAccounts.Services
 
         public ShowUserAccountModel SaveCreateModel(CreateUserAccountModel model)
         {
+
             var dbEntity = new ProjectPowerData.Folder.Models.UserAccounts();
 
             dbEntity.UserName = model.UserName;
             dbEntity.Password = UserAccountsHelpers.HashPassword(model.Password);
             dbEntity.Email = model.Email;
+            dbEntity.CurrentWeek = 1;
+            dbEntity.CurrentDay = 1;
 
             _dc.UserAccounts.Add(dbEntity);
             _dc.SaveChanges();
@@ -112,5 +122,26 @@ namespace ProjectPower.Areas.UserAccounts.Services
             _dc.SaveChanges();
         }
 
+
+
+        public bool Login(UserAccountLoginModel model)
+        {
+            var dbEntity = _dc.UserAccounts.FirstOrDefault(x => x.UserName == model.Username);
+            var loggedIn = UserAccountsHelpers.UserLogin(model, dbEntity);
+
+            if (loggedIn)
+            {
+                var cachingModel = new UserCacheInformationModel();
+                cachingModel.CurrentDay = dbEntity.CurrentDay;
+                cachingModel.CurrentWeek = dbEntity.CurrentWeek;
+                cachingModel.UserName = dbEntity.UserName;
+
+                _cachingService.SaveToCache(model.Username, 5, 5, 5, cachingModel, true);
+
+                return true;
+            }
+
+            else return false;
+        }
     }
 }

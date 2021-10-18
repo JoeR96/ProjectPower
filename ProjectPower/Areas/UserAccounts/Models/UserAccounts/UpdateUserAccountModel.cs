@@ -12,8 +12,12 @@ namespace ProjectPower.Areas.UserAccounts.Models.UserAccounts
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+        public int CurrentDay { get; set; }
+        public int CurrentWeek { get; set; }
         public UpdateUserAccountModel(ProjectPowerData.Folder.Models.UserAccounts entity)
         {
+            CurrentWeek = entity.CurrentWeek;
+            CurrentDay = entity.CurrentDay;
             UserName = entity.UserName;
             Email = entity.Email;
             Password = entity.Password;

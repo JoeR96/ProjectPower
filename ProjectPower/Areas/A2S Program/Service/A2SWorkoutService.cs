@@ -1,4 +1,5 @@
-﻿using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
+﻿using ProjectPower.Areas.A2S_Program.Helpers;
+using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.A2S_Program.Service.Interfaces;
 using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
@@ -73,6 +74,7 @@ namespace ProjectPower.Areas.A2S_Program.Service
             }
             else
             {
+
                 return new UpdateA2SWorkoutModel(dbEntity);
             }
         }
@@ -92,18 +94,8 @@ namespace ProjectPower.Areas.A2S_Program.Service
         {
             var dbEntity = new A2SHyperTrophyModel();
 
-            dbEntity.Name = model.Name;
-            dbEntity.TrainingMax = model.TrainingMax;
-            dbEntity.AuxillaryLift = model.AuxillaryLift;
-            dbEntity.Block = model.Block;
-            dbEntity.AmrapRepTarget = model.AmrapRepTarget;
-            dbEntity.AmrapRepResult = model.AmrapRepResult;
-            dbEntity.Week = model.Week;
-            dbEntity.Intensity = model.Intensity;
-            dbEntity.Sets = model.Sets;
-            dbEntity.RepsPerSet = model.RepsPerSet;
-
-            _dc.A2SWorkoutExercises.Add(dbEntity);
+            var scaffold = new A2SScaffoldDatabase(_dc);
+            scaffold.PopulateDb(model);
             _dc.SaveChanges();
 
             return new ShowA2SWorkoutModel(dbEntity);

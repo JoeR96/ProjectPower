@@ -25,5 +25,6 @@ namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
         public int RepsPerSet { get; set; }
         [Required]
         public string Category { get; set; }
+        public string Username { get; set; }
     }
 }
