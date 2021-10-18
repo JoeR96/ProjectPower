@@ -10,6 +10,11 @@ namespace ProjectPower.Areas.UserAccounts.Services.Models
         [Required]
         public int CurrentWeek { get; set; }
 
-        
+        public UserCacheInformationModel(ProjectPowerData.Folder.Models.UserAccounts dbEntity)
+        {
+            CurrentDay = dbEntity.CurrentDay;
+            CurrentWeek = dbEntity.CurrentWeek;
+            UserName = dbEntity.UserName;
+        }
     }
 }

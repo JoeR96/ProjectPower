@@ -1,6 +1,7 @@
 ﻿using ProjectPower.Areas.A2S_Program.Helpers;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.A2S_Program.Service.Interfaces;
+using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
 using System.Collections.Generic;
@@ -11,9 +12,10 @@ namespace ProjectPower.Areas.A2S_Program.Service
     public class A2SWorkoutService : IA2SWorkoutService
     {
         private readonly DataContext _dc;
-
-        public A2SWorkoutService(DataContext context)
+        private ICachingService _cachingService;
+        public A2SWorkoutService(DataContext context, ICachingService cachingService)
         {
+            _cachingService = cachingService;
             _dc = context;
         }
 
@@ -64,7 +66,7 @@ namespace ProjectPower.Areas.A2S_Program.Service
                 return new ShowA2SWorkoutModel(dbEntity);
             }
         }
-        public UpdateA2SWorkoutModel GetUpdateModel(long id)
+        public UpdateA2SAmrapResultModel GetUpdateModel(long id)
         {
             var dbEntity = _dc.A2SWorkoutExercises.Find(id);
 
@@ -75,10 +77,10 @@ namespace ProjectPower.Areas.A2S_Program.Service
             else
             {
 
-                return new UpdateA2SWorkoutModel(dbEntity);
+                return new UpdateA2SAmrapResultModel(dbEntity);
             }
         }
-        public void SaveUpdateModel(long id, UpdateA2SWorkoutModel model)
+        public void SaveUpdateModel(long id, UpdateA2SAmrapResultModel model)
         {
             var dbEntity = _dc.A2SWorkoutExercises.Find(id);
             dbEntity.AmrapRepResult = model.AmrapRepResult;
@@ -95,7 +97,7 @@ namespace ProjectPower.Areas.A2S_Program.Service
             var dbEntity = new A2SHyperTrophyModel();
 
             var scaffold = new A2SScaffoldDatabase(_dc);
-            scaffold.PopulateDb(model);
+            scaffold.PopulateA2SWorkout(model);
             _dc.SaveChanges();
 
             return new ShowA2SWorkoutModel(dbEntity);

@@ -126,15 +126,12 @@ namespace ProjectPower.Areas.UserAccounts.Services
 
         public bool Login(UserAccountLoginModel model)
         {
-            var dbEntity = _dc.UserAccounts.FirstOrDefault(x => x.UserName == model.Username);
+            ProjectPowerData.Folder.Models.UserAccounts dbEntity = _dc.UserAccounts.FirstOrDefault(x => x.UserName == model.Username);
             var loggedIn = UserAccountsHelpers.UserLogin(model, dbEntity);
 
             if (loggedIn)
             {
-                var cachingModel = new UserCacheInformationModel();
-                cachingModel.CurrentDay = dbEntity.CurrentDay;
-                cachingModel.CurrentWeek = dbEntity.CurrentWeek;
-                cachingModel.UserName = dbEntity.UserName;
+                var cachingModel = new UserCacheInformationModel(dbEntity);               
 
                 _cachingService.SaveToCache(model.Username, 5, 5, 5, cachingModel, true);
 

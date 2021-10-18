@@ -48,7 +48,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
         }
 
         [HttpGet("{id:long}/Edit")]
-        public ActionResult<UpdateA2SWorkoutModel> Edit(long id)
+        public ActionResult<UpdateA2SAmrapResultModel> Edit(long id)
         {
             var response = _service.GetUpdateModel(id);
 
@@ -63,7 +63,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
         }
 
         [HttpPut("{id:long}")]
-        public ActionResult Update(long id, UpdateA2SWorkoutModel model)
+        public ActionResult Update(long id, UpdateA2SAmrapResultModel model)
         {
             try
             {
