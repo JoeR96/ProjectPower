@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.A2S_Program.Service.Interfaces;
-using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
-using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -52,7 +50,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
         {
             var response = _service.GetUpdateModel(id);
 
-            if(response == null)
+            if (response == null)
             {
                 return BadRequest();
             }
@@ -62,12 +60,12 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             }
         }
 
-        [HttpPut]
-        public ActionResult Update(UpdateA2SAmrapResultModel model)
+        [HttpPut("{id:long}")]
+        public ActionResult Update(UpdateA2SAmrapResultModel model, long id)
         {
             try
             {
-                _service.SaveUpdateModel( model);
+                _service.SaveUpdateModel(model, id);
                 return Ok();
             }
             catch (KeyNotFoundException)
