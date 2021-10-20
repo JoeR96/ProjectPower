@@ -14,7 +14,7 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
     public class A2SScaffoldDatabase
     {
         private readonly DataContext _dc;
-  
+
         public A2SScaffoldDatabase(DataContext context)
         {
             _dc = context;
@@ -23,7 +23,7 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
         public void PopulateA2SWorkout(CreateA2SWorkoutModel model)
         {
             Dictionary<string, A2SLift> fullWorkout = new Dictionary<string, A2SLift>();
-            A2SHelper helper = new A2SHelper();
+            A2STemplateValues helper = new A2STemplateValues();
             
             if(model.AuxillaryLift)
             {
@@ -33,7 +33,6 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
             {
                 fullWorkout = helper.A2SPrimaryLifts;
             }
-            var x = helper.A2SAuxLifts;
 
             int week = 0;
             for (int i = 0; i < 3; i++)

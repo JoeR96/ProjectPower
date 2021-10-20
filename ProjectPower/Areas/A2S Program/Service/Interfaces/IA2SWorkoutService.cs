@@ -12,7 +12,7 @@ namespace ProjectPower.Areas.A2S_Program.Service.Interfaces
         IEnumerable<ShowA2SWorkoutModel> GetIndexModel(A2SWorkoutSearchModel search);
         int GetCount(A2SWorkoutSearchModel search);
 
-        ShowA2SWorkoutModel GetShowModel(long id);
+        List<A2SDailyWorkoutModel> GetDailyWorkout(GetA2SWeeklyWorkout workout);
 
         ShowA2SWorkoutModel GetShowModelByName(string name);
 

@@ -11,3 +11,4 @@ namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
         public string Term { get; set; }
     }
 }
+                                        

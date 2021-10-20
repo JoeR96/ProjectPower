@@ -43,6 +43,7 @@ namespace ProjectPowerData.Folder.Models
         public decimal UnderByOne { get; set; }
         [Required]
         public decimal UnderByTwo { get; set; }
+       
 
     }
 }

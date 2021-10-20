@@ -1,4 +1,5 @@
 ﻿using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
+using ProjectPower.Areas.UserAccounts.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,10 @@ namespace ProjectPower.Areas.UserAccounts.Services.Interfaces
 
         CreateUserAccountModel GetCreateModel();
 
-        ShowUserAccountModel SaveCreateModel(CreateUserAccountModel model);
+        UserCacheInformationModel SaveCreateModel(CreateUserAccountModel model);
 
         void Delete(long id);
-        bool Login(UserAccountLoginModel model);
+        UserCacheInformationModel Login(UserAccountLoginModel model);
 
     }
 }

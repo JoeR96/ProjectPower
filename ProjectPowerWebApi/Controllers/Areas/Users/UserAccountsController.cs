@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
+using ProjectPower.Areas.UserAccounts.Services.Models;
 using System;
 using System.Collections.Generic;
 
@@ -96,7 +97,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             try
             {
                 var response = _service.SaveCreateModel(model);
-                return CreatedAtAction(nameof(UserAccountsController.Show), new { id = response.UserId }, response);
+                return CreatedAtAction(nameof(UserAccountsController.Show),  response);
             }
             catch (Exception ex)
             {
@@ -106,14 +107,14 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
 
         [HttpPost("Login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<UserAccountLoginModel> Login(UserAccountLoginModel model)
+        public ActionResult<UserCacheInformationModel> Login(UserAccountLoginModel model)
         {
             try
             {
                 var response = _service.Login(model); 
-                if (response)
+                if (response != null)
                 {
-                    return Ok();
+                    return CreatedAtAction(nameof(A2SWorkoutController.Show), response);
                 }
                 else
                 {

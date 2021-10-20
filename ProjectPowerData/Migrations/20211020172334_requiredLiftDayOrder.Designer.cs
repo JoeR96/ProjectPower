@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectPowerData;
 
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211020172334_requiredLiftDayOrder")]
+    partial class requiredLiftDayOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,9 +47,11 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("decimal(9,4)");
 
                     b.Property<int?>("LiftDay")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("LiftOrder")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -56,9 +60,6 @@ namespace ProjectPowerData.Migrations
 
                     b.Property<int>("RepsPerSet")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("RoundingValue")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Sets")
                         .HasColumnType("int");

@@ -30,10 +30,10 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             return Ok(response);
         }
 
-        [HttpGet("Count")]
-        public ActionResult<ShowA2SWorkoutModel> Show(long id)
+        [HttpPost("DailyWorkout")]
+        public ActionResult<List<A2SDailyWorkoutModel>> Show(GetA2SWeeklyWorkout workout)
         {
-            var response = _service.GetShowModel(id);
+            List<A2SDailyWorkoutModel> response = _service.GetDailyWorkout(workout);
 
             if (response == null)
             {

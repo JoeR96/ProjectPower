@@ -124,21 +124,24 @@ namespace ProjectPower.Areas.UserAccounts.Services
 
 
 
-        public bool Login(UserAccountLoginModel model)
+        public UserCacheInformationModel Login(UserAccountLoginModel model)
         {
             ProjectPowerData.Folder.Models.UserAccounts dbEntity = _dc.UserAccounts.FirstOrDefault(x => x.UserName == model.Username);
             var loggedIn = UserAccountsHelpers.UserLogin(model, dbEntity);
 
             if (loggedIn)
             {
-                var cachingModel = new UserCacheInformationModel(dbEntity);               
+                UserCacheInformationModel cachingModel = new UserCacheInformationModel(dbEntity);               
 
-                _cachingService.SaveToCache(model.Username, 5, 5, 5, cachingModel, true);
-
-                return true;
+                return cachingModel;
             }
 
-            else return false;
+            else return null;
+        }
+
+        UserCacheInformationModel IUserAccountService.SaveCreateModel(CreateUserAccountModel model)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

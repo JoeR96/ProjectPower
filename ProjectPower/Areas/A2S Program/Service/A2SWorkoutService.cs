@@ -4,6 +4,7 @@ using ProjectPower.Areas.A2S_Program.Service.Interfaces;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +14,7 @@ namespace ProjectPower.Areas.A2S_Program.Service
     {
         private readonly DataContext _dc;
         private ICachingService _cachingService;
+        private A2STemplateValues _a2sHelper = new A2STemplateValues();
         public A2SWorkoutService(DataContext context, ICachingService cachingService)
         {
             _cachingService = cachingService;
@@ -39,19 +41,32 @@ namespace ProjectPower.Areas.A2S_Program.Service
             return dbEntities.Count();
         }
 
-        public ShowA2SWorkoutModel GetShowModel(long id)
+        List<A2SDailyWorkoutModel> IA2SWorkoutService.GetDailyWorkout(GetA2SWeeklyWorkout workout)
         {
-            var dbEntity = _dc.A2SWorkoutExercises.Find(id);
+            var exercises = _dc.A2SWorkoutExercises
+               .Where(w => w.Week == workout.Week &&
+                   w.LiftDay == workout.Day &&
+                       w.Username == workout.Username).
+                           Select(e => new A2SDailyWorkoutModel
+                           {
+                               ExerciseName = e.Name,
+                               AmrapTarget = e.AmrapRepTarget,
+                               Reps = e.RepsPerSet,
+                               Sets = (int)e.Sets,
+                               WorkingWeight = A2SHelper.ReturnWorkingWeight(e.Intensity, e.TrainingMax,e.RoundingValue)
 
-            if (dbEntity == null)
+                           }).ToList();
+
+            if (exercises == null)
             {
                 return null;
             }
             else
             {
-                return new ShowA2SWorkoutModel(dbEntity);
+                return exercises;
             }
         }
+
 
         public ShowA2SWorkoutModel GetShowModelByName(string name)
         {
@@ -109,5 +124,7 @@ namespace ProjectPower.Areas.A2S_Program.Service
             _dc.Remove(dbEntity);
             _dc.SaveChanges();
         }
+
+       
     }
 }

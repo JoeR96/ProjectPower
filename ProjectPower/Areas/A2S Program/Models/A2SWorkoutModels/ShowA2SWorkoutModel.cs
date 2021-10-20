@@ -21,6 +21,9 @@ namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
         public decimal Intensity { get; set; }
         public int Sets { get; set; }
         public int RepsPerSet { get; set; }
+        public int CurrentDay { get; set; }
+        public int CurrentWeek { get; set; }
+        public string Username { get; set; }
         public ShowA2SWorkoutModel(A2SHyperTrophyModel dbEntity)
         {
             Name = dbEntity.Name;
@@ -33,6 +36,8 @@ namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
             Intensity = dbEntity.Intensity;
             Sets = dbEntity.Sets;
             RepsPerSet = dbEntity.RepsPerSet;
+            //CurrentDay = dbEntity.LiftDay;
+            CurrentWeek = dbEntity.Week;
         }
     }
 }

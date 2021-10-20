@@ -34,5 +34,9 @@ namespace ProjectPowerData.Folder.Models
         [Required]
         public string UniqueId { get; set; }
 
+        public int? LiftOrder { get; set; }
+        public int? LiftDay { get; set; }
+        [Required]
+        public decimal RoundingValue { get; set; }
     }
 }
