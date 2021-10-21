@@ -53,7 +53,8 @@ namespace ProjectPower.Areas.A2S_Program.Service
                                AmrapTarget = e.AmrapRepTarget,
                                Reps = e.RepsPerSet,
                                Sets = (int)e.Sets,
-                               WorkingWeight = A2SHelper.ReturnWorkingWeight(e.Intensity, e.TrainingMax,e.RoundingValue)
+                               WorkingWeight = A2SHelper.ReturnWorkingWeight(e.Intensity, e.TrainingMax,e.RoundingValue),
+                               Id = (int)e.Id
 
                            }).ToList();
 
@@ -95,7 +96,7 @@ namespace ProjectPower.Areas.A2S_Program.Service
                 return new UpdateA2SAmrapResultModel(dbEntity);
             }
         }
-        public void SaveUpdateModel(UpdateA2SAmrapResultModel model,long id)
+        public void SaveAmrapResult(UpdateA2SAmrapResultModel model,long id)
         {
             var dbEntity = _dc.A2SWorkoutExercises.FirstOrDefault(m => m.Id == id);
             dbEntity.AmrapRepResult = model.AmrapRepResult;

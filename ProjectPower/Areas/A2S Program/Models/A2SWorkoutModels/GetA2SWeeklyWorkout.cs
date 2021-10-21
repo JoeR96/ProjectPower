@@ -11,6 +11,7 @@ namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
         public string Username { get; set; }
         public int Week { get; set; }
         public int Day { get; set; }
+      
 
         public GetA2SWeeklyWorkout()
         {

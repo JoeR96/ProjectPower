@@ -15,5 +15,6 @@ namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
         public int Sets { get; set; }
         public int AmrapTarget { get; set; }
         public decimal RoundingValue { get; set; }
+        public int Id { get; set; }
     }
 }

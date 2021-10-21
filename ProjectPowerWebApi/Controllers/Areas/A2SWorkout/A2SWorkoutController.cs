@@ -65,7 +65,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
         {
             try
             {
-                _service.SaveUpdateModel(model, id);
+                _service.SaveAmrapResult(model, id);
                 return Ok();
             }
             catch (KeyNotFoundException)

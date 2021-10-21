@@ -31,4 +31,4 @@ namespace ProjectPowerData
                         .HasPrecision(9, 4);// or whatever your schema specifies
         }
 }
-}
+    

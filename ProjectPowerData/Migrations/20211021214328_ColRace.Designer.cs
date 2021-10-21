@@ -10,8 +10,8 @@ using ProjectPowerData;
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211020172334_requiredLiftDayOrder")]
-    partial class requiredLiftDayOrder
+    [Migration("20211021214328_ColRace")]
+    partial class ColRace
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,11 +47,9 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("decimal(9,4)");
 
                     b.Property<int?>("LiftDay")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("LiftOrder")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -60,6 +58,9 @@ namespace ProjectPowerData.Migrations
 
                     b.Property<int>("RepsPerSet")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("RoundingValue")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Sets")
                         .HasColumnType("int");
@@ -187,6 +188,9 @@ namespace ProjectPowerData.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Race")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
