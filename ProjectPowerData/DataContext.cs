@@ -13,13 +13,13 @@ namespace ProjectPowerData
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=EFLab;");
             base.OnConfiguring(optionsBuilder);
 
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<A2SHyperTrophyModel>()
                         .Property(p => p.TrainingMax)
@@ -30,5 +30,6 @@ namespace ProjectPowerData
                         .Property(p => p.Intensity)
                         .HasPrecision(9, 4);// or whatever your schema specifies
         }
+    }
 }
     

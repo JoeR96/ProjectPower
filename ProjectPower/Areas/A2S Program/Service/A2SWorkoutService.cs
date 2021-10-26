@@ -21,17 +21,20 @@ namespace ProjectPower.Areas.A2S_Program.Service
             _dc = context;
         }
 
-        public IEnumerable<ShowA2SWorkoutModel> GetIndexModel(A2SWorkoutSearchModel search)
+        public List<UnassignedWorkoutModel> GetUnassignedExercises(A2SWorkoutSearchModel search)
         {
-            var dbEntities = _dc.A2SWorkoutExercises;
+            var unassginedExercises = _dc.A2SWorkoutExercises
+                .Where(e => search.Term == e.Username &&
+                    e.LiftOrder == null
+                        && e.LiftDay == null).Select(e => new UnassignedWorkoutModel
+                        {
+                            ExerciseName = e.Name,
+                            UniqueId = e.UniqueId,
 
-            var model = new List<ShowA2SWorkoutModel>();
-            foreach (var entity in dbEntities)
-            {
-                model.Add(new ShowA2SWorkoutModel(entity));
-            }
+                        }).Distinct().ToList();
+                            
 
-            return model;
+            return unassginedExercises;
         }
 
         public int GetCount(A2SWorkoutSearchModel search)
@@ -53,7 +56,7 @@ namespace ProjectPower.Areas.A2S_Program.Service
                                AmrapTarget = e.AmrapRepTarget,
                                Reps = e.RepsPerSet,
                                Sets = (int)e.Sets,
-                               WorkingWeight = A2SHelper.ReturnWorkingWeight(e.Intensity, e.TrainingMax,e.RoundingValue),
+                               WorkingWeight = e.WorkingWeight(),
                                Id = (int)e.Id
 
                            }).ToList();

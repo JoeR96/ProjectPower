@@ -21,11 +21,11 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             _service = service;
         }
 
-        [HttpGet]
+        [HttpGet("UnassignedExercises")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<ShowA2SWorkoutModel>> Index([FromQuery] A2SWorkoutSearchModel search)
         {
-            var response = _service.GetIndexModel(search);
+            var response = _service.GetUnassignedExercises(search);
 
             return Ok(response);
         }

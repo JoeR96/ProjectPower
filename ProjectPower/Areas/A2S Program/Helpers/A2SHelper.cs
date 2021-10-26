@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectPowerData.Folder.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,14 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
 {
     public static class A2SHelper
     {
-        public static decimal ReturnWorkingWeight(decimal intensity, decimal trainingMax, decimal roundingValue )
+        public static decimal WorkingWeight(this A2SHyperTrophyModel model)
         {
-            var workingWeight = intensity * trainingMax;
-            var newWeight = Math.Ceiling(workingWeight / roundingValue);
-            var newNumber = newWeight * roundingValue;
+            var workingWeight = model.Intensity * model.TrainingMax;
+            var newWeight = Math.Ceiling(workingWeight / model.RoundingValue);
+            var newNumber = newWeight * model.RoundingValue;
             return newNumber;
         }
+
         public static decimal RoundToNearestIncrement(decimal value)
         {
             var divided = value / 2.5m;

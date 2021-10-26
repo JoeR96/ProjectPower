@@ -31,10 +31,10 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             return Ok(response);
         }
 
-        [HttpGet("Count")]
-        public ActionResult<ShowUserAccountModel> Show(long id)
+        [HttpGet("Username")]
+        public ActionResult<ShowUserAccountModel> Show(string username)
         {
-            var response = _service.GetShowModel(id);
+            var response = _service.GetShowModelByUsername(username);
 
             if (response == null)
             {

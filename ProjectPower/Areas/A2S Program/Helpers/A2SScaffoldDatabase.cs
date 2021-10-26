@@ -24,8 +24,8 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
         {
             Dictionary<string, A2SLift> fullWorkout = new Dictionary<string, A2SLift>();
             A2STemplateValues helper = new A2STemplateValues();
-            
-            if(model.AuxillaryLift)
+            Guid g = Guid.NewGuid();
+            if (model.AuxillaryLift)
             {
                 fullWorkout = helper.A2SAuxLifts;
             }
@@ -41,7 +41,7 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
                                 
                 for (int j = 0; j < 6; j++)
                 {
-                    Guid g = Guid.NewGuid();
+                    
                     var weeklyValues = currentBlock.Value;                   
                     var dbEntity = new A2SHyperTrophyModel();
                     week++;
