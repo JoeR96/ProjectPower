@@ -43,7 +43,7 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
                 {
                     
                     var weeklyValues = currentBlock.Value;                   
-                    var dbEntity = new A2SHyperTrophyModel();
+                    var dbEntity = new A2SHyperTrophy();
                     week++;
 
                     dbEntity.Name = model.Name;

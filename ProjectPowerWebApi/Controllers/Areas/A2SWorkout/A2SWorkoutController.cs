@@ -62,7 +62,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
 
         [HttpPut("{id:long}")]
         public ActionResult Update(UpdateA2SAmrapResultModel model, long id)
-        {
+         {
             try
             {
                 _service.SaveAmrapResult(model, id);

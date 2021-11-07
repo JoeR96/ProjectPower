@@ -24,7 +24,7 @@ namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
         public int CurrentDay { get; set; }
         public int CurrentWeek { get; set; }
         public string Username { get; set; }
-        public ShowA2SWorkoutModel(A2SHyperTrophyModel dbEntity)
+        public ShowA2SWorkoutModel(A2SHyperTrophy dbEntity)
         {
             Name = dbEntity.Name;
             TrainingMax = dbEntity.TrainingMax;

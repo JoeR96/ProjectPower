@@ -49,17 +49,9 @@ namespace ProjectPower.Areas.A2S_Program.Service
             var exercises = _dc.A2SWorkoutExercises
                .Where(w => w.Week == workout.Week &&
                    w.LiftDay == workout.Day &&
-                       w.Username == workout.Username).
-                           Select(e => new A2SDailyWorkoutModel
-                           {
-                               ExerciseName = e.Name,
-                               AmrapTarget = e.AmrapRepTarget,
-                               Reps = e.RepsPerSet,
-                               Sets = (int)e.Sets,
-                               WorkingWeight = e.WorkingWeight(),
-                               Id = (int)e.Id
-
-                           }).ToList();
+                       w.Username == workout.Username)
+               .Select(e => new A2SDailyWorkoutModel(e))
+                .ToList();
 
             if (exercises == null)
             {
@@ -70,7 +62,6 @@ namespace ProjectPower.Areas.A2S_Program.Service
                 return exercises;
             }
         }
-
 
         public ShowA2SWorkoutModel GetShowModelByName(string name)
         {
@@ -113,7 +104,7 @@ namespace ProjectPower.Areas.A2S_Program.Service
 
         public ShowA2SWorkoutModel SaveCreateModel(CreateA2SWorkoutModel model)
         {
-            var dbEntity = new A2SHyperTrophyModel();
+            var dbEntity = new A2SHyperTrophy();
 
             var scaffold = new A2SScaffoldDatabase(_dc);
             scaffold.PopulateA2SWorkout(model);

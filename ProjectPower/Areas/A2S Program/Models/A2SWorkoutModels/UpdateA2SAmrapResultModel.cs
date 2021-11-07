@@ -8,7 +8,7 @@ namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
         [Required]
         public int? AmrapRepResult { get; set; }
 
-        public UpdateA2SAmrapResultModel(A2SHyperTrophyModel dbEntity)
+        public UpdateA2SAmrapResultModel(A2SHyperTrophy dbEntity)
         {
             AmrapRepResult = dbEntity.AmrapRepResult;
         }

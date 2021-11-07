@@ -7,7 +7,7 @@ namespace ProjectPowerData
         public DataContext() : base() { }
         public DbSet<BasicWorkoutInformation> BasicWorkoutInformation { get; set; }
         public DbSet<UserAccounts> UserAccounts { get; set; }
-        public DbSet<A2SHyperTrophyModel> A2SWorkoutExercises { get; set; }
+        public DbSet<A2SHyperTrophy> A2SWorkoutExercises { get; set; }
         public DbSet<A2SWorkoutValuesModel> A2SWorkoutTemplate { get; set; }
 
 
@@ -21,12 +21,12 @@ namespace ProjectPowerData
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<A2SHyperTrophyModel>()
+            modelBuilder.Entity<A2SHyperTrophy>()
                         .Property(p => p.TrainingMax)
                         .HasPrecision(9, 4);
 
 
-            modelBuilder.Entity<A2SHyperTrophyModel>()
+            modelBuilder.Entity<A2SHyperTrophy>()
                         .Property(p => p.Intensity)
                         .HasPrecision(9, 4);// or whatever your schema specifies
         }

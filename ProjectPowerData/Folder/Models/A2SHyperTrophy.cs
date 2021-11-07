@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectPowerData.Folder.Models
 {
-    public class A2SHyperTrophyModel
+    public class A2SHyperTrophy
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
