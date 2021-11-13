@@ -73,6 +73,30 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
                 return NotFound();
             }
         }
+        [HttpPost("UpdateDayAndPriority")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public ActionResult UpdateExerciseDayAndOrder(UpdateA2SExerciseDayAndLiftOrderModel model)
+        {
+            
+            for (int i = 0; i < model.ExerciseDaysAndOrders.Count; i++)
+            {
+                for (int j = 0; j < model.ExerciseDaysAndOrders[i].exercises.Count; j++)
+                {
+                    int day = i;
+                    int order = j;
+
+                    day++;
+                    order++;
+
+                    if(model.ExerciseDaysAndOrders[i].exercises[j] != null)
+                    {
+                        _service.UpdateDayAndOrder(model.ExerciseDaysAndOrders[i].exercises[j].uniqueId, day, order);
+                    }
+                }
+            }               
+            
+            return null;
+        }
 
         [HttpDelete("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -103,5 +127,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
                 return Problem(ex.Message);
             }
         }
+
+        
     }
 }

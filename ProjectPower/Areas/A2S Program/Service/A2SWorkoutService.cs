@@ -120,6 +120,12 @@ namespace ProjectPower.Areas.A2S_Program.Service
             _dc.SaveChanges();
         }
 
-       
+        public void UpdateDayAndOrder(string uniqueId, int day, int order)
+        {
+            var dbEntity = _dc.A2SWorkoutExercises.FirstOrDefault(e => e.UniqueId == uniqueId);
+            dbEntity.LiftDay = day;
+            dbEntity.LiftOrder = order;
+            _dc.SaveChanges();
+        }
     }
 }

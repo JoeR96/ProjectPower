@@ -18,6 +18,7 @@ namespace ProjectPower.Areas.A2S_Program.Service.Interfaces
         UpdateA2SAmrapResultModel GetUpdateModel(long id);
 
         void SaveAmrapResult(UpdateA2SAmrapResultModel model,long id);
+        void UpdateDayAndOrder(string uniqueId, int day, int order);
 
         CreateA2SWorkoutModel GetCreateModel();
 
