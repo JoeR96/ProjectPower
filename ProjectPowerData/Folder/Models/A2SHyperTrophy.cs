@@ -15,8 +15,9 @@ namespace ProjectPowerData.Folder.Models
         [Required]
         public bool AuxillaryLift { get; set; }
         [Required]
-        public string Block { get; set; }
-
+        public string Template { get; set; }
+        [Required]
+        public string Block { get; set; } 
         [Required]
         public int AmrapRepTarget { get; set; }
         [Required]

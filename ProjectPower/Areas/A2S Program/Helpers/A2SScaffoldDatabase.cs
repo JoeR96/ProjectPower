@@ -46,7 +46,8 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
                     var dbEntity = new A2SHyperTrophy();
                     week++;
 
-                    dbEntity.Name = model.Name;
+                    dbEntity.Name = model.ExerciseName;
+                    dbEntity.Template = model.Template;
                     dbEntity.TrainingMax = model.TrainingMax;
                     dbEntity.AuxillaryLift = model.AuxillaryLift;
                     dbEntity.Block = currentBlock.Key;
