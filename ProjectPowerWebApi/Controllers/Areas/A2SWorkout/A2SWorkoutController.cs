@@ -113,7 +113,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             }
         }
 
-        [HttpPost("UpdateDayAndPriority")]
+        [HttpPost("Create")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public ActionResult<ShowA2SWorkoutModel> Create(CreateA2SWorkoutModel model)
         {
@@ -128,7 +128,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             }
         }
 
-        [HttpPost("UpdateDayAndPriority")]
+        [HttpPost("CreateA2SWorkout")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public ActionResult<ShowA2SWorkoutModel> Create(CreateA2SWorkoutMasterModel model)
         {
@@ -136,7 +136,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             {
                 foreach(var day in model.ExerciseDaysAndOrders)
                 {
-                    foreach(var exercise in day.exercises)
+                    foreach(var exercise in day.hyperTrophyExercises)
                     _service.SaveCreateModel(exercise);
 
                 }

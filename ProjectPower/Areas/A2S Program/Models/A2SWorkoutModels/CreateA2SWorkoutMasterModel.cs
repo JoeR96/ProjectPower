@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectPower.Areas.A2S_Program.Models.A2SRepsThenSetsIncreaModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,8 @@ namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
     {
         //Only need to return the Id, we can use the array index for both day and order
 
-        public List<CreateA2SWorkoutModel> exercises { get; set; }
+        public List<CreateA2SWorkoutModel> hyperTrophyExercises { get; set; }
+        public List<CreateA2SRepsThenSetsModel> repsThenSetExercises { get; set; }
+        
     }
-
- 
 }

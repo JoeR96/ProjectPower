@@ -14,6 +14,10 @@ namespace ProjectPower.Areas.ExerciseCreation.Models
         public string Category { get; set; }
         [Required]
         public string Template { get; set; }
+        [Required]
+        public int LiftDay { get; set; }
+        [Required]
+        public int LiftOrder { get; set; }
 
     }
 }
