@@ -13,35 +13,11 @@ namespace ProjectPower.Areas.A2S_Program.Service
     public class A2SWorkoutService : IA2SWorkoutService
     {
         private readonly DataContext _dc;
-        private ICachingService _cachingService;
+
         private A2STemplateValues _a2sHelper = new A2STemplateValues();
-        public A2SWorkoutService(DataContext context, ICachingService cachingService)
+        public A2SWorkoutService(DataContext context)
         {
-            _cachingService = cachingService;
             _dc = context;
-        }
-
-        public List<UnassignedWorkoutModel> GetUnassignedExercises(A2SWorkoutSearchModel search)
-        {
-            var unassginedExercises = _dc.A2SWorkoutExercises
-                .Where(e => search.Term == e.Username &&
-                    e.LiftOrder == null
-                        && e.LiftDay == null).Select(e => new UnassignedWorkoutModel
-                        {
-                            ExerciseName = e.Name,
-                            UniqueId = e.UniqueId,
-
-                        }).Distinct().ToList();
-                            
-
-            return unassginedExercises;
-        }
-
-        public int GetCount(A2SWorkoutSearchModel search)
-        {
-            var dbEntities = _dc.A2SWorkoutExercises;
-
-            return dbEntities.Count();
         }
 
         List<A2SDailyWorkoutModel> IA2SWorkoutService.GetDailyWorkout(GetA2SWeeklyWorkout workout)
@@ -62,34 +38,7 @@ namespace ProjectPower.Areas.A2S_Program.Service
                 return exercises;
             }
         }
-
-        public ShowA2SWorkoutModel GetShowModelByName(string name)
-        {
-            var dbEntity = _dc.A2SWorkoutExercises.FirstOrDefault(x => x.Name == name);
-
-            if (dbEntity == null)
-            {
-                return null;
-            }
-            else
-            {
-                return new ShowA2SWorkoutModel(dbEntity);
-            }
-        }
-        public UpdateA2SAmrapResultModel GetUpdateModel(long id)
-        {
-            var dbEntity = _dc.A2SWorkoutExercises.Find(id);
-
-            if (dbEntity == null)
-            {
-                return null;
-            }
-            else
-            {
-
-                return new UpdateA2SAmrapResultModel(dbEntity);
-            }
-        }
+ 
         public void SaveAmrapResult(UpdateA2SAmrapResultModel model,long id)
         {
             var dbEntity = _dc.A2SWorkoutExercises.FirstOrDefault(m => m.Id == id);
@@ -97,34 +46,11 @@ namespace ProjectPower.Areas.A2S_Program.Service
 
             _dc.SaveChanges();
         }
-        public CreateA2SWorkoutModel GetCreateModel()
-        {
-            return new CreateA2SWorkoutModel();
-        }
-
-        public ShowA2SWorkoutModel SaveCreateModel(CreateA2SWorkoutModel model)
-        {
-            var dbEntity = new A2SHyperTrophy();
-
-            var scaffold = new A2SScaffoldDatabase(_dc);
-            scaffold.PopulateA2SWorkout(model);
-            _dc.SaveChanges();
-
-            return new ShowA2SWorkoutModel(dbEntity);
-        }
 
         public void Delete(long id)
         {
             var dbEntity = _dc.A2SWorkoutExercises.Find(id);
             _dc.Remove(dbEntity);
-            _dc.SaveChanges();
-        }
-
-        public void UpdateDayAndOrder(string uniqueId, int day, int order)
-        {
-            var dbEntity = _dc.A2SWorkoutExercises.FirstOrDefault(e => e.UniqueId == uniqueId);
-            dbEntity.LiftDay = day;
-            dbEntity.LiftOrder = order;
             _dc.SaveChanges();
         }
     }

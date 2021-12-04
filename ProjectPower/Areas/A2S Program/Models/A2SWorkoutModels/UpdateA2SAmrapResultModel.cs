@@ -10,12 +10,7 @@ namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
 
         public UpdateA2SAmrapResultModel(A2SHyperTrophy dbEntity)
         {
-            AmrapRepResult = dbEntity.AmrapRepResult;
-        }
-
-        public UpdateA2SAmrapResultModel()
-        {
-
+            dbEntity.AmrapRepResult = AmrapRepResult;
         }
     }
 }

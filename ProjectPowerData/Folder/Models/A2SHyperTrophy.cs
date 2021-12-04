@@ -4,20 +4,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ProjectPowerData.Folder.Models
 {
     public class A2SHyperTrophy
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
-        [Required]
-        public string Name { get; set; }
+    { 
         [Required]
         public decimal TrainingMax { get; set; }
         [Required]
         public bool AuxillaryLift { get; set; }
         [Required]
+<<<<<<< HEAD
         public string Template { get; set; }
         [Required]
         public string Block { get; set; } 
+=======
+        public string Block { get; set; }
+>>>>>>> f69e85f (123)
         [Required]
         public int AmrapRepTarget { get; set; }
         [Required]
@@ -34,9 +33,6 @@ namespace ProjectPowerData.Folder.Models
         public string Username { get; set; }
         [Required]
         public string UniqueId { get; set; }
-
-        public int? LiftOrder { get; set; }
-        public int? LiftDay { get; set; }
         [Required]
         public decimal RoundingValue { get; set; }
     }

@@ -9,6 +9,10 @@
     <Compile Remove="Factories\WorkoutFactory\ConcreteFactory\**" />
     <EmbeddedResource Remove="Factories\WorkoutFactory\ConcreteFactory\**" />
     <None Remove="Factories\WorkoutFactory\ConcreteFactory\**" />
+    <None Remove="Areas\WorkoutCreation\" />
+    <None Remove="Areas\WorkoutCreation\Models\" />
+    <None Remove="Areas\WorkoutCreation\Models\BaseWorkoutInformationService\" />
+    <None Remove="Areas\WorkoutCreation\Services\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,4 +24,10 @@
     <PackageReference Include="System.Net.Http.WinHttpHandler" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\WorkoutCreation\" />
+    <Folder Include="Areas\WorkoutCreation\Models\" />
+    <Folder Include="Areas\WorkoutCreation\Models\BaseWorkoutInformationService\" />
+    <Folder Include="Areas\WorkoutCreation\Services\" />
+  </ItemGroup>
 </Project>

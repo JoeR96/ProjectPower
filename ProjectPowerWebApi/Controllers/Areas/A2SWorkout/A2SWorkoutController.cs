@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.A2S_Program.Service.Interfaces;
+using ProjectPower.Areas.WorkoutCreation.Models;
 using System;
 using System.Collections.Generic;
 
@@ -21,80 +22,13 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             _service = service;
         }
 
-        [HttpGet("UnassignedExercises")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<ShowA2SWorkoutModel>> Index([FromQuery] A2SWorkoutSearchModel search)
-        {
-            var response = _service.GetUnassignedExercises(search);
-
-            return Ok(response);
-        }
-
-        [HttpPost("DailyWorkout")]
-        public ActionResult<List<A2SDailyWorkoutModel>> Show(GetA2SWeeklyWorkout workout)
-        {
-            List<A2SDailyWorkoutModel> response = _service.GetDailyWorkout(workout);
-
-            if (response == null)
-            {
-                return BadRequest();
-            }
-            else
-            {
-                return response;
-            }
-        }
-
-        [HttpGet("{id:long}/Edit")]
-        public ActionResult<UpdateA2SAmrapResultModel> Edit(long id)
-        {
-            var response = _service.GetUpdateModel(id);
-
-            if (response == null)
-            {
-                return BadRequest();
-            }
-            else
-            {
-                return response;
-            }
-        }
-
-        [HttpPut("{id:long}")]
-        public ActionResult Update(UpdateA2SAmrapResultModel model, long id)
-         {
-            try
-            {
-                _service.SaveAmrapResult(model, id);
-                return Ok();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-        }
-        [HttpPost("UpdateDayAndPriority")]
+        [HttpPost("CreateWorkout")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult UpdateExerciseDayAndOrder(UpdateA2SExerciseDayAndLiftOrderModel model)
+        public ActionResult UpdateExerciseDayAndOrder(CreateWorkoutMasterTemplateModel model)
         {
-            
-            for (int i = 0; i < model.ExerciseDaysAndOrders.Count; i++)
-            {
-                for (int j = 0; j < model.ExerciseDaysAndOrders[i].exercises.Count; j++)
-                {
-                    int day = i;
-                    int order = j;
+            //call the service and create the workout using the masterial template model
 
-                    day++;
-                    order++;
-
-                    if(model.ExerciseDaysAndOrders[i].exercises[j] != null)
-                    {
-                        _service.UpdateDayAndOrder(model.ExerciseDaysAndOrders[i].exercises[j].uniqueId, day, order);
-                    }
-                }
-            }               
-            
+            _service.CreateWorkout(model);
             return null;
         }
 

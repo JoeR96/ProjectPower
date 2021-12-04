@@ -1,4 +1,5 @@
 ﻿using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
+using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPowerData.Folder.Models;
 using System.Collections.Generic;
 
@@ -8,10 +9,9 @@ namespace ProjectPower.Areas.A2S_Program.Service.Interfaces
 {
     public interface IA2SWorkoutService
     {
-        List<UnassignedWorkoutModel> GetUnassignedExercises(A2SWorkoutSearchModel search);
         int GetCount(A2SWorkoutSearchModel search);
 
-        List<A2SDailyWorkoutModel> GetDailyWorkout(GetA2SWeeklyWorkout workout);
+        List<BaseExercise> GetDailyWorkout(GetA2SWeeklyWorkout workout);
 
         ShowA2SWorkoutModel GetShowModelByName(string name);
 
@@ -25,5 +25,6 @@ namespace ProjectPower.Areas.A2S_Program.Service.Interfaces
         ShowA2SWorkoutModel SaveCreateModel(CreateA2SWorkoutModel model);
 
         void Delete(long id);
+        void CreateWorkout(CreateWorkoutMasterTemplateModel model);
     }
 }

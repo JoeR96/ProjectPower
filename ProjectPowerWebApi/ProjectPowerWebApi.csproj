@@ -16,4 +16,10 @@
     <ProjectReference Include="..\ProjectPower\ProjectPower.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Controllers\Areas\WorkoutCreation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\Areas\WorkoutManagementController.cs\" />
+  </ItemGroup>
 </Project>
