@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectPowerData;
 
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211223011113_Initi1234")]
+    partial class Initi1234
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,8 +32,9 @@ namespace ProjectPowerData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Discriminator")
-                        .HasColumnType("int");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ExerciseDay")
                         .HasColumnType("int");
@@ -59,7 +62,7 @@ namespace ProjectPowerData.Migrations
 
                     b.ToTable("BasicWorkoutInformation");
 
-                    b.HasDiscriminator<int>("Discriminator").HasValue(0);
+                    b.HasDiscriminator<string>("Discriminator").HasValue("BasicWorkoutInformation");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.UserAccounts", b =>
@@ -133,7 +136,7 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("int")
                         .HasColumnName("A2SHyperTrophy_Week");
 
-                    b.HasDiscriminator().HasValue(1);
+                    b.HasDiscriminator().HasValue("A2SHyperTrophy");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SRepsThenSets", b =>
@@ -161,7 +164,7 @@ namespace ProjectPowerData.Migrations
                     b.Property<int>("Week")
                         .HasColumnType("int");
 
-                    b.HasDiscriminator().HasValue(2);
+                    b.HasDiscriminator().HasValue("A2SRepsThenSets");
                 });
 #pragma warning restore 612, 618
         }

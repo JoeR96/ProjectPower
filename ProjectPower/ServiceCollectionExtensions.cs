@@ -3,6 +3,7 @@ using ProjectPower.Areas.A2S_Program.Service;
 using ProjectPower.Areas.A2S_Program.Service.Interfaces;
 using ProjectPower.Areas.UserAccounts.Services;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
+using ProjectPower.Areas.WorkoutCreation.Services;
 using ProjectPowerData;
 
 namespace ProjectPower
@@ -24,6 +25,10 @@ namespace ProjectPower
             collection.AddScoped<IA2SWorkoutService, A2SWorkoutService>();
         }
 
+        public static void RegisterWorkoutManagementService(this IServiceCollection collection)
+        {
+            collection.AddScoped<IWorkoutManagementService, WorkoutManagementService>();
+        }
         public static void RegisterCachingService(this IServiceCollection collection)
         {
             collection.AddScoped<ICachingService, CachingService>();

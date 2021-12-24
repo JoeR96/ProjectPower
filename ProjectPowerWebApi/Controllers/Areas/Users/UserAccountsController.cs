@@ -114,7 +114,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
                 var response = _service.Login(model); 
                 if (response != null)
                 {
-                    return CreatedAtAction(nameof(A2SWorkoutController.Show), response);
+                    return CreatedAtAction(nameof(UserAccountsController), response);
                 }
                 else
                 {

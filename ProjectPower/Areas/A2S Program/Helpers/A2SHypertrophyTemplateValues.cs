@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjectPower.Areas.A2S_Program.Helpers
 {
-    public class A2STemplateValues
+    public class A2SHypertrophyTemplateValues
     {
         #region TemplateValues
         public HyperTrophyBlockPrimaryLift HTPL { get; set; }  = new HyperTrophyBlockPrimaryLift();
@@ -19,7 +19,7 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
         public PeakingBlockAuxillaryLift PBAL { get; set; } = new PeakingBlockAuxillaryLift();
         public Dictionary<string, A2SLift> A2SPrimaryLifts { get; set; }
         public Dictionary<string, A2SLift> A2SAuxLifts { get; set; }
-        public A2STemplateValues()
+        public A2SHypertrophyTemplateValues()
         {
             HTPL = new HyperTrophyBlockPrimaryLift();
             HTAL = new HyperTrophyBlockAuxillaryLift();

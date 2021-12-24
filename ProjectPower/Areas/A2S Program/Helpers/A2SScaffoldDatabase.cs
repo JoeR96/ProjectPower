@@ -20,19 +20,14 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
             _dc = context;
         }
 
-        public void PopulateA2SWorkout(CreateA2SWorkoutModel model)
+        public void PopulateA2SWorkout(CreateA2SHypertrophyModel model)
         {
             Dictionary<string, A2SLift> fullWorkout = new Dictionary<string, A2SLift>();
-            A2STemplateValues helper = new A2STemplateValues();
+            A2SHypertrophyTemplateValues helper = new A2SHypertrophyTemplateValues();
             Guid g = Guid.NewGuid();
-            if (model.AuxillaryLift)
-            {
-                fullWorkout = helper.A2SAuxLifts;
-            }
-            else
-            {
-                fullWorkout = helper.A2SPrimaryLifts;
-            }
+            fullWorkout = model.AuxillaryLift == true ? helper.A2SAuxLifts : helper.A2SPrimaryLifts;
+
+           
 
             int week = 0;
             for (int i = 0; i < 3; i++)
@@ -46,8 +41,6 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
                     var dbEntity = new A2SHyperTrophy();
                     week++;
 
-                    dbEntity.Name = model.ExerciseName;
-                    dbEntity.Template = model.Template;
                     dbEntity.TrainingMax = model.TrainingMax;
                     dbEntity.AuxillaryLift = model.AuxillaryLift;
                     dbEntity.Block = currentBlock.Key;
@@ -58,7 +51,6 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
                     dbEntity.Sets = weeklyValues.sets;
                     dbEntity.RepsPerSet = weeklyValues.repsPerSet[j];
                     dbEntity.UniqueId = g.ToString();
-                    dbEntity.Username = model.Username;
                     _dc.A2SWorkoutExercises.Add(dbEntity);
                 }
             }

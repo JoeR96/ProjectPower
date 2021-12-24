@@ -139,9 +139,6 @@ namespace ProjectPower.Areas.UserAccounts.Services
             else return null;
         }
 
-        UserCacheInformationModel IUserAccountService.SaveCreateModel(CreateUserAccountModel model)
-        {
-            throw new System.NotImplementedException();
-        }
+      
     }
 }

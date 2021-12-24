@@ -10,27 +10,44 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
 {
     [ApiController]
     [Route("WorkoutCreation")]
-    public class WorkoutManagementController
+    public class WorkoutManagementController : ControllerBase
     {
         private readonly ILogger<WorkoutManagementController> _logger;
         private readonly IWorkoutManagementService _service;
 
-        public WorkoutManagementController()
+        public WorkoutManagementController(IWorkoutManagementService service)
         {
+            _service = service;
         }
 
         [HttpPost("CreateWorkout")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<ShowCreatedWorkoutModel> CreateWorkout(CreateWorkoutMasterTemplateModel model)
+        public ActionResult CreateWorkout(CreateWorkoutMasterTemplateModel model)
         {
             try
             {
-                var response = _service.CreateWorkout(model);
-                return response;
+                _service.CreateWorkout(model);
+                return NoContent();
             }
             catch(Exception ex)
             {
-                return Problem(ex.Message);
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpGet("DailyWorkout")]
+        [HttpGet("{username}/{week}/{day}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult DailyWorkout(string username, int week, int day)
+        {
+            try
+            {
+                _service.GetDailyWorkout(username,week,day);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
             }
         }
     }

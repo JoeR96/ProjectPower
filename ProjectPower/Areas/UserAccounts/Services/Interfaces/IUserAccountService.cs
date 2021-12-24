@@ -24,7 +24,7 @@ namespace ProjectPower.Areas.UserAccounts.Services.Interfaces
 
         CreateUserAccountModel GetCreateModel();
 
-        UserCacheInformationModel SaveCreateModel(CreateUserAccountModel model);
+        ShowUserAccountModel SaveCreateModel(CreateUserAccountModel model);
 
         void Delete(long id);
         UserCacheInformationModel Login(UserAccountLoginModel model);

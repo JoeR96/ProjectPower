@@ -26,9 +26,9 @@ namespace ProjectPowerWebApi
             services.AddScoped<ICachingService, CachingService>();         
             services.RegisterA2SWorkout();
             services.AddDataContext();
-            services.RegisterCachingService();
             services.RegisterBasicWorkoutInformation();
             services.RegisterUserAcctionServices();
+            services.RegisterWorkoutManagementService();
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>

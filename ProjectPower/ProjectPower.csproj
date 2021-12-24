@@ -25,9 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\WorkoutCreation\" />
-    <Folder Include="Areas\WorkoutCreation\Models\" />
+    <Folder Include="Areas\WorkoutCreation\Factories\" />
     <Folder Include="Areas\WorkoutCreation\Models\BaseWorkoutInformationService\" />
-    <Folder Include="Areas\WorkoutCreation\Services\" />
   </ItemGroup>
 </Project>
