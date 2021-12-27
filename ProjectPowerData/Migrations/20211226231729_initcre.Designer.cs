@@ -10,8 +10,8 @@ using ProjectPowerData;
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211223015226_InitialCreate12344444")]
-    partial class InitialCreate12344444
+    [Migration("20211226231729_initcre")]
+    partial class initcre
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,9 +31,6 @@ namespace ProjectPowerData.Migrations
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Discriminator")
-                        .HasColumnType("int");
 
                     b.Property<int>("ExerciseDay")
                         .HasColumnType("int");
@@ -61,7 +58,7 @@ namespace ProjectPowerData.Migrations
 
                     b.ToTable("BasicWorkoutInformation");
 
-                    b.HasDiscriminator<int>("Discriminator").HasValue(0);
+                    b.HasDiscriminator<string>("Template").HasValue("BasicWorkoutInformation");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.UserAccounts", b =>
@@ -135,7 +132,7 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("int")
                         .HasColumnName("A2SHyperTrophy_Week");
 
-                    b.HasDiscriminator().HasValue(1);
+                    b.HasDiscriminator().HasValue("A2SHypertrophyTemplate");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SRepsThenSets", b =>
@@ -163,7 +160,7 @@ namespace ProjectPowerData.Migrations
                     b.Property<int>("Week")
                         .HasColumnType("int");
 
-                    b.HasDiscriminator().HasValue(2);
+                    b.HasDiscriminator().HasValue("A2SRepsThenSets");
                 });
 #pragma warning restore 612, 618
         }

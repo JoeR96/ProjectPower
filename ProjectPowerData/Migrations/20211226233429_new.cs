@@ -2,13 +2,13 @@
 
 namespace ProjectPowerData.Migrations
 {
-    public partial class rep : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "Week",
-                table: "A2SWorkoutTemplate",
+                name: "Discriminator",
+                table: "BasicWorkoutInformation",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
@@ -17,8 +17,8 @@ namespace ProjectPowerData.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Week",
-                table: "A2SWorkoutTemplate");
+                name: "Discriminator",
+                table: "BasicWorkoutInformation");
         }
     }
 }
