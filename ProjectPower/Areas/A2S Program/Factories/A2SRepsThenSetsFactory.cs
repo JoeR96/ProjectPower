@@ -9,8 +9,6 @@ namespace ProjectPower.Areas.A2S_Program.Factories
     {
         public override void CreateExercise(CreateExerciseModel model)
         {
-            var id = CreateBaseExercise(model);
-
             const int workoutTotalDuration = 20;
 
             for (int i = 0; i < workoutTotalDuration; i++)
@@ -24,11 +22,8 @@ namespace ProjectPower.Areas.A2S_Program.Factories
                 dbEntity.StartingSets = (int)model.StartingSets;
                 dbEntity.StartingReps = (int)model.StartingReps;
                 dbEntity.StartingWeight = (int)model.StartingWeight;
-                dbEntity.UniqueId = id;
                 dbEntity.Week = i + 1;
-                _dc.BasicWorkoutInformation.Add(dbEntity);
             }
-            _dc.SaveChanges();
         }
     }
 }

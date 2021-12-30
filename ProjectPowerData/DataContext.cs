@@ -13,7 +13,7 @@ namespace ProjectPowerData
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=EFLab;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=ProjectPower;");
             base.OnConfiguring(optionsBuilder);
 
         }
@@ -32,10 +32,11 @@ namespace ProjectPowerData
                         .HasPrecision(9, 4);
 
             modelBuilder.Entity<BasicWorkoutInformation>()
-                .HasDiscriminator<int>("Discriminator")
-                .HasValue<BasicWorkoutInformation>(0)
-                .HasValue<A2SHyperTrophy>(1)
-                .HasValue<A2SRepsThenSets>(2);
+                .HasDiscriminator<string>("Template")
+                .HasValue<BasicWorkoutInformation>("BasicWorkoutInformation")
+                .HasValue<A2SHyperTrophy>("A2SHyperTrophy")
+                .HasValue<A2SRepsThenSets>("A2SRepsThenSets");
+
         }
     }
 }

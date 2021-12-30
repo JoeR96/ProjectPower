@@ -28,10 +28,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
 
         public void CreateWorkout(CreateWorkoutMasterTemplateModel model)
         {
-            foreach (var exercise in model.ExerciseDaysAndOrders)
-            {
-                exerciseFactories[exercise.Template].CreateExercise(exercise);
-            }
+            model.ExerciseDaysAndOrders.ForEach(e => exerciseFactories[e.Template].CreateExercise(e));
         }
 
         public IQueryable<BasicWorkoutInformation> GetDailyWorkout(string username, int week, int day)

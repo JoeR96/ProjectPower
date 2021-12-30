@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ProjectPowerData.Folder.Models
 {
-    public abstract class BasicWorkoutInformation : IBasicWorkoutInformation
+    public class BasicWorkoutInformation 
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -28,8 +28,5 @@ namespace ProjectPowerData.Folder.Models
 
     }
 
-    public interface IBasicWorkoutInformation
-    {
-        BasicWorkoutInformation BasicWorkoutInformation;
-    }
+
 }

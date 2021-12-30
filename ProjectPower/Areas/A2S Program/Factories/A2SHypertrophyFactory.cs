@@ -16,7 +16,6 @@ namespace ProjectPower.Areas.A2S_Program.Factories
 
         public override void CreateExercise(CreateExerciseModel model)
         {
-            var id = CreateBaseExercise(model);
             var fullWorkout = (bool)model.AuxillaryLift == true ? helper.A2SAuxLifts : helper.A2SPrimaryLifts;
 
             int week = 0;
@@ -29,6 +28,7 @@ namespace ProjectPower.Areas.A2S_Program.Factories
 
                     var weeklyValues = currentBlock.Value;
                     var dbEntity = new A2SHyperTrophy();
+                    CreateBaseExercise(model, dbEntity);
                     week++;
                     dbEntity.UserName = model.Username;
                     dbEntity.TrainingMax = (decimal)model.TrainingMax;
@@ -40,11 +40,11 @@ namespace ProjectPower.Areas.A2S_Program.Factories
                     dbEntity.Intensity = weeklyValues.intensity[j];
                     dbEntity.Sets = weeklyValues.sets;
                     dbEntity.RepsPerSet = weeklyValues.repsPerSet[j];
-                    dbEntity.UniqueId = id;
                     _dc.BasicWorkoutInformation.Add(dbEntity);
+                    _dc.SaveChanges();
+
                 }
             }
-            _dc.SaveChanges();
         }
     }
 }

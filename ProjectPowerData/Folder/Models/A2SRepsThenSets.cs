@@ -23,18 +23,6 @@ namespace ProjectPowerData.Folder.Models
         public decimal StartingWeight { get; set; }
         [Required]
         public int Week { get; set;}
-        [NotMapped]
-        public override string Name { get; set; }
-        [NotMapped]
-        public override string Category { get; set; }
-        [NotMapped]
-        public override int ExerciseDay { get; set; }
-        [NotMapped]
-        public override int ExerciseOrder { get; set; }
-        [NotMapped]
-        public override string Template { get; set; }
-        [NotMapped]
-        public override string UserName { get; set; }
         public A2SRepsThenSets(){}
     }
 }

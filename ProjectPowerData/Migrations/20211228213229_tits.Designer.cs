@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectPowerData;
 
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211228213229_tits")]
+    partial class tits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +56,7 @@ namespace ProjectPowerData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BasicWorkoutInformation");
+                    b.ToTable("A2SHyperTrophy");
 
                     b.HasDiscriminator<string>("Template").HasValue("BasicWorkoutInformation");
                 });

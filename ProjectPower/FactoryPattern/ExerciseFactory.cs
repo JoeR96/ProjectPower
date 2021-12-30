@@ -9,7 +9,6 @@ namespace ProjectPower.FactoryPattern
     public abstract class ExerciseFactory
     {
         protected readonly DataContext _dc;
-        protected IBasicWorkoutInformation _basicWorkoutInformation;
         //need an abstracte type/interface for models to inherit from 
         //have to populate base+template @ same time g
         //woz blazed
@@ -19,20 +18,15 @@ namespace ProjectPower.FactoryPattern
         }
         public abstract void CreateExercise(CreateExerciseModel template);
 
-        public string CreateBaseExercise(CreateExerciseModel model)
+        public void CreateBaseExercise(CreateExerciseModel model,BasicWorkoutInformation dbEntity)
         {
-            var id = Guid.NewGuid().ToString();
-
             dbEntity.Name = model.ExerciseName;
             dbEntity.Category = model.Category;
             dbEntity.ExerciseDay = model.LiftDay;
             dbEntity.ExerciseOrder = model.LiftOrder;
             dbEntity.Template = model.Template;
-            dbEntity.UniqueId = id;
             dbEntity.UserName = model.Username;
-            _dc.BasicWorkoutInformation.Add(dbEntity);
-            _dc.SaveChanges();
-            return id;
+            dbEntity.UniqueId = Guid.NewGuid().ToString();
         }
     }
 
