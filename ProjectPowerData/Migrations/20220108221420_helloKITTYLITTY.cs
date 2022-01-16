@@ -2,7 +2,7 @@
 
 namespace ProjectPowerData.Migrations
 {
-    public partial class HasValueDiscriminator : Migration
+    public partial class helloKITTYLITTY : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

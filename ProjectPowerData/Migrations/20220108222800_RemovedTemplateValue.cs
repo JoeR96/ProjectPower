@@ -2,7 +2,7 @@
 
 namespace ProjectPowerData.Migrations
 {
-    public partial class woo : Migration
+    public partial class RemovedTemplateValue : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

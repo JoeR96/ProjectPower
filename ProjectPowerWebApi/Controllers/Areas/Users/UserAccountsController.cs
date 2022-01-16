@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
-using ProjectPower.Areas.UserAccounts.Services.Models;
 using System;
 using System.Collections.Generic;
 
@@ -46,35 +45,8 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             }
         }
 
-        [HttpGet("{id:long}/Edit")]
-        public ActionResult<UpdateUserAccountModel> Edit(long id)
-        {
-            var response = _service.GetUpdateModel(id);
 
-            if(response == null)
-            {
-                return BadRequest();
-            }
-            else
-            {
-                return response;
-            }
-        }
-
-        [HttpPut("{id:long}")]
-        public ActionResult Update(long id, UpdateUserAccountModel model)
-        {
-            try
-            {
-                _service.SaveUpdateModel(id, model);
-                return Ok();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-        }
-
+   
         [HttpDelete("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult Delete(long id)
@@ -103,29 +75,6 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             {
                 return Problem(ex.Message);
             }
-        }
-
-        [HttpPost("Login")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<UserCacheInformationModel> Login(UserAccountLoginModel model)
-        {
-            try
-            {
-                var response = _service.Login(model); 
-                if (response != null)
-                {
-                    return CreatedAtAction(nameof(UserAccountsController), response);
-                }
-                else
-                {
-                    return BadRequest();
-                }
-                    
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
-        }
+        }      
     }
 }

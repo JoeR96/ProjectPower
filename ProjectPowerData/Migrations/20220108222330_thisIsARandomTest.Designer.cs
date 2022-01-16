@@ -10,8 +10,8 @@ using ProjectPowerData;
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211228212744_HasValueDiscriminator")]
-    partial class HasValueDiscriminator
+    [Migration("20220108222330_thisIsARandomTest")]
+    partial class thisIsARandomTest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,9 @@ namespace ProjectPowerData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TemplateValuesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UniqueId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -54,7 +57,12 @@ namespace ProjectPowerData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Week")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TemplateValuesId");
 
                     b.ToTable("BasicWorkoutInformation");
 
@@ -128,11 +136,9 @@ namespace ProjectPowerData.Migrations
                         .HasPrecision(9, 4)
                         .HasColumnType("decimal(9,4)");
 
-                    b.Property<int>("Week")
-                        .HasColumnType("int")
-                        .HasColumnName("A2SHyperTrophy_Week");
+                    b.ToTable("BasicWorkoutInformation");
 
-                    b.HasDiscriminator().HasValue("A2SHyperTrophy");
+                    b.HasDiscriminator().HasValue("A2SHypertrophy");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SRepsThenSets", b =>
@@ -157,10 +163,16 @@ namespace ProjectPowerData.Migrations
                     b.Property<decimal>("StartingWeight")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Week")
-                        .HasColumnType("int");
-
                     b.HasDiscriminator().HasValue("A2SRepsThenSets");
+                });
+
+            modelBuilder.Entity("ProjectPowerData.Folder.Models.BasicWorkoutInformation", b =>
+                {
+                    b.HasOne("ProjectPowerData.Folder.Models.BasicWorkoutInformation", "TemplateValues")
+                        .WithMany()
+                        .HasForeignKey("TemplateValuesId");
+
+                    b.Navigation("TemplateValues");
                 });
 #pragma warning restore 612, 618
         }

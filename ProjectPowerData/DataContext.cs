@@ -7,8 +7,6 @@ namespace ProjectPowerData
         public DataContext() : base() { }
         public DbSet<BasicWorkoutInformation> BasicWorkoutInformation { get; set; }
         public DbSet<UserAccounts> UserAccounts { get; set; }
-        public DbSet<A2SHyperTrophy> A2SWorkoutExercises { get; set; }
-        public DbSet<A2SRepsThenSets> A2SWorkoutTemplate { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,21 +19,23 @@ namespace ProjectPowerData
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-
             modelBuilder.Entity<A2SHyperTrophy>()
+                         .ToTable("BasicWorkoutInformation")
                         .Property(p => p.TrainingMax)
                         .HasPrecision(9, 4);
 
 
             modelBuilder.Entity<A2SHyperTrophy>()
+                        .ToTable("BasicWorkoutInformation")
                         .Property(p => p.Intensity)
                         .HasPrecision(9, 4);
 
             modelBuilder.Entity<BasicWorkoutInformation>()
+                .ToTable("BasicWorkoutInformation")
                 .HasDiscriminator<string>("Template")
-                .HasValue<BasicWorkoutInformation>("BasicWorkoutInformation")
-                .HasValue<A2SHyperTrophy>("A2SHyperTrophy")
+                .HasValue<A2SHyperTrophy>("A2SHypertrophy")
                 .HasValue<A2SRepsThenSets>("A2SRepsThenSets");
+
 
         }
     }

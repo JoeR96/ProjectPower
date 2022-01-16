@@ -15,11 +15,6 @@ namespace ProjectPower
             collection.AddScoped<IUserAccountService, UserAccountService>();
         }
 
-        public static void RegisterBasicWorkoutInformation(this IServiceCollection collection)
-        {
-            collection.AddScoped<IBasicWorkoutInformationService, BasicWorkoutInformationService>();
-        }
-
         public static void RegisterA2SWorkout(this IServiceCollection collection)
         {
             collection.AddScoped<IA2SWorkoutService, A2SWorkoutService>();
@@ -28,10 +23,6 @@ namespace ProjectPower
         public static void RegisterWorkoutManagementService(this IServiceCollection collection)
         {
             collection.AddScoped<IWorkoutManagementService, WorkoutManagementService>();
-        }
-        public static void RegisterCachingService(this IServiceCollection collection)
-        {
-            collection.AddScoped<ICachingService, CachingService>();
         }
         public static void AddDataContext(this IServiceCollection collection)
         {

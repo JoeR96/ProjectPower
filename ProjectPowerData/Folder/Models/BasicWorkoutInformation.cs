@@ -9,7 +9,7 @@ namespace ProjectPowerData.Folder.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual int Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public virtual string Name { get; set; }
         [Required]
@@ -21,9 +21,12 @@ namespace ProjectPowerData.Folder.Models
         [Required]
         public virtual string Template { get; set;  }
         [Required]
-        public virtual string UniqueId { get; set; }
-        [Required]
         public virtual string UserName { get; set; }
+        [Required]
+        public int Week { get; set; }
+        public bool? ExerciseCompleted { get; set; }
+        public bool? ExerciseTargetCompleted { get; set; }
+
         public BasicWorkoutInformation() { }
 
     }

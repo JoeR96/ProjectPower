@@ -10,8 +10,8 @@ using ProjectPowerData;
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211228213229_tits")]
-    partial class tits
+    [Migration("20220109112117_AddedBooleansToBasicExerciseToTrackExerciseCompletionAndProgression")]
+    partial class AddedBooleansToBasicExerciseToTrackExerciseCompletionAndProgression
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,11 +32,17 @@ namespace ProjectPowerData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("ExerciseCompleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ExerciseDay")
                         .HasColumnType("int");
 
                     b.Property<int>("ExerciseOrder")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("ExerciseTargetCompleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -54,9 +60,12 @@ namespace ProjectPowerData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Week")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("A2SHyperTrophy");
+                    b.ToTable("BasicWorkoutInformation");
 
                     b.HasDiscriminator<string>("Template").HasValue("BasicWorkoutInformation");
                 });
@@ -128,11 +137,9 @@ namespace ProjectPowerData.Migrations
                         .HasPrecision(9, 4)
                         .HasColumnType("decimal(9,4)");
 
-                    b.Property<int>("Week")
-                        .HasColumnType("int")
-                        .HasColumnName("A2SHyperTrophy_Week");
+                    b.ToTable("BasicWorkoutInformation");
 
-                    b.HasDiscriminator().HasValue("A2SHyperTrophy");
+                    b.HasDiscriminator().HasValue("A2SHypertrophy");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SRepsThenSets", b =>
@@ -156,9 +163,6 @@ namespace ProjectPowerData.Migrations
 
                     b.Property<decimal>("StartingWeight")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Week")
-                        .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("A2SRepsThenSets");
                 });

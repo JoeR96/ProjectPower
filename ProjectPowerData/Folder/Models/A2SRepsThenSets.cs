@@ -5,10 +5,6 @@ namespace ProjectPowerData.Folder.Models
 {
     public class A2SRepsThenSets : BasicWorkoutInformation
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public override int Id { get; set; }
-      
         [Required]
         public int StartingReps { get; set; }
         [Required]
@@ -21,8 +17,7 @@ namespace ProjectPowerData.Folder.Models
         public int GoalReps { get; set; }
         [Required]
         public decimal StartingWeight { get; set; }
-        [Required]
-        public int Week { get; set;}
-        public A2SRepsThenSets(){}
+        public A2SRepsThenSets()
+        {}
     }
 }

@@ -10,8 +10,8 @@ using ProjectPowerData;
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211226233429_new")]
-    partial class @new
+    [Migration("20220108221420_helloKITTYLITTY")]
+    partial class helloKITTYLITTY
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,9 +31,6 @@ namespace ProjectPowerData.Migrations
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Discriminator")
-                        .HasColumnType("int");
 
                     b.Property<int>("ExerciseDay")
                         .HasColumnType("int");
@@ -57,11 +54,14 @@ namespace ProjectPowerData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Week")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("BasicWorkoutInformation");
 
-                    b.HasDiscriminator<int>("Discriminator").HasValue(1);
+                    b.HasDiscriminator<string>("Template").HasValue("BasicWorkoutInformation");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.UserAccounts", b =>
@@ -131,11 +131,9 @@ namespace ProjectPowerData.Migrations
                         .HasPrecision(9, 4)
                         .HasColumnType("decimal(9,4)");
 
-                    b.Property<int>("Week")
-                        .HasColumnType("int")
-                        .HasColumnName("A2SHyperTrophy_Week");
+                    b.ToTable("BasicWorkoutInformation");
 
-                    b.HasDiscriminator().HasValue(2);
+                    b.HasDiscriminator().HasValue("A2SHypertrophy");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SRepsThenSets", b =>
@@ -160,10 +158,7 @@ namespace ProjectPowerData.Migrations
                     b.Property<decimal>("StartingWeight")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Week")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue(3);
+                    b.HasDiscriminator().HasValue("A2SRepsThenSets");
                 });
 #pragma warning restore 612, 618
         }

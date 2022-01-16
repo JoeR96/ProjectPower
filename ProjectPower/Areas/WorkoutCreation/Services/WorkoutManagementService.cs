@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using ProjectPower.Areas.A2S_Program.Factories;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.ExerciseCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models;
+using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.FactoryPattern;
 using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
@@ -13,12 +15,14 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
 {
     public class WorkoutManagementService : IWorkoutManagementService
     {
+        DataContext _dc;
         Dictionary<string, ExerciseFactory> exerciseFactories = null;
         public WorkoutManagementService()
         {
             A2SHypertrophyFactory a2SHypertrophyFactory = new A2SHypertrophyFactory();
             A2SRepsThenSetsFactory a2SRepsThenSetsFactory = new A2SRepsThenSetsFactory();
 
+            _dc = new DataContext();
             exerciseFactories = new Dictionary<string, ExerciseFactory>
             {
                 { "A2SHypertrophy", a2SHypertrophyFactory },
@@ -31,35 +35,16 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
             model.ExerciseDaysAndOrders.ForEach(e => exerciseFactories[e.Template].CreateExercise(e));
         }
 
-        public IQueryable<BasicWorkoutInformation> GetDailyWorkout(string username, int week, int day)
+        public List<BasicWorkoutInformation> GetDailyWorkout(string username, int week, int day)
         {
-            DataContext dc = new DataContext();
-            List<BasicWorkoutInformation> bwiList = new List<BasicWorkoutInformation>();
-
-            var dbEntities = dc.BasicWorkoutInformation.Where(e => e.UserName == username);
-           
-            foreach(var bwi in dbEntities)
-            {
-
-                if(bwi.Template == "A2SHypertrophy")
-                {
-                    A2SHyperTrophy exercise = (A2SHyperTrophy)dc.A2SWorkoutExercises.Where(e => e.UniqueId == bwi.UniqueId && 
-                    e.Week == week);
-                    bwiList.Add(exercise);
-
-                }
-                if (bwi.Template == "A2SRepsThenSets")
-                {
-                    A2SRepsThenSets exercise = (A2SRepsThenSets)dc.A2SWorkoutTemplate.Where(e => e.UniqueId == bwi.UniqueId &&
-                    e.Week == week);
-                    bwiList.Add(exercise);
-
-                }
-            }
-
-            return (IQueryable<BasicWorkoutInformation>)bwiList;
+            var _ = _dc.BasicWorkoutInformation.Where(e => e.UserName == username && e.ExerciseDay == day && e.Week == week).ToList();
+            return _;             
         }
 
-       
+        public void UpdateExerciseResult(UpdateBasicWorkoutInformationModel model)
+        {
+            var _ = _dc.BasicWorkoutInformation.Where(e => e.Id == model.Id).FirstOrDefault();
+            exerciseFactories[_.Template].UpdateExercise(model,_);
+        }
     }
 }

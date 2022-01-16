@@ -9,13 +9,8 @@ namespace ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationServic
 {
     public class UpdateBasicWorkoutInformationModel
     {
-        public string Name { get; set; }
-        public string Category { get; set; }
-
-        public UpdateBasicWorkoutInformationModel(BasicWorkoutInformation dbEntity)
-        {
-            Name = dbEntity.Name;
-            Category = dbEntity.Category;
-        }
+        public int Id { get; set; }
+        public int Reps { get; set; }
+        public int? Sets {get;set;}
     }
 }

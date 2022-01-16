@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.WorkoutCreation.Models;
+using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.Areas.WorkoutCreation.Services;
+using ProjectPowerData.Folder.Models;
 
 namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
 {
@@ -36,16 +39,39 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
         }
 
         [HttpGet("DailyWorkout")]
-        [HttpGet("{username}/{week}/{day}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult DailyWorkout(string username, int week, int day)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public ActionResult<BasicWorkoutInformation> DailyWorkout(string username, int week, int day)
         {
             try
             {
-                _service.GetDailyWorkout(username,week,day);
-                return NoContent();
+                var response = _service.GetDailyWorkout(username, week, day);
+                var x = Newtonsoft.Json.JsonConvert.SerializeObject(response);
+
+                if (response != null)
+                {
+                    return CreatedAtAction(nameof(WorkoutManagementController.DailyWorkout), x);
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
             catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPut("UpdateWorkOutResult")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult ExerciseResult(UpdateBasicWorkoutInformationModel model)
+        {
+            _service.UpdateExerciseResult(model);
+            try
+            {
+                return NoContent();
+            }
+            catch(Exception ex)
             {
                 return BadRequest(ex);
             }

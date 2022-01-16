@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectPowerData;
 
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220108222800_RemovedTemplateValue")]
+    partial class RemovedTemplateValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,17 +32,11 @@ namespace ProjectPowerData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("ExerciseCompleted")
-                        .HasColumnType("bit");
-
                     b.Property<int>("ExerciseDay")
                         .HasColumnType("int");
 
                     b.Property<int>("ExerciseOrder")
                         .HasColumnType("int");
-
-                    b.Property<bool?>("ExerciseTargetCompleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -49,6 +45,9 @@ namespace ProjectPowerData.Migrations
                     b.Property<string>("Template")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TemplateValuesId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UniqueId")
                         .IsRequired()
@@ -62,6 +61,8 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TemplateValuesId");
 
                     b.ToTable("BasicWorkoutInformation");
 
@@ -163,6 +164,15 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasDiscriminator().HasValue("A2SRepsThenSets");
+                });
+
+            modelBuilder.Entity("ProjectPowerData.Folder.Models.BasicWorkoutInformation", b =>
+                {
+                    b.HasOne("ProjectPowerData.Folder.Models.BasicWorkoutInformation", "TemplateValues")
+                        .WithMany()
+                        .HasForeignKey("TemplateValuesId");
+
+                    b.Navigation("TemplateValues");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,7 +2,7 @@
 
 namespace ProjectPowerData.Migrations
 {
-    public partial class initcre : Migration
+    public partial class _911 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,14 +17,14 @@ namespace ProjectPowerData.Migrations
                     ExerciseDay = table.Column<int>(type: "int", nullable: false),
                     ExerciseOrder = table.Column<int>(type: "int", nullable: false),
                     Template = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UniqueId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Week = table.Column<int>(type: "int", nullable: false),
                     TrainingMax = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: true),
                     AuxillaryLift = table.Column<bool>(type: "bit", nullable: true),
                     Block = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AmrapRepTarget = table.Column<int>(type: "int", nullable: true),
                     AmrapRepResult = table.Column<int>(type: "int", nullable: true),
-                    A2SHyperTrophy_Week = table.Column<int>(type: "int", nullable: true),
                     Intensity = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: true),
                     Sets = table.Column<int>(type: "int", nullable: true),
                     RepsPerSet = table.Column<int>(type: "int", nullable: true),
@@ -34,8 +34,7 @@ namespace ProjectPowerData.Migrations
                     RepIncreasePerSet = table.Column<int>(type: "int", nullable: true),
                     GoalSets = table.Column<int>(type: "int", nullable: true),
                     GoalReps = table.Column<int>(type: "int", nullable: true),
-                    StartingWeight = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Week = table.Column<int>(type: "int", nullable: true)
+                    StartingWeight = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {

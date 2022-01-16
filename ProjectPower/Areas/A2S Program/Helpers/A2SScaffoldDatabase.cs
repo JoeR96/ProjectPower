@@ -50,8 +50,7 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
                     dbEntity.Intensity = weeklyValues.intensity[j];
                     dbEntity.Sets = weeklyValues.sets;
                     dbEntity.RepsPerSet = weeklyValues.repsPerSet[j];
-                    dbEntity.UniqueId = g.ToString();
-                    _dc.A2SWorkoutExercises.Add(dbEntity);
+                    _dc.BasicWorkoutInformation.Add(dbEntity);
                 }
             }
             

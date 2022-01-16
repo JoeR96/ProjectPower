@@ -21,38 +21,22 @@ namespace ProjectPower.Areas.A2S_Program.Service
             _dc = context;
         }
 
-        //List<BaseExercise> IA2SWorkoutService.GetDailyWorkout(GetA2SWeeklyWorkout workout)
-        //{
-        //    var exercises = _dc.A2SWorkoutExercises
-        //       .Where(w => w.Week == workout.Week &&
-        //           w.LiftDay == workout.Day &&
-        //               w.Username == workout.Username)
-        //       .Select(e => new BaseExercise(e))
-        //        .ToList();
-
-        //    if (exercises == null)
-        //    {
-        //        return null;
-        //    }
-        //    else
-        //    {
-        //        return exercises;
-        //    }
-        //}
- 
-        public void SaveAmrapResult(UpdateA2SAmrapResultModel model,long id)
-        {
-            //var dbEntity = _dc.A2SWorkoutExercises.FirstOrDefault(m => m.Id == id);
-            //dbEntity.AmrapRepResult = model.AmrapRepResult;
-
-            //_dc.SaveChanges();
-        }
-
         public void Delete(long id)
         {
-            var dbEntity = _dc.A2SWorkoutExercises.Find(id);
-            _dc.Remove(dbEntity);
             _dc.SaveChanges();
+        }
+
+        internal static void UpdateTrainingMax(decimal trainingMax, int updateModifier)
+        {
+            switch (updateModifier)
+            {
+                case -2: return;
+                case -1: return;
+                case 0: return;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                case 4: return;
+                case 5: return;
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace ProjectPowerData.Migrations
 {
-    public partial class etc123456 : Migration
+    public partial class hellokitty : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

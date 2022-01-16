@@ -10,8 +10,8 @@ using ProjectPowerData;
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211227193835_ntf")]
-    partial class ntf
+    [Migration("20220108211858_newting")]
+    partial class newting
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,6 +53,9 @@ namespace ProjectPowerData.Migrations
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Week")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -128,11 +131,7 @@ namespace ProjectPowerData.Migrations
                         .HasPrecision(9, 4)
                         .HasColumnType("decimal(9,4)");
 
-                    b.Property<int>("Week")
-                        .HasColumnType("int")
-                        .HasColumnName("A2SHyperTrophy_Week");
-
-                    b.HasDiscriminator().HasValue("A2SHyperTrophy");
+                    b.HasDiscriminator().HasValue("A2SHypertrophy");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SRepsThenSets", b =>
@@ -156,9 +155,6 @@ namespace ProjectPowerData.Migrations
 
                     b.Property<decimal>("StartingWeight")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Week")
-                        .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("A2SRepsThenSets");
                 });

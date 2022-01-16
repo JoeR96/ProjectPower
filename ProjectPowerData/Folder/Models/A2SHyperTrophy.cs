@@ -5,9 +5,6 @@ namespace ProjectPowerData.Folder.Models
 {
     public class A2SHyperTrophy : BasicWorkoutInformation
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public override int Id { get; set; }
         [Required]
         public decimal TrainingMax { get; set; }
         [Required]
@@ -18,8 +15,7 @@ namespace ProjectPowerData.Folder.Models
         public int AmrapRepTarget { get; set; }
         [Required]
         public int? AmrapRepResult { get; set; }
-        [Required]
-        public int Week { get; set; }
+       
         [Required]
         public decimal Intensity { get; set; }
         [Required]
@@ -27,7 +23,7 @@ namespace ProjectPowerData.Folder.Models
         [Required]
         public int RepsPerSet { get; set; }
         [Required]
-        public decimal RoundingValue { get; set; }
+        public decimal RoundingValue { get; set; }       
         public A2SHyperTrophy() {}
     }
 }

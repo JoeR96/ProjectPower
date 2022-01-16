@@ -10,8 +10,8 @@ using ProjectPowerData;
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211226231729_initcre")]
-    partial class initcre
+    [Migration("20220108213122_hellokitty")]
+    partial class hellokitty
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,6 +53,9 @@ namespace ProjectPowerData.Migrations
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Week")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -128,11 +131,9 @@ namespace ProjectPowerData.Migrations
                         .HasPrecision(9, 4)
                         .HasColumnType("decimal(9,4)");
 
-                    b.Property<int>("Week")
-                        .HasColumnType("int")
-                        .HasColumnName("A2SHyperTrophy_Week");
+                    b.ToTable("BasicWorkoutInformation");
 
-                    b.HasDiscriminator().HasValue("A2SHypertrophyTemplate");
+                    b.HasDiscriminator().HasValue("A2SHypertrophy");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SRepsThenSets", b =>
@@ -156,9 +157,6 @@ namespace ProjectPowerData.Migrations
 
                     b.Property<decimal>("StartingWeight")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Week")
-                        .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("A2SRepsThenSets");
                 });

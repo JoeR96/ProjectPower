@@ -22,11 +22,8 @@ namespace ProjectPowerWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMemoryCache();
-            services.AddScoped<ICachingService, CachingService>();         
             services.RegisterA2SWorkout();
             services.AddDataContext();
-            services.RegisterBasicWorkoutInformation();
             services.RegisterUserAcctionServices();
             services.RegisterWorkoutManagementService();
             services.AddControllers();
@@ -43,13 +40,14 @@ namespace ProjectPowerWebApi
         {
             if (env.IsDevelopment())
             {
+                
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo.API v1"));
             }
 
             app.UseHttpsRedirection();
-
+            
             app.UseRouting();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthorization();

@@ -2,7 +2,6 @@
 using ProjectPower.Areas.UserAccounts.Helpers;
 using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
-using ProjectPower.Areas.UserAccounts.Services.Models;
 using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
 using System.Collections.Generic;
@@ -13,11 +12,9 @@ namespace ProjectPower.Areas.UserAccounts.Services
     public class UserAccountService : IUserAccountService
     {
         private readonly DataContext _dc;
-        private ICachingService _cachingService;
 
-        public UserAccountService(DataContext context,ICachingService cachingService)
+        public UserAccountService(DataContext context)
         {
-            _cachingService = cachingService;
             _dc = context;
         }
         
@@ -120,25 +117,6 @@ namespace ProjectPower.Areas.UserAccounts.Services
             var dbEntity = _dc.UserAccounts.Find(id);
             _dc.Remove(dbEntity);
             _dc.SaveChanges();
-        }
-
-
-
-        public UserCacheInformationModel Login(UserAccountLoginModel model)
-        {
-            ProjectPowerData.Folder.Models.UserAccounts dbEntity = _dc.UserAccounts.FirstOrDefault(x => x.UserName == model.Username);
-            var loggedIn = UserAccountsHelpers.UserLogin(model, dbEntity);
-
-            if (loggedIn)
-            {
-                UserCacheInformationModel cachingModel = new UserCacheInformationModel(dbEntity);               
-
-                return cachingModel;
-            }
-
-            else return null;
-        }
-
-      
+        }   
     }
 }
