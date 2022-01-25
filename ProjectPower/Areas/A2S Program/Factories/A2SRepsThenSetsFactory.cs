@@ -1,8 +1,10 @@
-﻿using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
+﻿using ProjectPower.Areas.A2S_Program.Helpers;
+using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.ExerciseCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.FactoryPattern;
 using ProjectPowerData.Folder.Models;
+using System;
 using System.Linq;
 
 namespace ProjectPower.Areas.A2S_Program.Factories
@@ -12,12 +14,13 @@ namespace ProjectPower.Areas.A2S_Program.Factories
         public override void CreateExercise(CreateExerciseModel model)
         {
             const int workoutTotalDuration = 20;
+            var masterId = Guid.NewGuid();
 
             for (int i = 0; i < workoutTotalDuration; i++)
             {
-                var dbEntity = new A2SRepsThenSets();
+                var dbEntity = new A2SSetsThenReps();
                 CreateBaseExercise(model, dbEntity);
-
+                dbEntity.ExerciseMasterId = masterId.ToString();
                 dbEntity.RepIncreasePerSet = (int)model.RepIncreasePerSet;
                 dbEntity.GoalReps = (int)model.GoalReps;
                 dbEntity.GoalSets = (int)model.GoalSets;
@@ -32,32 +35,16 @@ namespace ProjectPower.Areas.A2S_Program.Factories
 
         internal override void UpdateExercise(UpdateBasicWorkoutInformationModel model, BasicWorkoutInformation exercise)
         {
-            var castedType = (A2SRepsThenSets)exercise;
+            var setsThenReps = (A2SSetsThenReps)exercise;
+            var nextWeek = (A2SSetsThenReps)_dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == exercise.ExerciseMasterId && e.Week == setsThenReps.Week + 1).FirstOrDefault();
 
-            if (model.Reps >= castedType.GoalReps && model.Sets >= castedType.GoalSets)
-            {
-                castedType.ExerciseTargetCompleted = true;
-                BasicWorkoutInformation nextWeek = _dc.BasicWorkoutInformation.Where(e => e.Id == castedType.Id + 1).FirstOrDefault();
-                var castedNextWeek = (A2SRepsThenSets)nextWeek;
-
-                if(castedType.StartingSets < castedNextWeek.GoalSets)
-                {
-                    castedNextWeek.StartingSets = castedNextWeek.StartingSets++;
-                }
-                if (castedType.StartingSets == castedNextWeek.GoalSets)
-                {
-                    castedNextWeek.StartingSets = castedNextWeek.StartingSets;
-                }
-
-            }
-            else
-            {
-                castedType.ExerciseTargetCompleted = false;
-            }
-            castedType.ExerciseCompleted = true;
-
-            _dc.BasicWorkoutInformation.Update(castedType);
+            A2SHelper.ProgressSetsThenReps(model, setsThenReps,nextWeek);
+            setsThenReps.ExerciseCompleted = true;
+            _dc.BasicWorkoutInformation.Update(nextWeek);
+            _dc.BasicWorkoutInformation.Update(setsThenReps);
             _dc.SaveChanges();
         }
+
+       
     }
 }

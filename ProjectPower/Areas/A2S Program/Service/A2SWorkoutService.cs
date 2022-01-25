@@ -14,8 +14,6 @@ namespace ProjectPower.Areas.A2S_Program.Service
     public class A2SWorkoutService : IA2SWorkoutService
     {
         private readonly DataContext _dc;
-
-        private A2SHypertrophyTemplateValues _a2sHelper = new A2SHypertrophyTemplateValues();
         public A2SWorkoutService(DataContext context)
         {
             _dc = context;
@@ -26,17 +24,6 @@ namespace ProjectPower.Areas.A2S_Program.Service
             _dc.SaveChanges();
         }
 
-        internal static void UpdateTrainingMax(decimal trainingMax, int updateModifier)
-        {
-            switch (updateModifier)
-            {
-                case -2: return;
-                case -1: return;
-                case 0: return;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-                case 4: return;
-                case 5: return;
-            }
-        }
+        
     }
 }

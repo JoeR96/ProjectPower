@@ -42,14 +42,6 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
                 {"PeakingBlock",PBAL}
             };            
         }
-        public Dictionary<string, A2SLift> ReturnA2SPrimaryLiftBlock()
-        {
-            return A2SPrimaryLifts;
-        }
-        public Dictionary<string, A2SLift> ReturnA2SAuxLiftBlock()
-        {
-            return A2SAuxLifts;
-        }
         #endregion
 
         
@@ -61,14 +53,10 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
         public decimal[] intensity { get; set; }
         public int sets { get; set; }
         public bool aux { get; set; }
-
-
-
 }
     #region scaffoldData
     public class HyperTrophyBlockPrimaryLift : A2SLift
     {
-
         public HyperTrophyBlockPrimaryLift()
         {
             amrapRepTarget = new int[] { 10, 8, 6, 9, 7, 5 };
@@ -77,8 +65,6 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
             sets = 5;
             aux = false;
         }
-
-
     }
     public class HyperTrophyBlockAuxillaryLift : A2SLift
     {
@@ -91,8 +77,6 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
             aux = true;
         }
     }
-    
-
     public class StrengthBlockPrimaryLift : A2SLift
     {
         public StrengthBlockPrimaryLift()

@@ -10,8 +10,8 @@ using ProjectPowerData;
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220109112117_AddedBooleansToBasicExerciseToTrackExerciseCompletionAndProgression")]
-    partial class AddedBooleansToBasicExerciseToTrackExerciseCompletionAndProgression
+    [Migration("20220117235123_guidToString")]
+    partial class guidToString
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,10 @@ namespace ProjectPowerData.Migrations
                     b.Property<int>("ExerciseDay")
                         .HasColumnType("int");
 
+                    b.Property<string>("ExerciseMasterId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ExerciseOrder")
                         .HasColumnType("int");
 
@@ -49,10 +53,6 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Template")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UniqueId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -142,9 +142,15 @@ namespace ProjectPowerData.Migrations
                     b.HasDiscriminator().HasValue("A2SHypertrophy");
                 });
 
-            modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SRepsThenSets", b =>
+            modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SSetsThenReps", b =>
                 {
                     b.HasBaseType("ProjectPowerData.Folder.Models.BasicWorkoutInformation");
+
+                    b.Property<int>("CurrentReps")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurrentSets")
+                        .HasColumnType("int");
 
                     b.Property<int>("GoalReps")
                         .HasColumnType("int");

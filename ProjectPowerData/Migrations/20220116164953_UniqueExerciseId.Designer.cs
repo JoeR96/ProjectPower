@@ -10,8 +10,8 @@ using ProjectPowerData;
 namespace ProjectPowerData.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220108222626_1234567")]
-    partial class _1234567
+    [Migration("20220116164953_UniqueExerciseId")]
+    partial class UniqueExerciseId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,24 +32,26 @@ namespace ProjectPowerData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("ExerciseCompleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ExerciseDay")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("ExerciseMasterId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("ExerciseOrder")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("ExerciseTargetCompleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Template")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TemplateValuesId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UniqueId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -61,8 +63,6 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TemplateValuesId");
 
                     b.ToTable("BasicWorkoutInformation");
 
@@ -141,9 +141,15 @@ namespace ProjectPowerData.Migrations
                     b.HasDiscriminator().HasValue("A2SHypertrophy");
                 });
 
-            modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SRepsThenSets", b =>
+            modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SSetsThenReps", b =>
                 {
                     b.HasBaseType("ProjectPowerData.Folder.Models.BasicWorkoutInformation");
+
+                    b.Property<int>("CurrentReps")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurrentSets")
+                        .HasColumnType("int");
 
                     b.Property<int>("GoalReps")
                         .HasColumnType("int");
@@ -164,15 +170,6 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasDiscriminator().HasValue("A2SRepsThenSets");
-                });
-
-            modelBuilder.Entity("ProjectPowerData.Folder.Models.BasicWorkoutInformation", b =>
-                {
-                    b.HasOne("ProjectPowerData.Folder.Models.BasicWorkoutInformation", "TemplateValues")
-                        .WithMany()
-                        .HasForeignKey("TemplateValuesId");
-
-                    b.Navigation("TemplateValues");
                 });
 #pragma warning restore 612, 618
         }

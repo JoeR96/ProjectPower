@@ -9,8 +9,9 @@ namespace ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationServic
 {
     public class UpdateBasicWorkoutInformationModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public int Reps { get; set; }
         public int? Sets {get;set;}
+        public int Week { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectPowerData.Folder.Models
 {
-    public class A2SRepsThenSets : BasicWorkoutInformation
+    public class A2SSetsThenReps : BasicWorkoutInformation
     {
         [Required]
         public int StartingReps { get; set; }
@@ -12,12 +12,16 @@ namespace ProjectPowerData.Folder.Models
         [Required]
         public int RepIncreasePerSet { get; set; }
         [Required]
+        public int CurrentReps { get; set; }
+        [Required]
+        public int CurrentSets { get; set; }
+        [Required]
         public int GoalSets { get; set; }
         [Required]
         public int GoalReps { get; set; }
         [Required]
         public decimal StartingWeight { get; set; }
-        public A2SRepsThenSets()
+        public A2SSetsThenReps()
         {}
     }
 }

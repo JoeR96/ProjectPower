@@ -43,7 +43,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
 
         public void UpdateExerciseResult(UpdateBasicWorkoutInformationModel model)
         {
-            var _ = _dc.BasicWorkoutInformation.Where(e => e.Id == model.Id).FirstOrDefault();
+            var _ = _dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == model.Id && e.Week == model.Week).FirstOrDefault();
             exerciseFactories[_.Template].UpdateExercise(model,_);
         }
     }

@@ -24,11 +24,7 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
         {
             Dictionary<string, A2SLift> fullWorkout = new Dictionary<string, A2SLift>();
             A2SHypertrophyTemplateValues helper = new A2SHypertrophyTemplateValues();
-            Guid g = Guid.NewGuid();
             fullWorkout = model.AuxillaryLift == true ? helper.A2SAuxLifts : helper.A2SPrimaryLifts;
-
-           
-
             int week = 0;
             for (int i = 0; i < 3; i++)
             {

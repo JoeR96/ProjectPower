@@ -24,6 +24,8 @@ namespace ProjectPowerData.Folder.Models
         public virtual string UserName { get; set; }
         [Required]
         public int Week { get; set; }
+        [Required]
+        public string ExerciseMasterId { get; set; }
         public bool? ExerciseCompleted { get; set; }
         public bool? ExerciseTargetCompleted { get; set; }
 

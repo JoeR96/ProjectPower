@@ -34,7 +34,7 @@ namespace ProjectPowerData
                 .ToTable("BasicWorkoutInformation")
                 .HasDiscriminator<string>("Template")
                 .HasValue<A2SHyperTrophy>("A2SHypertrophy")
-                .HasValue<A2SRepsThenSets>("A2SRepsThenSets");
+                .HasValue<A2SSetsThenReps>("A2SRepsThenSets");
 
 
         }

@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectPowerData.Migrations
 {
-    public partial class _911 : Migration
+    public partial class UniqueExerciseId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,9 +18,11 @@ namespace ProjectPowerData.Migrations
                     ExerciseDay = table.Column<int>(type: "int", nullable: false),
                     ExerciseOrder = table.Column<int>(type: "int", nullable: false),
                     Template = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UniqueId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Week = table.Column<int>(type: "int", nullable: false),
+                    ExerciseMasterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExerciseCompleted = table.Column<bool>(type: "bit", nullable: true),
+                    ExerciseTargetCompleted = table.Column<bool>(type: "bit", nullable: true),
                     TrainingMax = table.Column<decimal>(type: "decimal(9,4)", precision: 9, scale: 4, nullable: true),
                     AuxillaryLift = table.Column<bool>(type: "bit", nullable: true),
                     Block = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -32,6 +35,8 @@ namespace ProjectPowerData.Migrations
                     StartingReps = table.Column<int>(type: "int", nullable: true),
                     StartingSets = table.Column<int>(type: "int", nullable: true),
                     RepIncreasePerSet = table.Column<int>(type: "int", nullable: true),
+                    CurrentReps = table.Column<int>(type: "int", nullable: true),
+                    CurrentSets = table.Column<int>(type: "int", nullable: true),
                     GoalSets = table.Column<int>(type: "int", nullable: true),
                     GoalReps = table.Column<int>(type: "int", nullable: true),
                     StartingWeight = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
