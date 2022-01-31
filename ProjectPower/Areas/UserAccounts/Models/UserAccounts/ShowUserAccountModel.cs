@@ -1,6 +1,4 @@
-﻿using ProjectPowerData.Folder.Models;
-
-namespace ProjectPower.Areas.UserAccounts.Models.UserAccounts
+﻿namespace ProjectPower.Areas.UserAccounts.Models.UserAccounts
 {
     public class ShowUserAccountModel
     {

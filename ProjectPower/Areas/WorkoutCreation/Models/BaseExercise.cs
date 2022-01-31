@@ -16,6 +16,6 @@ namespace ProjectPower.Areas.WorkoutCreation.Models
         public int ExerciseDay { get; set; }
         [Required]
         public int ExerciseOrder { get; set; }
-       
+
     }
 }

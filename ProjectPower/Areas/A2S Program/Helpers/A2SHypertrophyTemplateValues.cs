@@ -1,17 +1,11 @@
-﻿using ProjectPowerData;
-using ProjectPowerData.Folder.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ProjectPower.Areas.A2S_Program.Helpers
 {
     public class A2SHypertrophyTemplateValues
     {
         #region TemplateValues
-        public HyperTrophyBlockPrimaryLift HTPL { get; set; }  = new HyperTrophyBlockPrimaryLift();
+        public HyperTrophyBlockPrimaryLift HTPL { get; set; } = new HyperTrophyBlockPrimaryLift();
         public HyperTrophyBlockAuxillaryLift HTAL { get; set; } = new HyperTrophyBlockAuxillaryLift();
         public StrengthBlockPrimaryLift SBPL { get; set; } = new StrengthBlockPrimaryLift();
         public StrengthBlockAuxillaryLift SBAL { get; set; } = new StrengthBlockAuxillaryLift();
@@ -40,11 +34,11 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
                 {"HypertrophyBlock",HTAL},
                 {"StrengthBlock",SBAL},
                 {"PeakingBlock",PBAL}
-            };            
+            };
         }
         #endregion
 
-        
+
     }
     public abstract class A2SLift
     {
@@ -53,7 +47,7 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
         public decimal[] intensity { get; set; }
         public int sets { get; set; }
         public bool aux { get; set; }
-}
+    }
     #region scaffoldData
     public class HyperTrophyBlockPrimaryLift : A2SLift
     {

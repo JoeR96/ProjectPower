@@ -31,6 +31,6 @@ namespace ProjectPower.Areas.ExerciseCreation.Models
         public int? Sets { get; set; }
         public int? RepsPerSet { get; set; }
         public decimal? RoundingValue { get; set; }
-        public CreateExerciseModel(){}
+        public CreateExerciseModel() { }
     }
 }

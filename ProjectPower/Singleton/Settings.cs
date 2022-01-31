@@ -1,13 +1,10 @@
-﻿using ProjectPower.Areas.UserAccounts.Services;
-using static ProjectPower.Utility.Enums;
-
-namespace ProjectPower.Singleton
+﻿namespace ProjectPower.Singleton
 {
 
     public class Settings
     {
         private Settings()
-        { 
+        {
 
         }
 
@@ -16,7 +13,7 @@ namespace ProjectPower.Singleton
         private static readonly object _lock = new object();
 
         public static Settings GetInstance()
-        {   
+        {
             if (_instance == null)
             {
 

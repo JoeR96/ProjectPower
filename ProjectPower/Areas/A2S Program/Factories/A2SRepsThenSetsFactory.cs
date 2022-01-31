@@ -1,5 +1,4 @@
 ﻿using ProjectPower.Areas.A2S_Program.Helpers;
-using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.ExerciseCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.FactoryPattern;
@@ -38,13 +37,13 @@ namespace ProjectPower.Areas.A2S_Program.Factories
             var setsThenReps = (A2SSetsThenReps)exercise;
             var nextWeek = (A2SSetsThenReps)_dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == exercise.ExerciseMasterId && e.Week == setsThenReps.Week + 1).FirstOrDefault();
 
-            A2SHelper.ProgressSetsThenReps(model, setsThenReps,nextWeek);
+            A2SHelper.ProgressSetsThenReps(model, setsThenReps, nextWeek);
             setsThenReps.ExerciseCompleted = true;
             _dc.BasicWorkoutInformation.Update(nextWeek);
             _dc.BasicWorkoutInformation.Update(setsThenReps);
             _dc.SaveChanges();
         }
 
-       
+
     }
 }

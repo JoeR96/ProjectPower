@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
-using ProjectPower.Areas.WorkoutCreation.Models;
+﻿using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPowerData.Folder.Models;
+using System.Collections.Generic;
 
 namespace ProjectPower.Areas.WorkoutCreation.Services
 {

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
-using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.Areas.WorkoutCreation.Services;
 using ProjectPowerData.Folder.Models;
+using System;
 
 namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
 {
@@ -32,7 +30,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
                 _service.CreateWorkout(model);
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }
@@ -71,7 +69,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
             {
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }

@@ -1,11 +1,6 @@
 ﻿using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
-using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectPower.Areas.A2S_Program.Helpers
 {
@@ -48,14 +43,14 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
             else if (model.Reps >= setsThenReps.CurrentReps && model.Sets < setsThenReps.GoalSets)
             {
                 nextWeek.CurrentSets += 1;
-            }        
+            }
             else
             {
                 setsThenReps.ExerciseTargetCompleted = false;
             }
         }
 
-        public static void ProgressA2SHypertrophy(A2SHyperTrophy hypertrophyExercise,A2SHyperTrophy nextWeek)
+        public static void ProgressA2SHypertrophy(A2SHyperTrophy hypertrophyExercise, A2SHyperTrophy nextWeek)
         {
             if (hypertrophyExercise.AmrapRepResult >= hypertrophyExercise.AmrapRepTarget)
             {

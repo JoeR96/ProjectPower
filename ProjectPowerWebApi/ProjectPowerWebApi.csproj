@@ -6,13 +6,18 @@
     <OutputType>Exe</OutputType>
     <StartupObject />
     <Configurations>Debug;Release;TEST</Configurations>
+    <SignAssembly>false</SignAssembly>
+    <UserSecretsId>9061eefc-0af4-43bb-9142-1adbec5b5d23</UserSecretsId>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
         
   <ItemGroup>
+    <ProjectReference Include="..\ProjectPowerData\ProjectPowerData.csproj" />
     <ProjectReference Include="..\ProjectPower\ProjectPower.csproj" />
   </ItemGroup>
 

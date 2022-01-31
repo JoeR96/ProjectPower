@@ -1,11 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace ProjectPowerData.Folder.Models
 {
-    public class BasicWorkoutInformation 
+    public class BasicWorkoutInformation
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,7 +17,7 @@ namespace ProjectPowerData.Folder.Models
         [Required]
         public virtual int ExerciseOrder { get; set; }
         [Required]
-        public virtual string Template { get; set;  }
+        public virtual string Template { get; set; }
         [Required]
         public virtual string UserName { get; set; }
         [Required]

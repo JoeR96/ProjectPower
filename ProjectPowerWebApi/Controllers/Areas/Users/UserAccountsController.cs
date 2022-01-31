@@ -46,7 +46,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
         }
 
 
-   
+
         [HttpDelete("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult Delete(long id)
@@ -69,12 +69,12 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             try
             {
                 var response = _service.SaveCreateModel(model);
-                return CreatedAtAction(nameof(UserAccountsController.Show),  response);
+                return CreatedAtAction(nameof(UserAccountsController.Show), response);
             }
             catch (Exception ex)
             {
                 return Problem(ex.Message);
             }
-        }      
+        }
     }
 }

@@ -1,5 +1,5 @@
-﻿using ProjectPowerData.Folder.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectPowerData.Folder.Models;
 namespace ProjectPowerData
 {
     public class DataContext : DbContext
@@ -11,7 +11,7 @@ namespace ProjectPowerData
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=ProjectPower;");
+            optionsBuilder.UseSqlServer("Server=projectpowerwebapidbserver.database.windows.net; Database=ProjectPowerWebApi_db;User Id=bigdave;Password=Zelfdwnq9512!;");
             base.OnConfiguring(optionsBuilder);
 
         }
@@ -40,4 +40,4 @@ namespace ProjectPowerData
         }
     }
 }
-    
+

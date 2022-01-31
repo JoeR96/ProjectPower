@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using ProjectPower.Areas.A2S_Program.Factories;
+﻿using ProjectPower.Areas.A2S_Program.Factories;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
-using ProjectPower.Areas.ExerciseCreation.Models;
-using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.FactoryPattern;
 using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectPower.Areas.WorkoutCreation.Services
 {
@@ -38,13 +34,13 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
         public List<BasicWorkoutInformation> GetDailyWorkout(string username, int week, int day)
         {
             var _ = _dc.BasicWorkoutInformation.Where(e => e.UserName == username && e.ExerciseDay == day && e.Week == week).ToList();
-            return _;             
+            return _;
         }
 
         public void UpdateExerciseResult(UpdateBasicWorkoutInformationModel model)
         {
             var _ = _dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == model.Id && e.Week == model.Week).FirstOrDefault();
-            exerciseFactories[_.Template].UpdateExercise(model,_);
+            exerciseFactories[_.Template].UpdateExercise(model, _);
         }
     }
 }

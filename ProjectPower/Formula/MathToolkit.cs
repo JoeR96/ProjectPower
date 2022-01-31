@@ -1,7 +1,4 @@
-﻿using ProjectPower.Singleton;
-using ProjectPower.Utility;
-using System;
-using static ProjectPower.Utility.Enums;
+﻿using System;
 
 namespace ProjectPower.Formula
 {
@@ -17,5 +14,5 @@ namespace ProjectPower.Formula
         {
             return roundingValue * Math.Ceiling(weight / roundingValue);
         }
-    }  
+    }
 }

@@ -12,9 +12,9 @@ namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
         [Required]
         public int RepIncreasePerSet { get; set; }
         [Required]
-        public int GoalSets { get;set ; }
+        public int GoalSets { get; set; }
         [Required]
-        public int GoalReps { get; set;  }
+        public int GoalReps { get; set; }
         [Required]
         public decimal StartingWeight { get; set; }
     }

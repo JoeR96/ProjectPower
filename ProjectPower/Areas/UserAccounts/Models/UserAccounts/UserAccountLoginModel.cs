@@ -8,7 +8,7 @@ namespace ProjectPower.Areas.UserAccounts.Models.UserAccounts
     {
         public string Username { get; set; }
         public string Password { get; set; }
-       
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Password.Length < 5)

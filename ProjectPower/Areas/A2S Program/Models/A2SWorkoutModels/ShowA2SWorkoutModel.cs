@@ -1,13 +1,8 @@
 ﻿using ProjectPowerData.Folder.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels
 {
-    public class ShowA2SWorkoutModel 
+    public class ShowA2SWorkoutModel
     {
         public long Id { get; set; }
         public string Name { get; set; }

@@ -1,10 +1,7 @@
 ﻿using ProjectPower.Areas.A2S_Program.Helpers;
-using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.ExerciseCreation.Models;
-using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.FactoryPattern;
-using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
 using System;
 using System.Linq;
@@ -54,7 +51,7 @@ namespace ProjectPower.Areas.A2S_Program.Factories
             var hypertrophyExercise = (A2SHyperTrophy)exercise;
             hypertrophyExercise.AmrapRepResult = model.Reps;
             var nextWeek = (A2SHyperTrophy)_dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == exercise.ExerciseMasterId && e.Week == hypertrophyExercise.Week + 1).FirstOrDefault();
-            A2SHelper.ProgressA2SHypertrophy( hypertrophyExercise, nextWeek);
+            A2SHelper.ProgressA2SHypertrophy(hypertrophyExercise, nextWeek);
 
 
             hypertrophyExercise.ExerciseCompleted = true;

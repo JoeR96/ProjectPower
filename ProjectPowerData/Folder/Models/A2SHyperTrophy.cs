@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectPowerData.Folder.Models
 {
@@ -15,7 +14,7 @@ namespace ProjectPowerData.Folder.Models
         public int AmrapRepTarget { get; set; }
         [Required]
         public int? AmrapRepResult { get; set; }
-       
+
         [Required]
         public decimal Intensity { get; set; }
         [Required]
@@ -23,7 +22,7 @@ namespace ProjectPowerData.Folder.Models
         [Required]
         public int RepsPerSet { get; set; }
         [Required]
-        public decimal RoundingValue { get; set; }       
-        public A2SHyperTrophy() {}
+        public decimal RoundingValue { get; set; }
+        public A2SHyperTrophy() { }
     }
 }

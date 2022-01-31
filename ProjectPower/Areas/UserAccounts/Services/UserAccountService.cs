@@ -1,9 +1,7 @@
-﻿using ProjectPower.Areas.A2S_Program.Helpers;
-using ProjectPower.Areas.UserAccounts.Helpers;
+﻿using ProjectPower.Areas.UserAccounts.Helpers;
 using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using ProjectPowerData;
-using ProjectPowerData.Folder.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,13 +15,13 @@ namespace ProjectPower.Areas.UserAccounts.Services
         {
             _dc = context;
         }
-        
+
         public IEnumerable<ShowUserAccountModel> GetIndexModel(UserAccountSearchModel search)
         {
             var dbEntities = _dc.UserAccounts;
 
             var model = new List<ShowUserAccountModel>();
-            foreach(var entity in dbEntities)
+            foreach (var entity in dbEntities)
             {
                 model.Add(new ShowUserAccountModel(entity));
             }
@@ -33,7 +31,7 @@ namespace ProjectPower.Areas.UserAccounts.Services
 
         public int GetCount(UserAccountSearchModel search)
         {
-            
+
 
             var dbEntities = _dc.UserAccounts;
 
@@ -42,10 +40,10 @@ namespace ProjectPower.Areas.UserAccounts.Services
 
         public ShowUserAccountModel GetShowModel(long id)
         {
-           
+
             var dbEntity = _dc.UserAccounts.Find(id);
 
-            if(dbEntity == null)
+            if (dbEntity == null)
             {
                 return null;
             }
@@ -59,7 +57,7 @@ namespace ProjectPower.Areas.UserAccounts.Services
         {
             var dbEntity = _dc.UserAccounts.FirstOrDefault(x => x.UserName == username);
 
-            if(dbEntity == null)
+            if (dbEntity == null)
             {
                 return null;
             }
@@ -72,7 +70,7 @@ namespace ProjectPower.Areas.UserAccounts.Services
         {
             var dbEntity = _dc.UserAccounts.Find(id);
 
-            if(dbEntity == null)
+            if (dbEntity == null)
             {
                 return null;
             }
@@ -117,6 +115,6 @@ namespace ProjectPower.Areas.UserAccounts.Services
             var dbEntity = _dc.UserAccounts.Find(id);
             _dc.Remove(dbEntity);
             _dc.SaveChanges();
-        }   
+        }
     }
 }

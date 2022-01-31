@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectPowerData.Folder.Models
 {
@@ -22,6 +21,6 @@ namespace ProjectPowerData.Folder.Models
         [Required]
         public decimal StartingWeight { get; set; }
         public A2SSetsThenReps()
-        {}
+        { }
     }
 }

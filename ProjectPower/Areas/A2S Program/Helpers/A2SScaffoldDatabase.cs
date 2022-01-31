@@ -1,13 +1,8 @@
 ﻿using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
-using ProjectPower.Areas.UserAccounts.Services;
-using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectPower.Areas.A2S_Program.Helpers
 {
@@ -29,11 +24,11 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
             for (int i = 0; i < 3; i++)
             {
                 var currentBlock = fullWorkout.ElementAt(i);
-                                
+
                 for (int j = 0; j < 6; j++)
                 {
-                    
-                    var weeklyValues = currentBlock.Value;                   
+
+                    var weeklyValues = currentBlock.Value;
                     var dbEntity = new A2SHyperTrophy();
                     week++;
 
@@ -49,7 +44,7 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
                     _dc.BasicWorkoutInformation.Add(dbEntity);
                 }
             }
-            
+
             _dc.SaveChanges();
         }
     }

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectPowerData.Folder.Models
 {
@@ -31,7 +26,7 @@ namespace ProjectPowerData.Folder.Models
         [Required]
         public decimal BeatByOne { get; set; }
         [Required]
-        public decimal BeatByTwo {get; set; }
+        public decimal BeatByTwo { get; set; }
         [Required]
         public decimal BeatByThree { get; set; }
         [Required]
@@ -43,7 +38,7 @@ namespace ProjectPowerData.Folder.Models
         public decimal UnderByOne { get; set; }
         [Required]
         public decimal UnderByTwo { get; set; }
-       
+
 
     }
 }

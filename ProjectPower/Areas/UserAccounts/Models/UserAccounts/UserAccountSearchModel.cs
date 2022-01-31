@@ -4,5 +4,5 @@
     {
         public string Term { get; set; }
     }
-    
+
 }
