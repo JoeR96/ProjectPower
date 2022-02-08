@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
+using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.Areas.WorkoutCreation.Services;
 using ProjectPowerData.Folder.Models;
@@ -36,13 +37,13 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
             }
         }
 
-        [HttpGet("DailyWorkout")]
+        [HttpGet("DailyWorkout/{username}/{day}/{week}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<BasicWorkoutInformation> DailyWorkout(string username, int week, int day)
+        public ActionResult<BasicWorkoutInformation> DailyWorkout(string username, int day, int week)
         {
             try
             {
-                var response = _service.GetDailyWorkout(username, week, day);
+                var response = _service.GetDailyWorkout(username, week,day);
                 var x = Newtonsoft.Json.JsonConvert.SerializeObject(response);
 
                 if (response != null)
