@@ -19,7 +19,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
         public WorkoutManagementController(IWorkoutManagementService service)
         {
             _service = service;
-        }
+        } 
 
         [HttpPost("CreateWorkout")]
         [ProducesResponseType(StatusCodes.Status201Created)]

@@ -23,6 +23,8 @@ namespace ProjectPowerData.Folder.Models
         public int RepsPerSet { get; set; }
         [Required]
         public decimal RoundingValue { get; set; }
+        public decimal? WorkingWeight { get; set; }
+
         public A2SHyperTrophy() { }
     }
 }

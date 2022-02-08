@@ -1,9 +1,11 @@
 ﻿using ProjectPower.Areas.A2S_Program.Factories;
+using ProjectPower.Areas.A2S_Program.Helpers;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.FactoryPattern;
 using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,11 +32,22 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
         {
             model.ExerciseDaysAndOrders.ForEach(e => exerciseFactories[e.Template].CreateExercise(e));
         }
-
+    //    List.Where(x => x.Name.ToString().Equals("Apple").ToList()
+    //.ForEach(x => { if (x.Name == "") { } } );
         public List<BasicWorkoutInformation> GetDailyWorkout(string username, int week, int day)
         {
             var _ = _dc.BasicWorkoutInformation.Where(e => e.UserName == username && e.ExerciseDay == day && e.Week == week).ToList();
+            _.ForEach(e => ValidateWorkout(e));
             return _;
+        }
+
+        private void ValidateWorkout(BasicWorkoutInformation e)
+        {
+            if(e.Template == "A2SHypertrophy")
+            {
+                A2SHelper.WorkingWeight((A2SHyperTrophy)e);
+                _dc.SaveChanges();
+            }
         }
 
         public void UpdateExerciseResult(UpdateBasicWorkoutInformationModel model)
@@ -42,5 +55,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
             var _ = _dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == model.Id && e.Week == model.Week).FirstOrDefault();
             exerciseFactories[_.Template].UpdateExercise(model, _);
         }
+
+        
     }
 }

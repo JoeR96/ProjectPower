@@ -6,12 +6,11 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
 {
     public static class A2SHelper
     {
-        public static decimal WorkingWeight(A2SHyperTrophy model)
+        public static void WorkingWeight(A2SHyperTrophy model)
         {
             var workingWeight = model.Intensity * model.TrainingMax;
             var newWeight = Math.Ceiling(workingWeight / model.RoundingValue);
-            var newNumber = newWeight * model.RoundingValue;
-            return newNumber;
+            model.WorkingWeight = newWeight * model.RoundingValue;
         }
 
         public static decimal UpdateTrainingMax(decimal trainingMax, int updateModifier)
