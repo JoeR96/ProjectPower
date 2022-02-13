@@ -37,13 +37,13 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
             }
         }
 
-        [HttpGet("DailyWorkout/{username}/{day}/{week}")]
+        [HttpGet("DailyWorkout/{username}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<BasicWorkoutInformation> DailyWorkout(string username, int day, int week)
+        public ActionResult<BasicWorkoutInformation> DailyWorkout(string username)
         {
             try
             {
-                var response = _service.GetDailyWorkout(username, week,day);
+                var response = _service.GetDailyWorkout(username);
                 var x = Newtonsoft.Json.JsonConvert.SerializeObject(response);
 
                 if (response != null)
@@ -61,13 +61,26 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
             }
         }
 
-        [HttpPut("UpdateWorkOutResult")]
+        [HttpPut("DailyWorkout/UpdateWorkOutResult")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult ExerciseResult(UpdateBasicWorkoutInformationModel model)
         {
-            _service.UpdateExerciseResult(model);
             try
             {
+                _service.UpdateExerciseResult(model);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpPut("UpdateDayAndWeek/{username}")]
+        public ActionResult UpdateDayAndWeek(string username)
+        {
+            try
+            {
+                _service.UpdateDayAndWeek(username);
                 return NoContent();
             }
             catch (Exception ex)

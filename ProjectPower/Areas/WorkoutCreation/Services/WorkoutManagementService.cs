@@ -32,11 +32,11 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
         {
             model.ExerciseDaysAndOrders.ForEach(e => exerciseFactories[e.Template].CreateExercise(e));
         }
-    //    List.Where(x => x.Name.ToString().Equals("Apple").ToList()
-    //.ForEach(x => { if (x.Name == "") { } } );
-        public List<BasicWorkoutInformation> GetDailyWorkout(string username, int week, int day)
+  
+        public List<BasicWorkoutInformation> GetDailyWorkout(string username)
         {
-            var _ = _dc.BasicWorkoutInformation.Where(e => e.UserName == username && e.ExerciseDay == day && e.Week == week).ToList();
+            var ua = _dc.UserAccounts.Where(e => e.UserName == username).FirstOrDefault();
+            var _ = _dc.BasicWorkoutInformation.Where(e => e.UserName == username && e.ExerciseDay == ua.CurrentDay && e.Week == ua.CurrentWeek).ToList();
             _.ForEach(e => ValidateWorkout(e));
             return _;
         }
@@ -49,13 +49,33 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
                 _dc.SaveChanges();
             }
         }
-
         public void UpdateExerciseResult(UpdateBasicWorkoutInformationModel model)
         {
-            var _ = _dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == model.Id && e.Week == model.Week).FirstOrDefault();
+            var _ =_dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == model.Id && e.Week == model.Week).FirstOrDefault();
             exerciseFactories[_.Template].UpdateExercise(model, _);
         }
+        public void GetDayAndWeek(string username)
+        {
+            var user = _dc.UserAccounts.Where(u => u.UserName == username).FirstOrDefault();
+        }
+        public void UpdateDayAndWeek(string username)
+        {
+            var user = _dc.UserAccounts.Where(u => u.UserName == username).FirstOrDefault();
+            if(user.CurrentDay < user.WorkoutDaysInWeek)
+            {
+                user.CurrentDay++;
+            }
+            else if(user.CurrentWeek < user.WorkoutWeeks)
+            {
+                user.CurrentWeek++;
+                user.CurrentDay = 1;
+            }
+            else
+            {
+                //Program completed
+            }
+            _dc.SaveChanges();
 
-        
+        }
     }
 }

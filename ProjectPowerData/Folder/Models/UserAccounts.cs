@@ -16,7 +16,9 @@ namespace ProjectPowerData.Folder.Models
         public string Email { get; set; }
         public int CurrentWeek { get; set; }
         public int CurrentDay { get; set; }
-        public string Race { get; set; }
+        public int WorkoutDaysInWeek { get; set; }
+        public int WorkoutWeeks { get; set; }
+
         public UserAccounts() { }
     }
 }

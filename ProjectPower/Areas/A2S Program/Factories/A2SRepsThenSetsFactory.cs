@@ -31,7 +31,6 @@ namespace ProjectPower.Areas.A2S_Program.Factories
                 _dc.SaveChanges();
             }
         }
-
         internal override void UpdateExercise(UpdateBasicWorkoutInformationModel model, BasicWorkoutInformation exercise)
         {
             var setsThenReps = (A2SSetsThenReps)exercise;
