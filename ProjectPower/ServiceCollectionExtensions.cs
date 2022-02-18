@@ -10,7 +10,7 @@ namespace ProjectPower
 {
     public static class ServiceCollectionExtensions
     {
-        public static void RegisterUserAcctionServices(this IServiceCollection collection)
+        public static void RegisterUserAccountServiceServices(this IServiceCollection collection)
         {
             collection.AddScoped<IUserAccountService, UserAccountService>();
         }

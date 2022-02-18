@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
@@ -19,30 +21,6 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
         {
             _logger = logger;
             _service = service;
-        }
-
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<ShowUserAccountModel>> Index([FromQuery] UserAccountSearchModel search)
-        {
-            var response = _service.GetIndexModel(search);
-
-            return Ok(response);
-        }
-
-        [HttpGet("Username")]
-        public ActionResult<ShowUserAccountModel> Show(string username)
-        {
-            var response = _service.GetShowModelByUsername(username);
-
-            if (response == null)
-            {
-                return BadRequest();
-            }
-            else
-            {
-                return response;
-            }
         }
 
 
@@ -69,12 +47,36 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             try
             {
                 var response = _service.SaveCreateModel(model);
-                return CreatedAtAction(nameof(UserAccountsController.Show), response);
+                return CreatedAtAction(nameof(UserAccountsController.Create), response);
             }
             catch (Exception ex)
             {
                 return Problem(ex.Message);
             }
         }
+
+        //[AllowAnonymous]
+        //[HttpPost]
+        //[ProducesResponseType(StatusCodes.Status201Created)]
+        //public ActionResult Login(UserAccountLoginModel model)
+        //{
+        //    try
+        //    {
+        //        HttpContext.SignInAsync
+
+        //        if (!_service.Login(model))
+        //        {
+        //            return Unauthorized();
+        //        }
+        //        else
+        //        {
+        //            var claims = new List<Claims>
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Problem(ex.Message);
+        //    }
+        //}
     }
 }

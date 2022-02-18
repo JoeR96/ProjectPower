@@ -1,11 +1,19 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ProjectPower;
+using ProjectPowerData;
+using ProjectPowerData.Folder.Models;
 
 namespace ProjectPowerWebApi
 {
@@ -23,13 +31,15 @@ namespace ProjectPowerWebApi
         {
             services.RegisterA2SWorkout();
             services.AddDataContext();
-            services.RegisterUserAcctionServices();
+            services.RegisterUserAccountServiceServices();
             services.RegisterWorkoutManagementService();
             services.AddControllers();
             services.AddCors();
+      
+           
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SAM IS A GAY BITCH", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Not Today Bro", Version = "v1" });
             });
 
         }
@@ -39,9 +49,9 @@ namespace ProjectPowerWebApi
         {
             
 
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo.API v1"));
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo.API v1"));
             
 
             app.UseHttpsRedirection();

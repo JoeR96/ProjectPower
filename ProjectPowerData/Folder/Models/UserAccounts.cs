@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectPowerData.Folder.Models
 {
-    public class UserAccounts
+    public class UserAccounts : IdentityUser
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -12,6 +13,7 @@ namespace ProjectPowerData.Folder.Models
         public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
+        [PersonalData]
         [EmailAddress]
         public string Email { get; set; }
         public int CurrentWeek { get; set; }

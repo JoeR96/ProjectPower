@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ProjectPowerData.Folder.Models;
 namespace ProjectPowerData
 {
@@ -18,7 +19,7 @@ namespace ProjectPowerData
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<A2SHyperTrophy>()
                          .ToTable("BasicWorkoutInformation")
                         .Property(p => p.TrainingMax)

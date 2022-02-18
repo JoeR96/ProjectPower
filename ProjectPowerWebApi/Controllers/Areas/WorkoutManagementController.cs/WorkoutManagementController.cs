@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
@@ -43,12 +44,11 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
         {
             try
             {
-                var response = _service.GetDailyWorkout(username);
-                var x = Newtonsoft.Json.JsonConvert.SerializeObject(response);
+                var response = JsonConvert.SerializeObject(_service.GetDailyWorkout(username));
 
                 if (response != null)
                 {
-                    return CreatedAtAction(nameof(WorkoutManagementController.DailyWorkout), x);
+                    return CreatedAtAction(nameof(WorkoutManagementController.DailyWorkout), response);
                 }
                 else
                 {

@@ -6,7 +6,6 @@
 
         public static string HashPassword(string password)
         {
-
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
             return hashedPassword;
         }
@@ -19,7 +18,6 @@
             if (BCrypt.Net.BCrypt.Verify(userAccount.Password, dbEntity.Password))
             {
                 return true;
-
             }
             else
             {

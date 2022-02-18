@@ -26,6 +26,8 @@ namespace ProjectPower.Areas.A2S_Program.Factories
                 dbEntity.StartingSets = (int)model.StartingSets;
                 dbEntity.StartingReps = (int)model.StartingReps;
                 dbEntity.StartingWeight = (int)model.StartingWeight;
+                dbEntity.CurrentSets = (int)model.StartingSets;
+                dbEntity.CurrentReps = (int)model.StartingReps;
                 dbEntity.Week = i + 1;
                 _dc.BasicWorkoutInformation.Add(dbEntity);
                 _dc.SaveChanges();

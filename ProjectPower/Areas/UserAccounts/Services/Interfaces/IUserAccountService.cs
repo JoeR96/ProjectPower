@@ -1,5 +1,6 @@
 ﻿using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProjectPower.Areas.UserAccounts.Services.Interfaces
 {
@@ -22,6 +23,6 @@ namespace ProjectPower.Areas.UserAccounts.Services.Interfaces
         ShowUserAccountModel SaveCreateModel(CreateUserAccountModel model);
 
         void Delete(long id);
-
+        Task<bool> Login(UserAccountLoginModel model);
     }
 }

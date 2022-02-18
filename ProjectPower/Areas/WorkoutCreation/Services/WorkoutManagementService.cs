@@ -36,7 +36,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
         public List<BasicWorkoutInformation> GetDailyWorkout(string username)
         {
             var ua = _dc.UserAccounts.Where(e => e.UserName == username).FirstOrDefault();
-            var _ = _dc.BasicWorkoutInformation.Where(e => e.UserName == username && e.ExerciseDay == ua.CurrentDay && e.Week == ua.CurrentWeek).ToList();
+            var _ = _dc.BasicWorkoutInformation.Where(e => e.UserName == username && e.ExerciseDay == ua.CurrentDay && e.Week == ua.CurrentWeek).OrderBy(exercise => exercise.ExerciseOrder).ToList();
             _.ForEach(e => ValidateWorkout(e));
             return _;
         }
@@ -48,7 +48,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
                 A2SHelper.WorkingWeight((A2SHyperTrophy)e);
                 _dc.SaveChanges();
             }
-        }
+        } 
         public void UpdateExerciseResult(UpdateBasicWorkoutInformationModel model)
         {
             var _ =_dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == model.Id && e.Week == model.Week).FirstOrDefault();
@@ -68,7 +68,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
             else if(user.CurrentWeek < user.WorkoutWeeks)
             {
                 user.CurrentWeek++;
-                user.CurrentDay = 1;
+                user.CurrentDay = 0;
             }
             else
             {
@@ -76,6 +76,6 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
             }
             _dc.SaveChanges();
 
-        }
+         }
     }
 }

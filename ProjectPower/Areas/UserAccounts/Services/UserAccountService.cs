@@ -4,6 +4,7 @@ using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using ProjectPowerData;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjectPower.Areas.UserAccounts.Services
 {
@@ -115,6 +116,17 @@ namespace ProjectPower.Areas.UserAccounts.Services
             var dbEntity = _dc.UserAccounts.Find(id);
             _dc.Remove(dbEntity);
             _dc.SaveChanges();
+        }
+
+        public async Task<bool> Login(UserAccountLoginModel model)
+        {
+            var u = _dc.UserAccounts.Where(u => u.UserName == model.Username).FirstOrDefault();
+           if(!BCrypt.Net.BCrypt.Verify(model.Password, u.Password))
+           {
+               return false;
+           }
+
+            return true;
         }
     }
 }
