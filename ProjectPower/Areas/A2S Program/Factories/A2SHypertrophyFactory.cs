@@ -4,6 +4,7 @@ using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.FactoryPattern;
 using ProjectPowerData.Folder.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProjectPower.Areas.A2S_Program.Factories
@@ -58,6 +59,32 @@ namespace ProjectPower.Areas.A2S_Program.Factories
             _dc.BasicWorkoutInformation.Update(hypertrophyExercise);
             _dc.BasicWorkoutInformation.Update(nextWeek);
             _dc.SaveChanges();
+        }
+
+        public void CreateDummyData()
+        {
+
+            for (int i = 0; i < 16; i++)
+            {
+                var e = (A2SHyperTrophy)_dc.BasicWorkoutInformation.Where(e => e.Name == "Deadlift" && e.UserName == 'DummyData' && e.Week == i + 1).FirstOrDefault();
+
+                UpdateBasicWorkoutInformationModel model = new UpdateBasicWorkoutInformationModel();
+                model.Id = e.ExerciseMasterId;
+                var rnd = new Random();
+
+                model.Reps = e.AmrapRepTarget + rnd.Next(0,6);
+
+                model.Week = i + 1;
+                if(i < 16)
+                {
+                    UpdateExercise(model, e);
+
+                }
+                else
+                {
+
+                }
+            }
         }
     }
 }

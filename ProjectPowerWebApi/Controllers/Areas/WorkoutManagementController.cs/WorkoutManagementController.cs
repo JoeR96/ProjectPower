@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using ProjectPower.Areas.A2S_Program.Factories;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
@@ -21,7 +22,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
         public WorkoutManagementController(IWorkoutManagementService service)
         {
             _service = service;
-        } 
+        }
 
         [HttpPost("CreateWorkout")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -60,7 +61,6 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
                 return BadRequest(ex);
             }
         }
-
         [HttpPut("DailyWorkout/UpdateWorkOutResult")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult ExerciseResult(UpdateBasicWorkoutInformationModel model)
@@ -80,7 +80,23 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
         {
             try
             {
+
                 _service.UpdateDayAndWeek(username);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpGet("DummyData/A2SHypertrophy")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult CreateA2SDummyData()
+        {
+            try
+            {
+                var x = new A2SHypertrophyFactory();
+                x.CreateDummyData();
                 return NoContent();
             }
             catch (Exception ex)

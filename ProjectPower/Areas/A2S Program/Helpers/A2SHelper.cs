@@ -9,7 +9,7 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
         public static void WorkingWeight(A2SHyperTrophy model)
         {
             var workingWeight = model.Intensity * model.TrainingMax;
-            var newWeight = Math.Ceiling(workingWeight / model.RoundingValue);
+            var newWeight = Math.Round(workingWeight / model.RoundingValue);
             model.WorkingWeight = newWeight * model.RoundingValue;
         }
 
@@ -36,16 +36,16 @@ namespace ProjectPower.Areas.A2S_Program.Helpers
         {
             if (model.Reps >= setsThenReps.CurrentReps && model.Sets == setsThenReps.GoalSets)
             {
-                nextWeek.CurrentReps = setsThenReps.StartingReps += setsThenReps.RepIncreasePerSet;
+                nextWeek.CurrentReps = setsThenReps.CurrentReps += setsThenReps.RepIncreasePerSet;
                 nextWeek.CurrentSets = setsThenReps.StartingSets;
             }
             else if (model.Reps >= setsThenReps.CurrentReps && model.Sets < setsThenReps.GoalSets)
             {
                 nextWeek.CurrentSets += 1;
+
             }
             else
             {
-                setsThenReps.ExerciseTargetCompleted = false;
             }
         }
 
