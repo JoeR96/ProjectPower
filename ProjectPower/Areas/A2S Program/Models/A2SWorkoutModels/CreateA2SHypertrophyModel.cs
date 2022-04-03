@@ -1,4 +1,4 @@
-﻿using ProjectPower.Areas.ExerciseCreation.Models;
+﻿using ProjectPower.Areas.WorkoutCreation.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels

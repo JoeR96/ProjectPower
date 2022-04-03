@@ -9,7 +9,7 @@
         public int CurrentWeek { get; set; }
         public int CurrentDay { get; set; }
 
-        public ShowUserAccountModel(ProjectPowerData.Folder.Models.UserAccounts dbEntity)
+        public ShowUserAccountModel(ProjectPowerData.Folder.Models.User dbEntity)
         {
             UserId = dbEntity.UserId;
             UserName = dbEntity.UserName;

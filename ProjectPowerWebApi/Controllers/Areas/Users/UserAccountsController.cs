@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
+using ProjectPower.Areas.UserAccounts.Services;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
+using ProjectPowerData.Folder.Models;
+using ProjectPowerWebApi.Controllers.Areas.Login.TokenResources;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProjectPowerWebApi.Controllers.Areas.Users
 {
@@ -15,68 +20,48 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
     public class UserAccountsController : ControllerBase
     {
         private readonly ILogger<UserAccountsController> _logger;
-        private readonly IUserAccountService _service;
+        private readonly IUserAccountService _userAccountService;
+        private readonly IMapper _mapper;
 
-        public UserAccountsController(IUserAccountService service, ILogger<UserAccountsController> logger)
+        public UserAccountsController(IUserAccountService userAccountService, ILogger<UserAccountsController> logger, IMapper mapper)
         {
             _logger = logger;
-            _service = service;
-        }
-
-
-
-        [HttpDelete("{id:long}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult Delete(long id)
-        {
-            try
-            {
-                _service.Delete(id);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
+            _userAccountService = userAccountService;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<ShowUserAccountModel> Create(CreateUserAccountModel model)
+        public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserAccountModel userCredentials)
         {
             try
             {
-                var response = _service.SaveCreateModel(model);
-                return CreatedAtAction(nameof(UserAccountsController.Create), response);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var user = _mapper.Map<CreateUserAccountModel, User>(userCredentials);
+                //User user = new User
+                //{
+                //    UserName = userCredentials.UserName,
+                //    Email = userCredentials.Email,
+                //    Password = userCredentials.Password,
+                //};
+                var response = await _userAccountService.CreateUserAccountAsync(user, ApplicationRole.Common);
+                if (!response.Success)
+                {
+                    return BadRequest(response.Message);
+                }
+
+                var userResource = _mapper.Map<User, UserResourceModel>(response.User);
+                return Ok(userResource);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                return Problem(ex.Message);
+                throw ex;
             }
+            
         }
 
-        //[AllowAnonymous]
-        //[HttpPost]
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //public ActionResult Login(UserAccountLoginModel model)
-        //{
-        //    try
-        //    {
-        //        HttpContext.SignInAsync
-
-        //        if (!_service.Login(model))
-        //        {
-        //            return Unauthorized();
-        //        }
-        //        else
-        //        {
-        //            var claims = new List<Claims>
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Problem(ex.Message);
-        //    }
-        //}
     }
 }

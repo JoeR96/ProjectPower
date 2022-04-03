@@ -4,16 +4,14 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using ProjectPower.Areas.A2S_Program.Factories;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
-using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.Areas.WorkoutCreation.Services;
-using ProjectPowerData.Folder.Models;
 using System;
 
 namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
 {
     [ApiController]
-    [Route("WorkoutCreation")]
+    [Route("Workout")]
     public class WorkoutManagementController : ControllerBase
     {
         private readonly ILogger<WorkoutManagementController> _logger;
@@ -31,17 +29,16 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
             try
             {
                 _service.CreateWorkout(model);
-                return NoContent();
+                return Ok();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex);
             }
         }
-
         [HttpGet("DailyWorkout/{username}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<BasicWorkoutInformation> DailyWorkout(string username)
+        public ActionResult<ProjectPowerData.Folder.Models.Exercise> DailyWorkout(string username)
         {
             try
             {
@@ -49,7 +46,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
 
                 if (response != null)
                 {
-                    return CreatedAtAction(nameof(WorkoutManagementController.DailyWorkout), response);
+                    return Ok(response);
                 }
                 else
                 {
@@ -80,7 +77,6 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
         {
             try
             {
-
                 _service.UpdateDayAndWeek(username);
                 return NoContent();
             }
@@ -97,7 +93,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
             {
                 var x = new A2SHypertrophyFactory();
                 x.CreateDummyData();
-                return NoContent();
+                return Ok();
             }
             catch (Exception ex)
             {

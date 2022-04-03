@@ -1,11 +1,13 @@
 ﻿using ProjectPower.Areas.A2S_Program.Helpers;
-using ProjectPower.Areas.ExerciseCreation.Models;
+using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.FactoryPattern;
 using ProjectPowerData.Folder.Models;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("ProjectPowerTests")]
 namespace ProjectPower.Areas.A2S_Program.Factories
 {
     public class A2SRepsThenSetsFactory : ExerciseFactory
@@ -29,22 +31,44 @@ namespace ProjectPower.Areas.A2S_Program.Factories
                 dbEntity.CurrentSets = (int)model.StartingSets;
                 dbEntity.CurrentReps = (int)model.StartingReps;
                 dbEntity.Week = i + 1;
-                _dc.BasicWorkoutInformation.Add(dbEntity);
-                _dc.SaveChanges();
+                _dc.Exercises.Add(dbEntity);
             }
-        }
-        internal override void UpdateExercise(UpdateBasicWorkoutInformationModel model, BasicWorkoutInformation exercise)
-        {
-            var setsThenReps = (A2SSetsThenReps)exercise;
-            var nextWeek = (A2SSetsThenReps)_dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == exercise.ExerciseMasterId && e.Week == setsThenReps.Week + 1).FirstOrDefault();
 
-            A2SHelper.ProgressSetsThenReps(model, setsThenReps, nextWeek);
-            setsThenReps.ExerciseCompleted = true;
-            _dc.BasicWorkoutInformation.Update(nextWeek);
-            _dc.BasicWorkoutInformation.Update(setsThenReps);
+            _dc.SaveChanges();
+
+        }     
+
+        internal override void UpdateExercise(UpdateBasicWorkoutInformationModel model, ProjectPowerData.Folder.Models.Exercise exercise)
+        {
+            var currentExercise = (A2SSetsThenReps)exercise;
+            var nextWeekExercise = (A2SSetsThenReps)_dc.Exercises.Where(e => e.ExerciseMasterId == exercise.ExerciseMasterId && e.Week == currentExercise.Week + 1).FirstOrDefault();
+
+            ProgressExercise( currentExercise, nextWeekExercise);
+
+            currentExercise.ExerciseCompleted = true;
+            _dc.Exercises.Update(nextWeekExercise);
+            _dc.Exercises.Update(currentExercise);
+
             _dc.SaveChanges();
         }
 
+        public override void ProgressExercise(ProjectPowerData.Folder.Models.Exercise currentWeek, ProjectPowerData.Folder.Models.Exercise nextWeek)
+        {
+            A2SSetsThenReps c = (A2SSetsThenReps)currentWeek;
+            A2SSetsThenReps n = (A2SSetsThenReps)nextWeek;
 
+            if (c.CurrentReps >= c.GoalReps && c.CurrentSets == c.GoalSets)
+            {
+                n.CurrentReps = c.CurrentReps += c.RepIncreasePerSet;
+                n.CurrentSets = c.StartingSets;
+            }
+            else if (c.CurrentReps >= c.CurrentReps && c.CurrentSets < c.GoalSets)
+            {
+                n.CurrentSets += 1;
+            }
+            else
+            {
+            }
+        }
     }
 }

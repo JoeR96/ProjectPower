@@ -1,6 +1,6 @@
 ﻿namespace ProjectPowerData.Folder.Models
 {
-    public class Template : BasicWorkoutInformation
+    public class Template : Exercise
     {
     }
 }

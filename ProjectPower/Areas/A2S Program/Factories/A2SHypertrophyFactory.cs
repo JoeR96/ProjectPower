@@ -1,17 +1,20 @@
 ﻿using ProjectPower.Areas.A2S_Program.Helpers;
-using ProjectPower.Areas.ExerciseCreation.Models;
+using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.FactoryPattern;
 using ProjectPowerData.Folder.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("ProjectPowerTests")]
 namespace ProjectPower.Areas.A2S_Program.Factories
 {
     public class A2SHypertrophyFactory : ExerciseFactory
     {
         A2SHypertrophyTemplateValues helper = new A2SHypertrophyTemplateValues();
+        public static new A2SHypertrophyFactory Factory { get; set; }
 
         public override void CreateExercise(CreateExerciseModel model)
         {
@@ -40,33 +43,79 @@ namespace ProjectPower.Areas.A2S_Program.Factories
                     dbEntity.Sets = weeklyValues.sets;
                     dbEntity.RepsPerSet = weeklyValues.repsPerSet[j];
                     dbEntity.ExerciseMasterId = masterId.ToString();
-                    _dc.BasicWorkoutInformation.Add(dbEntity);
-                    _dc.SaveChanges();
+
+                    _dc.Exercises.Add(dbEntity);
 
                 }
             }
+            _dc.SaveChanges();
+
         }
 
-        internal override void UpdateExercise(UpdateBasicWorkoutInformationModel model, BasicWorkoutInformation exercise)
+        internal override void UpdateExercise(UpdateBasicWorkoutInformationModel model, ProjectPowerData.Folder.Models.Exercise exercise)
         {
-            var hypertrophyExercise = (A2SHyperTrophy)exercise;
-            hypertrophyExercise.AmrapRepResult = model.Reps;
-            var nextWeek = (A2SHyperTrophy)_dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == exercise.ExerciseMasterId && e.Week == hypertrophyExercise.Week + 1).FirstOrDefault();
-            A2SHelper.ProgressA2SHypertrophy(hypertrophyExercise, nextWeek);
+            var currentWeekExercise = (A2SHyperTrophy)exercise;
+            currentWeekExercise.AmrapRepResult = model.Reps;
+            var nextWeekExercise = (A2SHyperTrophy)_dc.Exercises.Where(e => e.ExerciseMasterId == exercise.ExerciseMasterId && e.Week == currentWeekExercise.Week + 1).FirstOrDefault();
+            
+            ProgressExercise(currentWeekExercise, nextWeekExercise);
 
+            currentWeekExercise.ExerciseCompleted = true;
 
-            hypertrophyExercise.ExerciseCompleted = true;
-            _dc.BasicWorkoutInformation.Update(hypertrophyExercise);
-            _dc.BasicWorkoutInformation.Update(nextWeek);
+            _dc.Exercises.Update(currentWeekExercise);
+            _dc.Exercises.Update(nextWeekExercise);
             _dc.SaveChanges();
         }
 
+        public override void ProgressExercise(ProjectPowerData.Folder.Models.Exercise curr, ProjectPowerData.Folder.Models.Exercise next)
+        {
+            A2SHyperTrophy nextWeek = (A2SHyperTrophy)next;
+            A2SHyperTrophy currentWeek = (A2SHyperTrophy)curr;
+            if (currentWeek.AmrapRepResult >= currentWeek.AmrapRepTarget)
+            {
+                int updateModifier = (int)(currentWeek.AmrapRepResult - currentWeek.AmrapRepTarget);
+                currentWeek.ExerciseTargetCompleted = true;
+                Math.Clamp(updateModifier, -2, 5);
+                nextWeek.TrainingMax = UpdateTrainingMax(currentWeek.TrainingMax, updateModifier);
+                SetWorkingWeight(nextWeek);
+            }
+            else
+            {
+                currentWeek.ExerciseTargetCompleted = false;
+            }
+        }
+
+        internal void SetWorkingWeight(A2SHyperTrophy model)
+        {
+            var workingWeight = model.Intensity * model.TrainingMax;
+            var newWeight = Math.Round(workingWeight / model.RoundingValue);
+            model.WorkingWeight = newWeight * model.RoundingValue;
+        }
+
+        internal decimal UpdateTrainingMax(decimal trainingMax, int updateModifier)
+        {
+            decimal modifier = 0;
+            switch (updateModifier)
+            {
+                case -2: modifier = -2m; break;
+                case -1: modifier = -1m; break;
+                case 0: modifier = 0m; break;
+                case 1: modifier = 0.5m; break;
+                case 2: modifier = 1m; break;
+                case 3: modifier = 1.5m; break;
+                case 4: modifier = 2m; break;
+                case 5: modifier = 3m; break;
+                default: modifier = 0m; break;
+            }
+
+            return trainingMax / 100 * (100 + modifier);
+        }
         public void CreateDummyData()
         {
 
             for (int i = 0; i < 16; i++)
             {
-                var e = (A2SHyperTrophy)_dc.BasicWorkoutInformation.Where(e => e.Name == "Deadlift" && e.UserName == 'DummyData' && e.Week == i + 1).FirstOrDefault();
+                var e = (A2SHyperTrophy)_dc.Exercises.Where(e => e.Name == "Deadlift" && e.UserName == "DummyData" && e.Week == i + 1).FirstOrDefault();
 
                 UpdateBasicWorkoutInformationModel model = new UpdateBasicWorkoutInformationModel();
                 model.Id = e.ExerciseMasterId;
@@ -78,7 +127,6 @@ namespace ProjectPower.Areas.A2S_Program.Factories
                 if(i < 16)
                 {
                     UpdateExercise(model, e);
-
                 }
                 else
                 {

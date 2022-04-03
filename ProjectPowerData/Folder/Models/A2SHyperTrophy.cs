@@ -2,7 +2,7 @@
 
 namespace ProjectPowerData.Folder.Models
 {
-    public class A2SHyperTrophy : BasicWorkoutInformation
+    public class A2SHyperTrophy : Exercise
     {
         [Required]
         public decimal TrainingMax { get; set; }

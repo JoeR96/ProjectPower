@@ -2,7 +2,7 @@
 
 namespace ProjectPowerData.Folder.Models
 {
-    public class A2SSetsThenReps :                                      BasicWorkoutInformation
+    public class A2SSetsThenReps :                                      Exercise
     {
         [Required]
         public int StartingReps { get; set; }

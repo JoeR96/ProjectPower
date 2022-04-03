@@ -72,19 +72,31 @@ namespace ProjectPowerData.Migrations
                     b.HasDiscriminator<string>("Template").HasValue("BasicWorkoutInformation");
                 });
 
-            modelBuilder.Entity("ProjectPowerData.Folder.Models.UserAccounts", b =>
+            modelBuilder.Entity("ProjectPowerData.Folder.Models.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("ProjectPowerData.Folder.Models.UserAccount", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CurrentDay")
                         .HasColumnType("int");
@@ -93,44 +105,13 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -145,6 +126,26 @@ namespace ProjectPowerData.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("UserAccounts");
+                });
+
+            modelBuilder.Entity("ProjectPowerData.Folder.Models.UserRole", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserAccountUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserAccountUserId");
+
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("ProjectPowerData.Folder.Models.A2SHyperTrophy", b =>
@@ -219,6 +220,33 @@ namespace ProjectPowerData.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasDiscriminator().HasValue("A2SRepsThenSets");
+                });
+
+            modelBuilder.Entity("ProjectPowerData.Folder.Models.UserRole", b =>
+                {
+                    b.HasOne("ProjectPowerData.Folder.Models.Role", "Role")
+                        .WithMany("UsersRole")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectPowerData.Folder.Models.UserAccount", "UserAccount")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserAccountUserId");
+
+                    b.Navigation("Role");
+
+                    b.Navigation("UserAccount");
+                });
+
+            modelBuilder.Entity("ProjectPowerData.Folder.Models.Role", b =>
+                {
+                    b.Navigation("UsersRole");
+                });
+
+            modelBuilder.Entity("ProjectPowerData.Folder.Models.UserAccount", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

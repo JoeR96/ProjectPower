@@ -15,7 +15,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Models
 
     public class GetDailyWorkoutView
     {
-        List<BasicWorkoutInformation> ExerciseCollection { get; set; }
+        List<ProjectPowerData.Folder.Models.Exercise> ExerciseCollection { get; set; }
     }
 
 }

@@ -1,7 +1,9 @@
-﻿using ProjectPower.Areas.UserAccounts.Helpers;
-using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
+﻿using ProjectPower.Areas.UserAccounts.Communication;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
+using ProjectPower.Repositories.Interfaces;
 using ProjectPowerData;
+using ProjectPowerData.Folder.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,123 +12,43 @@ namespace ProjectPower.Areas.UserAccounts.Services
 {
     public class UserAccountService : IUserAccountService
     {
-        private readonly DataContext _dc;
+        private readonly IUserAccountRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IPasswordHasherService _passwordHasher;
 
-        public UserAccountService(DataContext context)
+        public UserAccountService(IUserAccountRepository userRepository, IUnitOfWork unitOfWork, IPasswordHasherService passwordHasher)
         {
-            _dc = context;
+            _passwordHasher = passwordHasher;
+            _unitOfWork = unitOfWork;
+            _userRepository = userRepository;
         }
 
-        public IEnumerable<ShowUserAccountModel> GetIndexModel(UserAccountSearchModel search)
+        public async Task<CreateUserResponse> CreateUserAccountAsync(User user, params ApplicationRole[] userRoles)
         {
-            var dbEntities = _dc.UserAccounts;
-
-            var model = new List<ShowUserAccountModel>();
-            foreach (var entity in dbEntities)
+            try
             {
-                model.Add(new ShowUserAccountModel(entity));
+                var existingUser = await _userRepository.FindByEmailAsync(user.Email);
+                if (existingUser != null)
+                {
+                    return new CreateUserResponse(false, "Email already in use.", null);
+                }
+
+                user.Password = _passwordHasher.HashPassword(user.Password);
+
+                await _userRepository.AddAsync(user, userRoles);
+                await _unitOfWork.CompleteAsync();
+
+                return new CreateUserResponse(true, null, user);
             }
-
-            return model;
-        }
-
-        public int GetCount(UserAccountSearchModel search)
-        {
-
-
-            var dbEntities = _dc.UserAccounts;
-
-            return dbEntities.Count();
-        }
-
-        public ShowUserAccountModel GetShowModel(long id)
-        {
-
-            var dbEntity = _dc.UserAccounts.Find(id);
-
-            if (dbEntity == null)
+            catch(Exception ex)
             {
-                return null;
-            }
-            else
-            {
-                return new ShowUserAccountModel(dbEntity);
+                throw ex;
             }
         }
 
-        public ShowUserAccountModel GetShowModelByUsername(string username)
+        public async Task<User> FindByEmailAsync(string email)
         {
-            var dbEntity = _dc.UserAccounts.FirstOrDefault(x => x.UserName == username);
-
-            if (dbEntity == null)
-            {
-                return null;
-            }
-            else
-            {
-                return new ShowUserAccountModel(dbEntity);
-            }
-        }
-        public UpdateUserAccountModel GetUpdateModel(long id)
-        {
-            var dbEntity = _dc.UserAccounts.Find(id);
-
-            if (dbEntity == null)
-            {
-                return null;
-            }
-            else
-            {
-                return new UpdateUserAccountModel(dbEntity);
-            }
-        }
-        public void SaveUpdateModel(long id, UpdateUserAccountModel model)
-        {
-            var dbEntity = _dc.UserAccounts.Find(id);
-            dbEntity.UserName = model.UserName;
-            dbEntity.Password = UserAccountsHelpers.HashPassword(model.Password);
-            dbEntity.Email = model.Email;
-
-            _dc.SaveChanges();
-        }
-        public CreateUserAccountModel GetCreateModel()
-        {
-            return new CreateUserAccountModel();
-        }
-
-        public ShowUserAccountModel SaveCreateModel(CreateUserAccountModel model)
-        {
-
-            var dbEntity = new ProjectPowerData.Folder.Models.UserAccounts();
-
-            dbEntity.UserName = model.UserName;
-            dbEntity.Password = UserAccountsHelpers.HashPassword(model.Password);
-            dbEntity.Email = model.Email;
-            dbEntity.CurrentWeek = 1;
-            dbEntity.CurrentDay = 1;
-
-            _dc.UserAccounts.Add(dbEntity);
-            _dc.SaveChanges();
-
-            return new ShowUserAccountModel(dbEntity);
-        }
-
-        public void Delete(long id)
-        {
-            var dbEntity = _dc.UserAccounts.Find(id);
-            _dc.Remove(dbEntity);
-            _dc.SaveChanges();
-        }
-
-        public async Task<bool> Login(UserAccountLoginModel model)
-        {
-            var u = _dc.UserAccounts.Where(u => u.UserName == model.Username).FirstOrDefault();
-           if(!BCrypt.Net.BCrypt.Verify(model.Password, u.Password))
-           {
-               return false;
-           }
-
-            return true;
+            return await _userRepository.FindByEmailAsync(email);
         }
     }
 }

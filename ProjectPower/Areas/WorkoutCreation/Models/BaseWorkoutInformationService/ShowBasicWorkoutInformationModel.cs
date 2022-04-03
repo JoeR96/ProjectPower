@@ -8,7 +8,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationServic
         public string Name { get; set; }
         public string Category { get; set; }
 
-        public ShowBasicWorkoutInformationModel(BasicWorkoutInformation dbEntity)
+        public ShowBasicWorkoutInformationModel(ProjectPowerData.Folder.Models.Exercise dbEntity)
         {
             Name = dbEntity.Name;
             Category = dbEntity.Category;

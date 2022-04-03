@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectPowerData.Folder.Models
 {
-    public class BasicWorkoutInformation
+    public class Exercise
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -27,7 +27,7 @@ namespace ProjectPowerData.Folder.Models
         public bool? ExerciseCompleted { get; set; }
         public bool? ExerciseTargetCompleted { get; set; }
 
-        public BasicWorkoutInformation() { }
+        public Exercise() { }
 
     }
 

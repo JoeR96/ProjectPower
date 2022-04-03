@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProjectPower.Areas.ExerciseCreation.Models
+namespace ProjectPower.Areas.WorkoutCreation.Models
 {
     public class CreateExerciseModel
     {

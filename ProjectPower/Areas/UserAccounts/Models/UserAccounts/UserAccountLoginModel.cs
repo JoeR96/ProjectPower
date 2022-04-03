@@ -4,17 +4,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProjectPower.Areas.UserAccounts.Models.UserAccounts
 {
-    public class UserAccountLoginModel : IValidatableObject
+    public class UserAccountLoginModel 
     {
-        public string Username { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [StringLength(255)]
+        public string EmailAddress { get; set; }
+        [Required]
+        [StringLength(32)]
         public string Password { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (Password.Length < 5)
-            {
-                yield return new ValidationResult("Password must be greater than 6 characters", new List<string> { nameof(Password) });
-            }
-        }
     }
 }

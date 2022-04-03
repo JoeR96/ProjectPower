@@ -31,27 +31,21 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
         public void CreateWorkout(CreateWorkoutMasterTemplateModel model)
         {
             model.ExerciseDaysAndOrders.ForEach(e => exerciseFactories[e.Template].CreateExercise(e));
+          
         }
   
-        public List<BasicWorkoutInformation> GetDailyWorkout(string username)
+        public List<Exercise> GetDailyWorkout(string username)
         {
             var ua = _dc.UserAccounts.Where(e => e.UserName == username).FirstOrDefault();
-            var _ = _dc.BasicWorkoutInformation.Where(e => e.UserName == username && e.ExerciseDay == ua.CurrentDay && e.Week == ua.CurrentWeek).OrderBy(exercise => exercise.ExerciseOrder).ToList();
-            _.ForEach(e => ValidateWorkout(e));
+            var _ = _dc.Exercises.Where(e => e.UserName == username && e.ExerciseDay == ua.CurrentDay && e.Week == ua.CurrentWeek).OrderBy(exercise => exercise.ExerciseOrder).ToList();
+
             return _;
         }
 
-        private void ValidateWorkout(BasicWorkoutInformation e)
-        {
-            if(e.Template == "A2SHypertrophy")
-            {
-                A2SHelper.WorkingWeight((A2SHyperTrophy)e);
-                _dc.SaveChanges();
-            }
-        } 
+      
         public void UpdateExerciseResult(UpdateBasicWorkoutInformationModel model)
         {
-            var _ =_dc.BasicWorkoutInformation.Where(e => e.ExerciseMasterId == model.Id && e.Week == model.Week).FirstOrDefault();
+            var _ =_dc.Exercises.Where(e => e.ExerciseMasterId == model.Id && e.Week == model.Week).FirstOrDefault();
             exerciseFactories[_.Template].UpdateExercise(model, _);
         }
         public void GetDayAndWeek(string username)

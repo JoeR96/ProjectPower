@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\UserAccounts\Communication\Tokens\**" />
     <Compile Remove="Factories\WorkoutFactory\ConcreteFactory\**" />
+    <EmbeddedResource Remove="Areas\UserAccounts\Communication\Tokens\**" />
     <EmbeddedResource Remove="Factories\WorkoutFactory\ConcreteFactory\**" />
+    <None Remove="Areas\UserAccounts\Communication\Tokens\**" />
     <None Remove="Factories\WorkoutFactory\ConcreteFactory\**" />
     <None Remove="Areas\WorkoutCreation\" />
     <None Remove="Areas\WorkoutCreation\Models\" />
@@ -25,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\ExerciseCreation\Models\" />
     <Folder Include="Areas\UserAccounts\Services\Helpers\" />
-    <Folder Include="Areas\UserAccounts\Services\Models\" />
     <Folder Include="Areas\WorkoutCreation\Models\BaseWorkoutInformationService\" />
   </ItemGroup>
 </Project>

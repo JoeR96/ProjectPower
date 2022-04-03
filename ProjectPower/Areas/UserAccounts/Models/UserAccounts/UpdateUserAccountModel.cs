@@ -12,7 +12,7 @@ namespace ProjectPower.Areas.UserAccounts.Models.UserAccounts
         public string Email { get; set; }
         public int CurrentDay { get; set; }
         public int CurrentWeek { get; set; }
-        public UpdateUserAccountModel(ProjectPowerData.Folder.Models.UserAccounts entity)
+        public UpdateUserAccountModel(ProjectPowerData.Folder.Models.User entity)
         {
             CurrentWeek = entity.CurrentWeek;
             CurrentDay = entity.CurrentDay;
