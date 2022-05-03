@@ -9,7 +9,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
     {
         public void CreateWorkout(CreateWorkoutMasterTemplateModel model);
         public List<Exercise> GetDailyWorkout(string username);
-        public void UpdateExerciseResult(UpdateBasicWorkoutInformationModel model);
+        public void UpdateExerciseResult(UpdateWeeklyExerciseModel model);
         public void UpdateDayAndWeek(string username);
         public void GetDayAndWeek(string username);
     }

@@ -1,7 +1,8 @@
 ﻿
 namespace ProjectPowerTests.Tests.FactoryTests
 {
-    internal class A2SHypertrophyFactoryTests
+    public class A2SHypertrophyFactoryTests
     {
+
     }
 }

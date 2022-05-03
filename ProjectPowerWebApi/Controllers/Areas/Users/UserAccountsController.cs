@@ -29,8 +29,8 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
             _userAccountService = userAccountService;
             _mapper = mapper;
         }
-
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserAccountModel userCredentials)
         {
             try
@@ -41,12 +41,6 @@ namespace ProjectPowerWebApi.Controllers.Areas.Users
                 }
 
                 var user = _mapper.Map<CreateUserAccountModel, User>(userCredentials);
-                //User user = new User
-                //{
-                //    UserName = userCredentials.UserName,
-                //    Email = userCredentials.Email,
-                //    Password = userCredentials.Password,
-                //};
                 var response = await _userAccountService.CreateUserAccountAsync(user, ApplicationRole.Common);
                 if (!response.Success)
                 {

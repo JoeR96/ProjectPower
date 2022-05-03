@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Configurations>Debug;Release;TEST</Configurations>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Configurations>Debug;Release;TEST</Configurations>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Areas\UserAccounts\Communication\Tokens\**" />
+		<Compile Remove="Areas\UserAccounts\Communication\Tokens\**" />
     <Compile Remove="Factories\WorkoutFactory\ConcreteFactory\**" />
     <EmbeddedResource Remove="Areas\UserAccounts\Communication\Tokens\**" />
     <EmbeddedResource Remove="Factories\WorkoutFactory\ConcreteFactory\**" />
@@ -23,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="System.Net.Http.WinHttpHandler" Version="5.0.0" />
   </ItemGroup>
@@ -30,6 +32,5 @@
   <ItemGroup>
     <Folder Include="Areas\ExerciseCreation\Models\" />
     <Folder Include="Areas\UserAccounts\Services\Helpers\" />
-    <Folder Include="Areas\WorkoutCreation\Models\BaseWorkoutInformationService\" />
   </ItemGroup>
 </Project>

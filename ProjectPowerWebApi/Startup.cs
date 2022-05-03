@@ -33,6 +33,7 @@ namespace ProjectPowerWebApi
             services.AddControllers();
             services.AddCors();
             services.AddScoped<IUserAccountRepository, UserAccountRepository>();
+            services.AddScoped<IExerciseRepository, ExerciseRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddSingleton<IPasswordHasherService, PasswordHasherService>();

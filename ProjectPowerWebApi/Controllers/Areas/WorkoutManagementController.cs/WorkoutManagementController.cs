@@ -36,8 +36,9 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
                 return BadRequest(ex);
             }
         }
+
         [HttpGet("DailyWorkout/{username}")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<ProjectPowerData.Folder.Models.Exercise> DailyWorkout(string username)
         {
             try
@@ -60,7 +61,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
         }
         [HttpPut("DailyWorkout/UpdateWorkOutResult")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult ExerciseResult(UpdateBasicWorkoutInformationModel model)
+        public ActionResult ExerciseResult(UpdateWeeklyExerciseModel model)
         {
             try
             {
@@ -73,6 +74,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
             }
         }
         [HttpPut("UpdateDayAndWeek/{username}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult UpdateDayAndWeek(string username)
         {
             try
@@ -85,6 +87,7 @@ namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
                 return BadRequest(ex);
             }
         }
+
         [HttpGet("DummyData/A2SHypertrophy")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult CreateA2SDummyData()

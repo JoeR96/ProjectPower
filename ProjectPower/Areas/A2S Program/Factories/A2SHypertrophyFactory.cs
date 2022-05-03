@@ -52,7 +52,7 @@ namespace ProjectPower.Areas.A2S_Program.Factories
 
         }
 
-        internal override void UpdateExercise(UpdateBasicWorkoutInformationModel model, ProjectPowerData.Folder.Models.Exercise exercise)
+        internal override void UpdateExercise(UpdateWeeklyExerciseModel model, ProjectPowerData.Folder.Models.Exercise exercise)
         {
             var currentWeekExercise = (A2SHyperTrophy)exercise;
             currentWeekExercise.AmrapRepResult = model.Reps;
@@ -71,18 +71,15 @@ namespace ProjectPower.Areas.A2S_Program.Factories
         {
             A2SHyperTrophy nextWeek = (A2SHyperTrophy)next;
             A2SHyperTrophy currentWeek = (A2SHyperTrophy)curr;
-            if (currentWeek.AmrapRepResult >= currentWeek.AmrapRepTarget)
-            {
-                int updateModifier = (int)(currentWeek.AmrapRepResult - currentWeek.AmrapRepTarget);
-                currentWeek.ExerciseTargetCompleted = true;
-                Math.Clamp(updateModifier, -2, 5);
-                nextWeek.TrainingMax = UpdateTrainingMax(currentWeek.TrainingMax, updateModifier);
-                SetWorkingWeight(nextWeek);
-            }
-            else
-            {
-                currentWeek.ExerciseTargetCompleted = false;
-            }
+            int updateModifier = 0;
+            Math.Clamp(updateModifier, -2, 5);
+
+            updateModifier = (int)(currentWeek.AmrapRepResult - currentWeek.AmrapRepTarget);
+            nextWeek.TrainingMax = UpdateTrainingMax(currentWeek.TrainingMax, updateModifier);
+            Math.Clamp(updateModifier, -2, 5);
+
+            SetWorkingWeight(nextWeek);
+            currentWeek.ExerciseTargetCompleted = currentWeek.AmrapRepResult >= currentWeek.AmrapRepTarget;
         }
 
         internal void SetWorkingWeight(A2SHyperTrophy model)
@@ -117,8 +114,8 @@ namespace ProjectPower.Areas.A2S_Program.Factories
             {
                 var e = (A2SHyperTrophy)_dc.Exercises.Where(e => e.Name == "Deadlift" && e.UserName == "DummyData" && e.Week == i + 1).FirstOrDefault();
 
-                UpdateBasicWorkoutInformationModel model = new UpdateBasicWorkoutInformationModel();
-                model.Id = e.ExerciseMasterId;
+                UpdateWeeklyExerciseModel model = new UpdateWeeklyExerciseModel();
+                model.ExerciseMasterId = e.ExerciseMasterId;
                 var rnd = new Random();
 
                 model.Reps = e.AmrapRepTarget + rnd.Next(0,6);

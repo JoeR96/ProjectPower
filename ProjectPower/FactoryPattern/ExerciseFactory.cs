@@ -28,7 +28,7 @@ namespace ProjectPower.FactoryPattern
             dbEntity.Template = model.Template;
             dbEntity.UserName = model.Username;
         }
-        internal abstract void UpdateExercise(UpdateBasicWorkoutInformationModel model, ProjectPowerData.Folder.Models.Exercise exercise);
+        internal abstract void UpdateExercise(UpdateWeeklyExerciseModel model, ProjectPowerData.Folder.Models.Exercise exercise);
 
         public abstract void ProgressExercise(ProjectPowerData.Folder.Models.Exercise currentWeek, ProjectPowerData.Folder.Models.Exercise nextWeek);
 

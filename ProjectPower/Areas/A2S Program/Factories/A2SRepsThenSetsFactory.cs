@@ -38,7 +38,7 @@ namespace ProjectPower.Areas.A2S_Program.Factories
 
         }     
 
-        internal override void UpdateExercise(UpdateBasicWorkoutInformationModel model, ProjectPowerData.Folder.Models.Exercise exercise)
+        internal override void UpdateExercise(UpdateWeeklyExerciseModel model, ProjectPowerData.Folder.Models.Exercise exercise)
         {
             var currentExercise = (A2SSetsThenReps)exercise;
             var nextWeekExercise = (A2SSetsThenReps)_dc.Exercises.Where(e => e.ExerciseMasterId == exercise.ExerciseMasterId && e.Week == currentExercise.Week + 1).FirstOrDefault();
