@@ -45,5 +45,25 @@ namespace ProjectPowerTests.TemplateTests
             Assert.True(w3.CurrentReps == 10);
             Assert.True(w3.CurrentSets == 3);
         }
+
+        [Test]
+        public void ProgressResetsAfterWeightIncrease()
+        {
+            var ex = new A2SSetsThenReps
+            {
+                StartingReps = 6,
+                StartingSets = 3,
+                CurrentSets = 4,
+                CurrentReps = 10,
+                GoalReps = 10,
+                GoalSets = 4
+            };
+
+            var nextWeek = new A2SSetsThenReps(){};
+
+            factory.ProgressExercise(ex, nextWeek);
+            Assert.True(nextWeek.CurrentReps == 6);
+            Assert.True(nextWeek.CurrentSets == 3);
+        }
     }
 }
