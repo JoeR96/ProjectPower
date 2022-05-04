@@ -57,7 +57,7 @@ namespace ProjectPower.Areas.A2S_Program.Factories
             A2SSetsThenReps c = (A2SSetsThenReps)currentWeek;
             A2SSetsThenReps n = (A2SSetsThenReps)nextWeek;
 
-            if (c.CurrentReps >= 10 && c.CurrentSets == c.GoalSets)
+            if (c.CurrentReps >= c.GoalReps && c.CurrentSets == c.GoalSets)
             {
                 n.CurrentReps = c.StartingReps;
                 n.CurrentSets = c.StartingSets;
@@ -66,7 +66,7 @@ namespace ProjectPower.Areas.A2S_Program.Factories
             {
                 n.CurrentSets += 1;
             }
-            if (c.CurrentReps <= c.GoalReps && c.CurrentSets != c.GoalSets)
+            else if (c.CurrentReps <= c.GoalReps && c.CurrentSets != c.GoalSets)
             {
                 n.CurrentReps = c.CurrentReps += c.RepIncreasePerSet;
 

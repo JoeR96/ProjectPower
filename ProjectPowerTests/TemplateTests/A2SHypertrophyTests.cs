@@ -77,7 +77,7 @@ namespace ProjectPowerTests.TemplateTests
             };
             
             factory.ProgressExercise(w1, w2);
-            Assert.AreEqual(expectedResult, w2.TrainingMax);
+            expectedResult.Should().Be(w2.TrainingMax);
         }
     }
 }

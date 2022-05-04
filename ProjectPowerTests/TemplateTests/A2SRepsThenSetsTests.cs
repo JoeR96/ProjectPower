@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using ProjectPower.Areas.A2S_Program.Factories;
 using ProjectPowerData.Folder.Models;
 using System;
@@ -36,16 +37,20 @@ namespace ProjectPowerTests.TemplateTests
 
             Assert.True(w2.GoalSets == 4);
         }
-        [Test]
-        public void RepsIncrease()
+        [TestCase(3, 8, 4, 8)]
+        [TestCase(4, 8, 3, 10)]
+        [TestCase(4, 10, 3, 8)]
+
+        public void RepsIncrease(int currentSets, int currentReps, int expectedSets, int expectedReps)
         {
-            w2.CurrentSets = 4;
+            w2.CurrentSets = currentSets;
+            w2.CurrentReps = currentReps;
             factory.ProgressExercise(w2, w3);
 
-            Assert.True(w3.CurrentReps == 10);
-            Assert.True(w3.CurrentSets == 3);
-        }
+            w3.CurrentReps.Should().Be(expectedReps);
+            w3.CurrentSets.Should().Be(expectedSets);
 
+        }
         [Test]
         public void ProgressResetsAfterWeightIncrease()
         {
@@ -62,8 +67,8 @@ namespace ProjectPowerTests.TemplateTests
             var nextWeek = new A2SSetsThenReps(){};
 
             factory.ProgressExercise(ex, nextWeek);
-            Assert.True(nextWeek.CurrentReps == 6);
-            Assert.True(nextWeek.CurrentSets == 3);
+            nextWeek.CurrentReps.Should().Be(ex.StartingReps);
+            nextWeek.CurrentSets.Should().Be(ex.StartingSets);
         }
     }
 }
