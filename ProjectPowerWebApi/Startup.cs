@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ProjectPower;
@@ -11,8 +8,6 @@ using ProjectPower.Areas.UserAccounts.Services;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using ProjectPower.Repositories;
 using ProjectPower.Repositories.Interfaces;
-using System;
-using Microsoft.Extensions.Configuration;
 
 namespace ProjectPowerWebApi
 {
@@ -37,7 +32,7 @@ namespace ProjectPowerWebApi
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddSingleton<IPasswordHasherService, PasswordHasherService>();
-            services.AddSingleton<ITokenHandler, ProjectPower.Areas.UserAccounts.Services.TokenHandler>();
+            services.AddSingleton<ITokenHandlerService, ProjectPower.Areas.UserAccounts.Services.TokenHandlerService>();
 
             services.AddScoped<IUserAccountService, UserAccountService>();
             services.AddScoped<ProjectPower.Areas.UserAccounts.Services.Interfaces.IAuthenticationService, ProjectPower.Areas.UserAccounts.Services.AuthenticationService>();
@@ -67,7 +62,7 @@ namespace ProjectPowerWebApi
             ); services.AddAutoMapper(this.GetType().Assembly);
             services.RegisterUserAccountServiceServices();
             services.RegisterWorkoutManagementService();
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Not Today Bro", Version = "v1" });
@@ -78,12 +73,12 @@ namespace ProjectPowerWebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
+
 
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo.API v1"));
-            
+
 
             //app.UseHttpsRedirection();
 

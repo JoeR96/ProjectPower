@@ -22,4 +22,8 @@
     <ProjectReference Include="..\ProjectPower\ProjectPower.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tests\FactoryTests\" />
+  </ItemGroup>
+
 </Project>

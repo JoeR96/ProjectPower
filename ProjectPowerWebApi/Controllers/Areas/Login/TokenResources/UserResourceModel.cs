@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ProjectPowerWebApi.Controllers.Areas.Login.TokenResources
+﻿namespace ProjectPowerWebApi.Controllers.Areas.Login.TokenResources
 {
     public class UserResourceModel
     {

@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
-using System.Threading.Tasks;
-using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using ProjectPower.Areas.UserAccounts.Communication;
+using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
+using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using ProjectPowerWebApi.Controllers.Areas.Login.TokenResources;
 
 namespace ProjectPowerWebApi.Controllers.Areas.Login

@@ -2,15 +2,12 @@
 using ProjectPower.Areas.UserAccounts.Communication;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using ProjectPowerData.Folder.Models;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 
 namespace ProjectPower.Areas.UserAccounts.Services
 {
-    public class TokenHandler : ITokenHandler
+    public class TokenHandlerService : ITokenHandlerService
     {
         private readonly ISet<RefreshToken> _refreshTokens = new HashSet<RefreshToken>();
 
@@ -18,7 +15,7 @@ namespace ProjectPower.Areas.UserAccounts.Services
         private readonly SigningConfigurations _signingConfigurations;
         private readonly IPasswordHasherService _passwordHaser;
 
-        public TokenHandler(IOptions<Communication.TokenOptions> tokenOptionsSnapshot, SigningConfigurations signingConfigurations, IPasswordHasherService passwordHasher)
+        public TokenHandlerService(IOptions<Communication.TokenOptions> tokenOptionsSnapshot, SigningConfigurations signingConfigurations, IPasswordHasherService passwordHasher)
         {
             _passwordHaser = passwordHasher;
             _tokenOptions = tokenOptionsSnapshot.Value;

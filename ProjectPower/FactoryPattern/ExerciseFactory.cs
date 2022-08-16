@@ -1,7 +1,6 @@
 ﻿using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPowerData;
-using ProjectPowerData.Folder.Models;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("ProjectPowerTests")]

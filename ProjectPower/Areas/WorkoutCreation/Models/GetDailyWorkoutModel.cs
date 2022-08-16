@@ -1,6 +1,4 @@
-﻿using ProjectPowerData.Folder.Models;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 
 namespace ProjectPower.Areas.WorkoutCreation.Models

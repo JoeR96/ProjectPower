@@ -1,8 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using ProjectPower.Areas.UserAccounts.Services.Interfaces;
+﻿using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using ProjectPowerData;
 
 namespace ProjectPowerWebApi
@@ -28,6 +24,7 @@ namespace ProjectPowerWebApi
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls("localhost:44317")
                     webBuilder.UseStartup<Startup>();
 
                 });

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ProjectPower.Areas.A2S_Program.Helpers
+﻿namespace ProjectPower.Areas.A2S_Program.Helpers
 {
     public class A2SHypertrophyTemplateValues
     {

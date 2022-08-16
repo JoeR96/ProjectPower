@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectPowerData", "Project
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectPowerTests", "ProjectPowerTests\ProjectPowerTests.csproj", "{E85293A9-CDF5-4464-8CDE-A144EFEC1A4C}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{BADBEDC9-ABEF-4F3B-801C-F04B9269532E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,12 @@ Global
 		{E85293A9-CDF5-4464-8CDE-A144EFEC1A4C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E85293A9-CDF5-4464-8CDE-A144EFEC1A4C}.TEST|Any CPU.ActiveCfg = Debug|Any CPU
 		{E85293A9-CDF5-4464-8CDE-A144EFEC1A4C}.TEST|Any CPU.Build.0 = Debug|Any CPU
+		{BADBEDC9-ABEF-4F3B-801C-F04B9269532E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BADBEDC9-ABEF-4F3B-801C-F04B9269532E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BADBEDC9-ABEF-4F3B-801C-F04B9269532E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BADBEDC9-ABEF-4F3B-801C-F04B9269532E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BADBEDC9-ABEF-4F3B-801C-F04B9269532E}.TEST|Any CPU.ActiveCfg = Release|Any CPU
+		{BADBEDC9-ABEF-4F3B-801C-F04B9269532E}.TEST|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

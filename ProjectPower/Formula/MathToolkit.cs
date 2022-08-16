@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ProjectPower.Formula
+﻿namespace ProjectPower.Formula
 {
     public static class MathToolkit
     {

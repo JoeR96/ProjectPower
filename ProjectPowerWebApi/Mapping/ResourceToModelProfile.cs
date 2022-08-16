@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ProjectPower.Areas.UserAccounts.Models.UserAccounts;
 using ProjectPowerData.Folder.Models;
 using ProjectPowerWebApi.Controllers.Areas.Login.TokenResources;
 
@@ -12,7 +11,7 @@ namespace ProjectPowerWebApi.Mapping
             CreateMap<CreateUserAccountModel, User>()
                 .ForMember(x => x.Email, opt => opt.MapFrom(x => x.Email))
                 .ForMember(x => x.Password, opt => opt.MapFrom(x => x.Password))
-                .ForMember(x => x.UserName, opt => opt.MapFrom(x => x.UserName));          
+                .ForMember(x => x.UserName, opt => opt.MapFrom(x => x.UserName));
         }
     }
 }

@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ProjectPower.Areas.A2S_Program.Factories;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.Areas.WorkoutCreation.Services;
-using System;
 
 namespace ProjectPowerWebApi.Controllers.Areas.WorkoutManagementController.cs
 {

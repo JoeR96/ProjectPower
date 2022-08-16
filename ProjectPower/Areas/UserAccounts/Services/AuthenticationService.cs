@@ -1,6 +1,5 @@
 ﻿using ProjectPower.Areas.UserAccounts.Communication;
 using ProjectPower.Areas.UserAccounts.Services.Interfaces;
-using System.Threading.Tasks;
 
 namespace ProjectPower.Areas.UserAccounts.Services
 {
@@ -8,9 +7,9 @@ namespace ProjectPower.Areas.UserAccounts.Services
     {
         private readonly IUserAccountService _userAccountService;
         private readonly IPasswordHasherService _passwordHasherService;
-        private readonly ITokenHandler _tokenHandlerService;
+        private readonly ITokenHandlerService _tokenHandlerService;
 
-        public AuthenticationService(IUserAccountService userAccountService, ITokenHandler tokenService, IPasswordHasherService passwordHasherService)
+        public AuthenticationService(IUserAccountService userAccountService, ITokenHandlerService tokenService, IPasswordHasherService passwordHasherService)
         {
             _tokenHandlerService = tokenService;
             _passwordHasherService = passwordHasherService;

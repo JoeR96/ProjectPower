@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ProjectPower.Areas.UserAccounts.Communication
+﻿namespace ProjectPower.Areas.UserAccounts.Communication
 {
     public abstract class JsonWebToken
     {
@@ -21,5 +19,5 @@ namespace ProjectPower.Areas.UserAccounts.Communication
 
         public bool IsExpired() => DateTime.UtcNow.Ticks > Expiration;
     }
-    
+
 }

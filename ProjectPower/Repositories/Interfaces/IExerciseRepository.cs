@@ -1,7 +1,5 @@
 ﻿using ProjectPower.Areas.WorkoutCreation.Weekly;
 using ProjectPowerData.Folder.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ProjectPower.Repositories.Interfaces
 {
@@ -10,6 +8,6 @@ namespace ProjectPower.Repositories.Interfaces
         Task AddAsync(Exercise exercise);
         Task<List<Exercise>> FindCurrentWorkout(User userAccount);
         Task<Exercise> FindWeeklyExercise(FindWeeklyExercise exercise);
-        
+
     }
 }

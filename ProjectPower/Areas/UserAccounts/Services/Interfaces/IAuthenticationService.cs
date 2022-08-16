@@ -1,5 +1,4 @@
 ﻿using ProjectPower.Areas.UserAccounts.Communication;
-using System.Threading.Tasks;
 
 namespace ProjectPower.Areas.UserAccounts.Services.Interfaces
 {

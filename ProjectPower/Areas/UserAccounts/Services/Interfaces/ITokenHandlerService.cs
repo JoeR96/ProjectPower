@@ -3,7 +3,7 @@ using ProjectPowerData.Folder.Models;
 
 namespace ProjectPower.Areas.UserAccounts.Services.Interfaces
 {
-    public interface ITokenHandler
+    public interface ITokenHandlerService
     {
         AccessToken CreateAccessToken(User user);
         RefreshToken TakeRefreshToken(string token);

@@ -8,10 +8,11 @@
     <Configurations>Debug;Release;TEST</Configurations>
     <SignAssembly>false</SignAssembly>
     <UserSecretsId>9061eefc-0af4-43bb-9142-1adbec5b5d23</UserSecretsId>
-    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	  <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 	  <DebugType>portable</DebugType>
 	  <ImplicitUsings>enable</ImplicitUsings>
+	  <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,9 +3,6 @@ using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.FactoryPattern;
 using ProjectPowerData.Folder.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("ProjectPowerTests")]
@@ -57,7 +54,7 @@ namespace ProjectPower.Areas.A2S_Program.Factories
             var currentWeekExercise = (A2SHyperTrophy)exercise;
             currentWeekExercise.AmrapRepResult = model.Reps;
             var nextWeekExercise = (A2SHyperTrophy)_dc.Exercises.Where(e => e.ExerciseMasterId == exercise.ExerciseMasterId && e.Week == currentWeekExercise.Week + 1).FirstOrDefault();
-            
+
             ProgressExercise(currentWeekExercise, nextWeekExercise);
 
             currentWeekExercise.ExerciseCompleted = true;
@@ -118,10 +115,10 @@ namespace ProjectPower.Areas.A2S_Program.Factories
                 model.ExerciseMasterId = e.ExerciseMasterId;
                 var rnd = new Random();
 
-                model.Reps = e.AmrapRepTarget + rnd.Next(0,6);
+                model.Reps = e.AmrapRepTarget + rnd.Next(0, 6);
 
                 model.Week = i + 1;
-                if(i < 16)
+                if (i < 16)
                 {
                     UpdateExercise(model, e);
                 }

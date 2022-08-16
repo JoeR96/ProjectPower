@@ -1,6 +1,4 @@
-﻿using ProjectPowerData.Folder.Models;
-
-namespace ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService
+﻿namespace ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService
 {
     public class ShowBasicWorkoutInformationModel
     {

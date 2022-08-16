@@ -1,9 +1,5 @@
-﻿using ProjectPower.Areas.UserAccounts.Services;
-using ProjectPower.Areas.UserAccounts.Services.Interfaces;
+﻿using ProjectPower.Areas.UserAccounts.Services.Interfaces;
 using ProjectPowerData;
-using ProjectPowerData.Folder.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ProjectPowerWebApi
 {
@@ -11,7 +7,7 @@ namespace ProjectPowerWebApi
     {
         public static void Seed(DataContext context, IPasswordHasherService passwordHasher)
         {
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
         }
     }
 }

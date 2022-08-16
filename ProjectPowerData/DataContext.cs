@@ -11,7 +11,7 @@ namespace ProjectPowerData
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=ProjectPower;");
+            optionsBuilder.UseSqlServer("Server=ms-sql-server ,1433;Database=ProjectPower;User Id=SA;Password=Zelfdwnq9512!;Encrypt=False;TrustServerCertificate=True;");
 
             //optionsBuilder.UseSqlServer("Server=projectpowerwebapidbserver.database.windows.net; Database=ProjectPowerWebApi_db;User Id=bigdave;Password=Zelfdwnq9512!;");
             base.OnConfiguring(optionsBuilder);

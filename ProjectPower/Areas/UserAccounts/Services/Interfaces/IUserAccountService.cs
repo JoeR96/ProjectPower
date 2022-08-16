@@ -1,6 +1,5 @@
 ﻿using ProjectPower.Areas.UserAccounts.Communication;
 using ProjectPowerData.Folder.Models;
-using System.Threading.Tasks;
 
 namespace ProjectPower.Areas.UserAccounts.Services.Interfaces
 {

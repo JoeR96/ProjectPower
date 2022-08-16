@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using ProjectPower.Areas.A2S_Program.Factories;
 using ProjectPowerData.Folder.Models;
-using System;
 
 namespace ProjectPowerTests.TemplateTests
 {
@@ -19,23 +18,29 @@ namespace ProjectPowerTests.TemplateTests
         A2SSetsThenReps w2;
         A2SSetsThenReps w3;
 
+        List<A2SSetsThenReps> weeklyExercises = new List<A2SSetsThenReps>()
+        {
+            new A2SSetsThenReps(),
+            new A2SSetsThenReps(),
+            new A2SSetsThenReps()
+          };
+
         public A2SRepsThenSetsTests()
         {
             var id = Guid.NewGuid().ToString();
-            w1 = Helpers.A2SRepsThenSetsHelper.ReturnBasicRepsThenSetsExercise(id);
-            w2 = Helpers.A2SRepsThenSetsHelper.ReturnBasicRepsThenSetsExercise(id);
-            w3 = Helpers.A2SRepsThenSetsHelper.ReturnBasicRepsThenSetsExercise(id);
+
+            weeklyExercises.ForEach(x => x = Helpers.A2SRepsThenSetsHelper.CreateExercise(id));
         }
 
         [Test]
         public void SetsIncrease()
         {
-            w1.CurrentSets = 3;
-            w1.CurrentReps = 8;
+            weeklyExercises[0].CurrentSets = 3;
+            weeklyExercises[0].CurrentReps = 8;
 
-            factory.ProgressExercise(w1, w2);
+            factory.ProgressExercise(weeklyExercises[0], weeklyExercises[1]);
 
-            Assert.True(w2.GoalSets == 4);
+            Assert.True(weeklyExercises[1].GoalSets == 4);
         }
         [TestCase(3, 8, 4, 8)]
         [TestCase(4, 8, 3, 10)]
@@ -43,12 +48,12 @@ namespace ProjectPowerTests.TemplateTests
 
         public void RepsIncrease(int currentSets, int currentReps, int expectedSets, int expectedReps)
         {
-            w2.CurrentSets = currentSets;
-            w2.CurrentReps = currentReps;
-            factory.ProgressExercise(w2, w3);
+            weeklyExercises[1].CurrentSets = currentSets;
+            weeklyExercises[1].CurrentReps = currentReps;
+            factory.ProgressExercise(weeklyExercises[1], weeklyExercises[2]);
 
-            w3.CurrentReps.Should().Be(expectedReps);
-            w3.CurrentSets.Should().Be(expectedSets);
+            weeklyExercises[2].CurrentReps.Should().Be(expectedReps);
+            weeklyExercises[2].CurrentSets.Should().Be(expectedSets);
 
         }
         [Test]
@@ -64,7 +69,7 @@ namespace ProjectPowerTests.TemplateTests
                 GoalSets = 4
             };
 
-            var nextWeek = new A2SSetsThenReps(){};
+            var nextWeek = new A2SSetsThenReps() { };
 
             factory.ProgressExercise(ex, nextWeek);
             nextWeek.CurrentReps.Should().Be(ex.StartingReps);

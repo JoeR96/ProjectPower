@@ -1,10 +1,7 @@
-﻿using ProjectPower.Areas.A2S_Program.Helpers;
-using ProjectPower.Areas.WorkoutCreation.Models;
+﻿using ProjectPower.Areas.WorkoutCreation.Models;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.FactoryPattern;
 using ProjectPowerData.Folder.Models;
-using System;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("ProjectPowerTests")]
@@ -36,14 +33,14 @@ namespace ProjectPower.Areas.A2S_Program.Factories
 
             _dc.SaveChanges();
 
-        }     
+        }
 
         internal override void UpdateExercise(UpdateWeeklyExerciseModel model, ProjectPowerData.Folder.Models.Exercise exercise)
         {
             var currentExercise = (A2SSetsThenReps)exercise;
             var nextWeekExercise = (A2SSetsThenReps)_dc.Exercises.Where(e => e.ExerciseMasterId == exercise.ExerciseMasterId && e.Week == currentExercise.Week + 1).FirstOrDefault();
 
-            ProgressExercise( currentExercise, nextWeekExercise);
+            ProgressExercise(currentExercise, nextWeekExercise);
 
             currentExercise.ExerciseCompleted = true;
             _dc.Exercises.Update(nextWeekExercise);

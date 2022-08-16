@@ -2,7 +2,6 @@
 using ProjectPower.Areas.UserAccounts.Communication;
 using ProjectPowerData.Folder.Models;
 using ProjectPowerWebApi.Controllers.Areas.Login.TokenResources;
-using System.Linq;
 
 namespace ProjectPowerWebApi.Mapping
 {

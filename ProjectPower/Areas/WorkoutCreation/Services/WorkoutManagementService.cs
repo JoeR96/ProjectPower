@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ProjectPower.Areas.A2S_Program.Factories;
-using ProjectPower.Areas.A2S_Program.Helpers;
 using ProjectPower.Areas.A2S_Program.Models.A2SWorkoutModels;
 using ProjectPower.Areas.WorkoutCreation.Models.BaseWorkoutInformationService;
 using ProjectPower.Areas.WorkoutCreation.Weekly;
@@ -8,9 +7,6 @@ using ProjectPower.FactoryPattern;
 using ProjectPower.Repositories.Interfaces;
 using ProjectPowerData;
 using ProjectPowerData.Folder.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ProjectPower.Areas.WorkoutCreation.Services
 {
@@ -23,7 +19,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
         A2SHypertrophyFactory a2SHypertrophyFactory = null;
         A2SRepsThenSetsFactory a2SRepsThenSetsFactory = null;
         public WorkoutManagementService(DataContext context, IExerciseRepository exerciseRepository, IMapper mapper)
-        {
+        { 
             _exerciseRepository = exerciseRepository;
             _mapper = mapper;
             _dc = context;
@@ -38,6 +34,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
             exerciseFactories = new Dictionary<string, ExerciseFactory>
             {
                 { "A2SHypertrophy", a2SHypertrophyFactory },
+
                 { "A2SRepsThenSets", a2SRepsThenSetsFactory }
             };
         }
@@ -45,9 +42,9 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
         public void CreateWorkout(CreateWorkoutMasterTemplateModel model)
         {
             model.ExerciseDaysAndOrders.ForEach(e => exerciseFactories[e.Template].CreateExercise(e));
-          
+
         }
-  
+
         public List<Exercise> GetDailyWorkout(string username)
         {
             var ua = _dc.UserAccounts.Where(e => e.UserName == username).FirstOrDefault();
@@ -58,7 +55,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
             return _;
         }
 
-      
+
         public void UpdateExerciseResult(UpdateWeeklyExerciseModel model)
         {
             var exercise = _mapper.Map<UpdateWeeklyExerciseModel, FindWeeklyExercise>(model);
@@ -77,11 +74,11 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
         {
             var user = _dc.UserAccounts.Where(u => u.UserName == username)
                 .FirstOrDefault();
-            if(user.CurrentDay < user.WorkoutDaysInWeek)
+            if (user.CurrentDay < user.WorkoutDaysInWeek)
             {
                 user.CurrentDay++;
             }
-            else if(user.CurrentWeek < user.WorkoutWeeks)
+            else if (user.CurrentWeek < user.WorkoutWeeks)
             {
                 user.CurrentWeek++;
                 user.CurrentDay = 0;
@@ -92,7 +89,7 @@ namespace ProjectPower.Areas.WorkoutCreation.Services
             }
             _dc.SaveChanges();
 
-         }
-        
+        }
+
     }
 }

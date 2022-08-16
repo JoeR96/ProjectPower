@@ -1,6 +1,5 @@
 ﻿using ProjectPower.Repositories.Interfaces;
 using ProjectPowerData;
-using System.Threading.Tasks;
 
 namespace ProjectPower.Repositories
 {
