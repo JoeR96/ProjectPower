@@ -6,7 +6,6 @@ namespace ProjectPowerTests.Tests.WorkoutManagement
 {
     public class CreateWorkoutTests
     {
-        [Test]
         public void HypertrophyExerciseCreates()
         {
             CreateExerciseModel model = new CreateExerciseModel

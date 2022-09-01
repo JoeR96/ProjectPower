@@ -24,7 +24,6 @@ namespace ProjectPowerWebApi
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls("localhost:44317")
                     webBuilder.UseStartup<Startup>();
 
                 });

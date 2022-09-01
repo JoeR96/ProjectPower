@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using ProjectPowerData.Folder.Models;
 namespace ProjectPowerData
 {
@@ -11,7 +12,7 @@ namespace ProjectPowerData
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=ProjectPower;");
+            optionsBuilder.UseSqlServer("Server=localhost, 1433;Database=ProjectPower;User Id=SA;Password=Zelfdwnq9512!;Encrypt=False;TrustServerCertificate=True;");
             base.OnConfiguring(optionsBuilder);
 
         }

@@ -13,23 +13,7 @@ services:
     build:
       context: .
       dockerfile: ProjectPowerWebApi/Dockerfile
+    ports:
+    - "49255:443"
 
   
-
-
-#version: '3.4'
-
-#services:
-#    ms-sql-server:
-#        image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
-#        environment:
-#          ACCEPT_EULA: "Y"
-#          SA_PASSWORD: "Zelfdwnq9512!"
-#          MSSQL_PID: Express
-#        ports:
-#          - "1433:1433"
-#  projectpowerwebapi:
-#    image: ${DOCKER_REGISTRY-}projectpowerwebapi
-#    build:
-#      context: .
-#      dockerfile: ProjectPowerWebApi/Dockerfile

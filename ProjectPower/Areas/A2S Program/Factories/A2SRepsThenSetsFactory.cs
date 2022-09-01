@@ -54,19 +54,19 @@ namespace ProjectPower.Areas.A2S_Program.Factories
             A2SSetsThenReps c = (A2SSetsThenReps)currentWeek;
             A2SSetsThenReps n = (A2SSetsThenReps)nextWeek;
 
-            if (c.CurrentReps >= c.GoalReps && c.CurrentSets == c.GoalSets)
-            {
-                n.CurrentReps = c.StartingReps;
-                n.CurrentSets = c.StartingSets;
-            }
-            else if (c.CurrentReps >= c.CurrentReps && c.CurrentSets < c.GoalSets)
-            {
-                n.CurrentSets += 1;
-            }
-            else if (c.CurrentReps <= c.GoalReps && c.CurrentSets != c.GoalSets)
+            if (c.CurrentReps >= c.GoalReps && c.CurrentSets < c.GoalSets)
             {
                 n.CurrentReps = c.CurrentReps += c.RepIncreasePerSet;
-
+            }
+            else if (c.CurrentSets < c.GoalSets)
+            {
+                n.CurrentReps = n.StartingReps;
+                n.CurrentSets += 1;
+            }
+            else
+            {
+                n.CurrentReps = n.StartingReps;
+                n.CurrentSets = n.StartingSets;
             }
         }
     }
